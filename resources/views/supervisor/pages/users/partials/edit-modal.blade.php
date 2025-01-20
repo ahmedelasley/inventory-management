@@ -1,0 +1,38 @@
+
+
+  <x-modal name="edit-{{$value->id}}" :show="$errors->userDeletion->isNotEmpty()" focusable>
+      <form method="post" action="{{ route('admin.users.update', $value) }}" class="p-6 text-start">
+          @csrf
+          @method('patch')
+          <div class="mb-3">
+            <x-input-label for="name" class="form-label" :value="__('Name')" />
+            <x-text-input id="name" name="name" type="text" class="form-control" :value="old('name', $value->name)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+    
+        <div class="mb-3">
+            <x-input-label for="email" class="form-label" :value="__('Email')" />
+            <x-text-input id="email" name="email" type="email" class="form-control" :value="old('email', $value->email)" required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        </div>
+
+          <div class="mt-6 flex justify-end">
+            <x-secondary-button x-on:click="$dispatch('close')">
+                {{ __('Cancel') }}
+            </x-secondary-button>
+            <button type="submit"  class="btn btn-primary btn-sm ms-3">
+                Update
+                @if (session('status') === 'Updated')
+                    <i
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        {{-- class="text-sm text-gray-600 dark:text-gray-400" --}}
+                    class='bx bx-loader-circle' ></i>
+                @endif
+            </button>
+          </div>
+      </form>
+  </x-modal>
+

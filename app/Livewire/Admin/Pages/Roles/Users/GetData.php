@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Livewire\Admin\Pages\Roles\Users;
+
+use Livewire\Component;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
+
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
+
+class GetData extends Component
+{
+    use LivewireAlert, WithPagination, WithFileUploads;
+    protected $paginationTheme = 'bootstrap';
+
+    public $search = '';
+    public $field = 'name';
+    public $paginate;
+
+    protected function queryString()
+    {
+        return [
+            'search' => [
+                'except' => '',
+                'as' => 'q',
+            ],
+            'paginate' => [
+                'except' => 1,
+            ],
+        ];
+    }
+
+    public function mount()
+    {
+        $this->paginate = getSetting('pagination');
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+    public function updatingPaginate()
+    {
+        $this->resetPage();
+    }
+
+    public function searchField($searchField)
+    {
+        $this->field = $searchField;
+    }
+
+    
+    protected $listeners = [
+        'refreshData' => '$refresh',
+        'roleShow' => '$refresh',
+        'roleUpdate' => '$refresh',
+        'roleDelete' => '$refresh',
+    ];
+
+
+    public function render()
+    {
+
+        $data = Role::where('guard_name', 'web')->where($this->field, 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
+
+        return view('admin.pages.roles.users.get-data', [
+            'data' => $data,
+        ]);
+    }
+}
