@@ -1,14 +1,9 @@
 <?php
 
-use App\Http\Controllers\Supervisor\SettingController;
 use App\Http\Controllers\Supervisor\ProfileController;
-use App\Http\Controllers\Supervisor\AdminController;
-use App\Http\Controllers\Supervisor\AdminRoleController;
-use App\Http\Controllers\Supervisor\UserController;
-use App\Http\Controllers\Supervisor\UserRoleController;
-use App\Http\Controllers\Supervisor\SupplierController;
-use App\Http\Controllers\Supervisor\CategoryController;
 use App\Http\Controllers\Supervisor\ProductController;
+use App\Http\Controllers\Supervisor\KitchenController;
+use App\Http\Controllers\Supervisor\OrderController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +35,24 @@ Route::prefix('supervisor')->name('supervisor.')->group(function () {
             Route::patch('/profile', 'update')->name('update');
             Route::delete('/profile', 'destroy')->name('destroy');
         });
+
+
+
+        Route::resources([
+            '/kitchens' => KitchenController::class,
+
+            '/products' => ProductController::class,
+
+            '/orders' => OrderController::class,
+        ]);
+        Route::get('/kitchens/show/transaction/{kitchen_stock}', [KitchenController::class, 'showTransaction'])->name('kitchens.show.transaction');
+
+        Route::get('/orders/create/order/{order}', [OrderController::class, 'createOrder'])->name('orders.create.order');
+        Route::get('/orders/print/order/{order}', [OrderController::class, 'printOrder'])->name('orders.print.order');
+
+
+
+
         
     });
 

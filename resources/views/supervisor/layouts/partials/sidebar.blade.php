@@ -22,8 +22,22 @@
               </a>
             </li>
 
-          
+            <!-- Kitchens -->
+            <li class="menu-item {{ request()->routeIs('supervisor.kitchens.index') ? 'active' : '' }}">
+              <a href="{{ route('supervisor.kitchens.index') }}" class="menu-link">
+                {{-- <i class='bx bxs-dish'></i> --}}
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/kitchen.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics">Kitchen Stock</div>
+              </a>
+            </li>
             
+            <!-- Transfers -->
+            <li class="menu-item {{ request()->routeIs('supervisor.orders.index') ? 'active' : '' }}">
+              <a href="{{ route('supervisor.orders.index') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-transfer'></i>
+                <div data-i18n="Analytics">Transfers</div>
+              </a>
+            </li>
 
 
 

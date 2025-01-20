@@ -11,7 +11,7 @@
                 @include('supervisor.layouts.partials.logo')
             </div>
             <!-- /Logo -->
-            <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+            <h4 class="mb-2">Welcome Kitchen Supervisor to Elasley! 👋</h4>
             <p class="mb-4">Please sign-in to your account and start the adventure</p>
             <x-auth-session-status class="mb-4 text-success" :status="session('status')" />
             <form id="formAuthentication" class="mb-3" action="{{ route('supervisor.login') }}" method="POST">
