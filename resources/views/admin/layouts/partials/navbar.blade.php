@@ -61,6 +61,69 @@
                 </li>
                 <!--/ Languages -->
 
+                <!-- Notifications -->
+                <li class="nav-item navbar-dropdown dropdown-notification dropdown mx-3">
+                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+
+                      <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/bell.png" alt class=" h-auto rounded-circle" />
+                      @if(Auth::guard('admin')->user()->unreadNotifications->count())
+                      <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20" style="margin-left: -20px;">{{ Auth::guard('admin')->user()->unreadNotifications->count() }}</span>
+                      @endif
+                    </div>
+                  </a>
+                  @if(Auth::guard('admin')->user()->unreadNotifications->count())
+                  <ul class="dropdown-menu dropdown-menu-end " style="width: 300px;">
+                    <li class="mb-2 ">
+                      <div class="dropdown-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Notifications</h5>
+                        <a href="javascript:void(0)" class="text-danger"><i class='bx bxs-trash'></i></a>
+                      </div>
+                      <div class="dropdown-divider"></div>
+
+                    </li>
+                    <div style="width: 300px;height : calc(100vh - 700px);position: relative;overflow: auto;">
+                      @foreach(Auth::guard('admin')->user()->unreadNotifications->take(5) as $notification)
+                        <li class="dropdown-item p-2 my-0" >
+                          <a class="" href="{{ route('admin.orders.create.order', ['order' => $notification->data['details']['order_id'], "notification_id" => $notification->id ] ) }}" >
+                            {{-- <div class="avatar">
+                                <i class='bx bxs-bell-ring'></i>
+                              </div> --}}
+                              <div class="d-flex justify-content-between">
+                                <span class="fw-bold">{{ $notification->data['details']['title'] }}</span>
+                                <small class="text-muted">{{ $notification->created_at->longAbsoluteDiffForHumans() }}</small>
+                              </div>
+                              <p class="text-wrap text-muted">{{ Str::limit($notification->data['details']['body'], 30, '...' ) }}</p>
+                          </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                      @endforeach
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <li class="dropdown-item text-center">
+                      <a class="" href="{{ route('admin.notifications.read.all')}}">Show All Notifications</a>
+                    </li>                 
+                  </ul>
+                  @else
+                  <ul class="dropdown-menu dropdown-menu-end " style="width: 300px;">
+                    <li class="mb-2 ">
+                      <div class="dropdown-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Notifications</h5>
+                        <a href="javascript:void(0)" class="text-danger"><i class='bx bxs-trash'></i></a>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <li class="dropdown-item p-2 my-0" >
+                        <div class="d-flex justify-content-center">
+                          <span class="fw-bold">No New Notifications</span>
+                        </div>
+                      </li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                  </ul>
+                  @endif
+                </li>
+                <!--/ Notifications -->
+
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -93,21 +156,6 @@
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
-                    {{-- <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li> --}}
-                    {{-- <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li> --}}
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
@@ -125,6 +173,8 @@
                   </ul>
                 </li>
                 <!--/ User -->
+
+                                
               </ul>
             </div>
           </nav>

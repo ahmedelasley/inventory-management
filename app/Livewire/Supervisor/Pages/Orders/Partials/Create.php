@@ -18,12 +18,16 @@ class Create extends Component
 {
     use LivewireAlert;
 
-    public $kitchen_id;
+    // public $kitchen_id;
     public $warehouse_id;
 
     protected function rules(): array 
     {
-        return (new OrderRequest())->rules();
+        // return (new OrderRequest())->rules();
+        return [
+            'warehouse_id' => 'required|exists:warehouses,id',
+        ];
+
     } 
  
     public function updated($field)
@@ -46,7 +50,7 @@ class Create extends Component
             $validatedData['code'] = 'ORD-' . DB::table('orders')->max('id') + 1;
 
             // Add additional data
-            $validatedData['kitchen_id'] = $this->kitchen_id;
+            $validatedData['kitchen_id'] = Auth::guard('supervisor')->user()->kitchen->id;
             $validatedData['warehouse_id'] = $this->warehouse_id;
             $validatedData['request_date'] = now();
 

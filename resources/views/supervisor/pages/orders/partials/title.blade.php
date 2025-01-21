@@ -25,7 +25,7 @@
                 <i class='bx bx-edit-alt'></i> Edit
             </button> --}}
             @if($order->status == 'Open')
-                @if($order->type != 'Shipped')
+                @if($order->type == 'Pending')
                     <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
                         wire:click.prevent="$dispatch('orderUpdate', { id: {{ $order->id }} })"
                     >
@@ -33,10 +33,11 @@
                     </a>
                     @livewire('supervisor.pages.orders.partials.edit', ['order' => $order], key('order-edit-'.time()))
                     <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
-                        wire:click.prevent="$dispatch('orderConvert', { id: {{ $order->id }} })"
+                        wire:click.prevent="$dispatch('orderSend', { id: {{ $order->id }} })"
                     >
-                        <i class='bx bx-repost'></i>
+                        <i class='bx bx-send'></i>
                     </a>
+                    @livewire('supervisor.pages.orders.partials.send-order', ['order' => $order], key('order-send-'.time()))
 
                     <a class="btn btn-sm btn-danger" href="javascript:void(0);"
                         wire:click.prevent="$dispatch('orderDelete', { id: {{ $order->id }} })"
@@ -46,16 +47,15 @@
                     {{-- @livewire('supervisor.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time())) --}}
 
                 @endif
-                @livewire('supervisor.pages.orders.partials.convert-order', ['order' => $order], key('order-convert-'.time()))
 
-                    @if($order->type == 'Shipped')
-                        <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
-                            wire:click.prevent="$dispatch('orderSave', { id: {{ $order->id }} })"
-                        >
-                            <i class='bx bx-save'></i>
-                        </a>
-                        @livewire('supervisor.pages.orders.partials.save', ['order' => $order], key('order-save-'.time()))
-                    @endif
+                @if($order->type == 'Shipped')
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderSave', { id: {{ $order->id }} })"
+                    >
+                        <i class='bx bx-save'></i>
+                    </a>
+                    @livewire('supervisor.pages.orders.partials.save', ['order' => $order], key('order-save-'.time()))
+                @endif
 
             @endif
         </div>

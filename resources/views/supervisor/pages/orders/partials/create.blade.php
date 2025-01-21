@@ -10,17 +10,6 @@
             @csrf
             <div class="modal-body">   
                 <div class="mb-3">
-                    <label for="kitchen_id" class="form-label">Kitchens</label><span class='text-danger'>*</span>
-                    <select wire:model.live="kitchen_id" class="form-control" id="kitchen_id">
-                        <option value="">Select a Kitchen...</option>
-                        @forelse ($kitchens as $record)
-                            <option value="{{ $record->id }}" wire:key="kitchen-{{ $record->id }}" >{{ $record->name }}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('kitchen_id')" />
-                </div>
-                <div class="mb-3">
                     <label for="warehouse_id" class="form-label">Warehouses</label><span class='text-danger'>*</span>
                     <select wire:model.live="warehouse_id" class="form-control" id="warehouse_id">
                         <option value="">Select a Warehouse...</option>

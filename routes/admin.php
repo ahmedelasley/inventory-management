@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\NotificationController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -89,6 +90,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/orders/create/order/{order}', [OrderController::class, 'createOrder'])->name('orders.create.order');
         Route::get('/orders/print/order/{order}', [OrderController::class, 'printOrder'])->name('orders.print.order');
+        
+        // Read All Notifications
+        Route::get('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read.all');
 
         Route::controller(AdminController::class)->group(function () {
             Route::patch('/admins/verify/{admin}', 'verify')->name('admins.verify');

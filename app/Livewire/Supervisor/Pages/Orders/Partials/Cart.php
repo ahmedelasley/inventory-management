@@ -20,7 +20,7 @@ class Cart extends Component
         'deleteModalToggle' =>'$refresh',
         'editOrderModalToggle' =>'$refresh',
         'saveOrderModalToggle' =>'$refresh',
-        'convertOrderModalToggle' =>'$refresh',
+        'sendOrderModalToggle' =>'$refresh',
     ];
 
 

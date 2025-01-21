@@ -5,6 +5,7 @@ namespace App\Livewire\Supervisor\Pages\Orders\Partials;
 use Livewire\Component;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\Admin;
 use App\Models\Supervisor;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -13,8 +14,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Livewire\Supervisor\Pages\Orders\GetData;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\TrackOrderStatus;
 
-class ConvertOrder extends Component
+class SendOrder extends Component
 {
     use LivewireAlert;
 
@@ -31,9 +33,9 @@ class ConvertOrder extends Component
         
     }
 
-    protected $listeners = ['orderConvert'];
+    protected $listeners = ['orderSend'];
 
-    public function orderConvert($id)
+    public function orderSend($id)
     {
         $this->order = Order::find($id);
     
@@ -52,7 +54,7 @@ class ConvertOrder extends Component
         $this->resetErrorBag();
     
         // Open modal
-        $this->dispatch('convertOrderModalToggle');
+        $this->dispatch('sendOrderModalToggle');
     }
 
     public function closeForm()
@@ -65,7 +67,7 @@ class ConvertOrder extends Component
         $this->resetErrorBag();
     
         // Close modal
-        $this->dispatch('convertOrderModalToggle');
+        $this->dispatch('sendOrderModalToggle');
     }
     
     public function rules()
@@ -99,22 +101,34 @@ class ConvertOrder extends Component
             $orderStatus = new OrderStatus();
             $orderStatus->order_id = $this->order->id;
             $orderStatus->old_status = $this->order->type;
-            $orderStatus->new_status = $validatedData['type'];
+            $orderStatus->new_status = "Send";
             $orderStatus->date = now();
             $orderStatus->statusable()->associate($service);
             $orderStatus->save();
 
             // Update order
-            $this->order->type   = $validatedData['type'];
+            $this->order->type   = "Send";
 
             $this->order->updateable()->associate($service);
 
             $this->order->save(); 
 
+            $details = [
+                'order_id' => $this->order->id,
+                'title' => "Order from '{$this->order->kitchen->name}'",
+                'body' => "A products request has been sent from '{$this->order->kitchen->name}' to the '{$this->order->warehouse->name}' by '{$this->order->updateable->name}'",
+            ];
+            // Notify the user
+            foreach (Admin::get() as $admin) {
+                $admin->notify(new TrackOrderStatus($details));
+            }
+            $this->order->updateable->notify(new TrackOrderStatus($details));
+            $this->order->warehouse->keeper->notify(new TrackOrderStatus($details));
+
             $this->reset();
 
             // Hide modal
-            $this->dispatch('convertOrderModalToggle');
+            $this->dispatch('sendOrderModalToggle');
             $this->dispatch('refreshTitle'); 
 
             // Refresh skills data component
@@ -137,6 +151,6 @@ class ConvertOrder extends Component
 
     public function render()
     {
-        return view('supervisor.pages.orders.partials.convert-order');
+        return view('supervisor.pages.orders.partials.send-order');
     }
 }

@@ -43,8 +43,39 @@
 <div class="container-fluid flex-grow-1 ">
       {{-- @dd($order) --}}
       {{-- <h1>{{ $order }}</h1> --}}
+
+      <div class="row justify-content-center">
+            <div class="col-md-12">
+ 
+
+
+            {{-- @if($order->type == 'Pending')
+                  <x-text-show  class='bg-warning text-center text-white' :value='$order->type'/>
+              @elseif($order->type == 'Send')
+                  <x-text-show  class='bg-info text-center text-white' :value='$order->type'/>
+              @elseif($order->type == 'Processed')
+                  <x-text-show  class='bg-success text-center text-white' :value='$order->type'/>
+              @elseif($order->type == 'Shipped')
+                  <x-text-show  class='bg-dark text-center text-white' :value='$order->type'/>
+              @elseif($order->type == 'Received')
+                  <x-text-show  class='bg-primary text-center text-white' :value='$order->type'/>
+              @endif --}}
+
+
+
+            </div>
+
+      </div>
+
       <div class="row justify-content-center">
             <div class="col-md-5">
+                  {{-- <div class="d-flex justify-content-between">
+                        <h6 class="p-2 rounded-pill {{ $order->type == 'Pending' ? 'bg-warning text-center text-white' : '' }}" ><img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/pending.png" alt="User" style="width: 20px; height: 20px;"/></h6>
+                        <h6 class="p-2 rounded-pill {{ $order->type == 'Send' ? 'bg-info text-center text-white' : '' }}" >Send</h6>
+                        <h6 class="p-2 rounded-pill {{ $order->type == 'Processed' ? 'bg-success text-center text-white' : '' }}" >Processed</h6>
+                        <h6 class="p-2 rounded-pill {{ $order->type == 'Shipped' ? 'bg-dark text-center text-white' : '' }}" >Shipped</h6>
+                        <h6 class="p-2 rounded-pill {{ $order->type == 'Received' ? 'bg-primary text-center text-white' : '' }}" >Received</h6>
+                  </div> --}}
                   @livewire('admin.pages.orders.partials.title', ['order' => $order])
                   @livewire('admin.pages.orders.partials.cart', ['order' => $order])
             </div>
