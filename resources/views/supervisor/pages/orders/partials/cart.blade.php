@@ -64,7 +64,7 @@
                         @endif
                         {{-- <th class="fw-bolder">Cost</th>
                         <th class="fw-bolder">Total</th> --}}
-                        @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))
+                        @if($order->status == 'Open' &&  $order->type == 'Pending')
                             <th class="fw-bolder">Action</th>
                         @endif
                     </tr>
@@ -86,7 +86,7 @@
                         @endif
                         {{-- <td>{{ $value->cost }}</td>
                         <td>{{ $value->quantity * $value->cost }}</td> --}}
-                        @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))  
+                        @if($order->status == 'Open' && $order->type == 'Pending' )  
                             <td>
                                 <a class="text-success" href="javascript:void(0);"
                                     wire:click.prevent="$dispatch('orderItemUpdate', { id: {{ $value->id }} })"

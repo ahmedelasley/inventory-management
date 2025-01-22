@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Livewire\Admin\Pages\Orders\GetData;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\TrackOrderStatus;
 
 class ConvertOrder extends Component
 {
@@ -110,6 +111,20 @@ class ConvertOrder extends Component
             $this->order->updateable()->associate($service);
 
             $this->order->save(); 
+
+
+            $details = [
+                'order_id' => $this->order->id,
+                'title' => "'{$this->order->type}' '{$this->order->code}' from Administrator",
+                'body' => "A products request has been Processing from '{$service->name}' to the '{$this->order->kitchen->name}' by '{$this->order->updateable->name}'",
+            ];
+            // Notify the user
+            foreach (Admin::get() as $admin) {
+                $admin->notify(new TrackOrderStatus($details));
+            }
+            $this->order->updateable->notify(new TrackOrderStatus($details));
+            $this->order->kitchen->supervisor->notify(new TrackOrderStatus($details));
+
 
             $this->reset();
 

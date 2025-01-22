@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Order;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -19,8 +21,21 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function createOrder(Order $order)
+    public function createOrder(Order $order, Request $request)
     {
+
+        //set order notification to read at this point
+        $notification_id = $request->notification_id;
+        if ($notification_id) {
+            $user = Auth::guard('supervisor')->user();
+            if($user) {
+                $notification = $user->unreadNotifications()->find($notification_id);
+                if($notification) {
+                    $notification->markAsRead();
+                }
+            }
+        }
+
         $products = Product::with(['creator', 'updater', 'category'])->paginate(30);
         return view('supervisor.pages.orders.create-order', [
             'order' => $order,
