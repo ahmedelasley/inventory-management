@@ -17,7 +17,7 @@
             <!-- Dashboard -->
             <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
               <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/dashboard.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
@@ -65,7 +65,7 @@
             <!-- Users -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-user-circle"></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/users.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Admins">Users</div>
               </a>
               <ul class="menu-sub">
@@ -225,7 +225,7 @@
             <!-- Roles -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-check-shield"></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/roles.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Admins">Roles</div>
               </a>
               <ul class="menu-sub">
@@ -286,7 +286,7 @@
             <!-- Suppliers -->
             <li class="menu-item {{ request()->routeIs('admin.suppliers.index') ? 'active' : '' }}">
               <a href="{{ route('admin.suppliers.index') }}" class="menu-link">
-                <i class='menu-icon tf-icons bx bxs-store-alt' ></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/supplier.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Suppliers</div>
               </a>
             </li>
@@ -294,7 +294,7 @@
             <!-- Categories -->
             <li class="menu-item {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
               <a href="{{ route('admin.categories.index') }}" class="menu-link">
-                <i class='menu-icon tf-icons bx bxs-category-alt' ></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/list.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Categories</div>
               </a>
             </li>
@@ -302,7 +302,7 @@
             <!-- Products -->
             <li class="menu-item {{ request()->routeIs('admin.products.index') ? 'active' : '' }}">
               <a href="{{ route('admin.products.index') }}" class="menu-link">
-                <i class='menu-icon tf-icons bx bxs-cube-alt' ></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/products.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Products</div>
               </a>
             </li>
@@ -310,7 +310,7 @@
             <!-- Purchases -->
             <li class="menu-item {{ request()->routeIs('admin.purchases.index') ? 'active' : '' }}">
               <a href="{{ route('admin.purchases.index') }}" class="menu-link">
-                <i class='menu-icon tf-icons bx bx-cart' ></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/shopping-cart.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Purchases</div>
               </a>
             </li>
@@ -318,7 +318,7 @@
             <!-- Transfers -->
             <li class="menu-item {{ request()->routeIs('admin.orders.index') ? 'active' : '' }}">
               <a href="{{ route('admin.orders.index') }}" class="menu-link">
-                <i class='menu-icon tf-icons bx bx-transfer'></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/transfer.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Transfers</div>
               </a>
             </li>
@@ -330,7 +330,7 @@
             <!-- Settings -->
             <li class="menu-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
               <a href="{{ route('admin.settings') }}" class="menu-link">
-                <i class='menu-icon tf-icons bx bxs-cog' ></i>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/settings.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics">Settings</div>
               </a>
             </li>
