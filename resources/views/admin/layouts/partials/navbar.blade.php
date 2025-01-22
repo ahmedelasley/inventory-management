@@ -43,7 +43,7 @@
                 <li class="nav-item navbar-dropdown dropdown-languages dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar d-flex">
-                      <img src="{{ URL::asset('assets/admin') }}/img/icons/translate.png" alt class="w-px-40 h-auto me-2" />
+                      <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/translate.png" alt class="w-px-40 h-auto me-2" />
                       
                     </div>
                   </a>
