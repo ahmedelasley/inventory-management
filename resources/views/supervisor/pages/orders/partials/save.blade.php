@@ -9,11 +9,10 @@
             <form method="post" wire:submit.prevent="submit">
                 @csrf
                 <div class="modal-body">   
-
                     <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        {{ __('Are you sure you want to delete your Order ?') }}
+                        {{ __('Are you sure you want to Received your Order ?') }}
                     </h4>
-                    <input id="name"  type="text" class="form-control" value="{{ $code }}"readonly  />
+                    <input id="name"  wire:model="code" type="text" class="form-control"  readonly  />
                     
                 </div>
                 <div class="modal-footer">

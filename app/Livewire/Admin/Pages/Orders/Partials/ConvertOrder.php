@@ -24,11 +24,13 @@ class ConvertOrder extends Component
 
     public $code;
     public $type;
+    public $response_date;
 
     public function mount($order)
     {
         $this->order = $order;
         $this->type = $order->type;
+        $this->response_date = $order->response_date;
         
     }
 
@@ -73,6 +75,7 @@ class ConvertOrder extends Component
     {
         return [
             'type' => 'required|in:Pending,Send,Processed,Shipped,Received',
+            'response_date' => 'required|date',
         ];
     } 
  
@@ -107,6 +110,7 @@ class ConvertOrder extends Component
 
             // Update order
             $this->order->type   = $validatedData['type'];
+            $this->order->response_date   = $validatedData['response_date'];
 
             $this->order->updateable()->associate($service);
 

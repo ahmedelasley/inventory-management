@@ -35,6 +35,18 @@
                         </div>
                     </div>
 
+                    @if($type == 'Processed')
+                        
+                        <div class="row">
+                            <div class="col mb-3">
+                                <x-input-label for="response_date" class="form-label" :value="__('Response Date')" /><span class='text-danger'>*</span>
+                                <x-text-input id="response_date" wire:model.live.debounce.250ms="response_date" type="datetime-local" class="form-control"/>
+                                <x-input-error class="mt-2" :messages="$errors->get('response_date')" />
+                            </div>
+                        </div>
+                    @endif
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" wire:click="closeForm">

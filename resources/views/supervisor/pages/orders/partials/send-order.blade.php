@@ -12,7 +12,7 @@
                     <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                         {{ __('Are you sure you want to Send your order To Warehouse ?') }}
                     </h4>
-                    <input id="name" wire:model="code" type="text" class="form-control" value="{{ $code }}"readonly  />
+                    <input id="name" wire:model="code" type="text" class="form-control" value="{{ $code }}" readonly  />
 
                 </div>
                 <div class="modal-footer">
