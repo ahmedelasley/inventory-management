@@ -118,6 +118,10 @@ class Edit extends Component
 
     public function render()
     {
-        return view('admin.pages.supervisors.partials.edit');
+        $roles = Role::where('guard_name', 'supervisor')->get();
+
+        return view('admin.pages.supervisors.partials.edit',[
+            'roles' =>$roles,
+        ]);
     }
 }

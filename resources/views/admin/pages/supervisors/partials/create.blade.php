@@ -26,7 +26,7 @@
                     <x-input-label for="role" class="form-label" :value="__('Role')" />
                         <select class="border form-control" id="role" wire:model.live="role">
                             <option value="">{{ __('Select Role') }}</option>
-                            @forelse (cache('supervisor_roles', []) as $role)
+                            @forelse ($roles as $role)
                                 <option value="{{ $role->name }}">{{ $role->name }}</option>
                             @empty
                                 <p>No Roles Available</p>

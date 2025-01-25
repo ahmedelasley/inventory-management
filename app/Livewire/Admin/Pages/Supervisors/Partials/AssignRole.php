@@ -113,6 +113,10 @@ class AssignRole extends Component
 
     public function render()
     {
-        return view('admin.pages.supervisors.partials.assign-role');
+        $roles = Role::where('guard_name', 'supervisor')->get();
+
+        return view('admin.pages.supervisors.partials.assign-role',[
+            'roles' =>$roles,
+        ]);
     }
 }

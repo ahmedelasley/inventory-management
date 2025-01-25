@@ -9,6 +9,7 @@ use App\Http\Requests\SupervisorRequest;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class Create extends Component
 {
@@ -76,6 +77,10 @@ class Create extends Component
 
     public function render()
     {
-        return view('admin.pages.supervisors.partials.create');
+        $roles = Role::where('guard_name', 'supervisor')->get();
+
+        return view('admin.pages.supervisors.partials.create',[
+            'roles' =>$roles,
+        ]);
     }
 }
