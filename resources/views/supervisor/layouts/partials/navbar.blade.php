@@ -76,7 +76,7 @@
                     <li class="mb-2 ">
                       <div class="dropdown-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Notifications</h5>
-                        <a href="javascript:void(0)" class="text-danger"><i class='bx bxs-trash'></i></a>
+                        <a href="{{ route('supervisor.notifications.read.all') }}" class="text-primary"><i class='bx bxs-show'></i></a>
                       </div>
                       <div class="dropdown-divider"></div>
 
@@ -100,7 +100,7 @@
                     </div>
                     <div class="dropdown-divider"></div>
                     <li class="dropdown-item text-center">
-                      <a class="" href="{{ route('supervisor.notifications.read.all')}}">Show All Notifications</a>
+                      <a class="" href="{{ route('supervisor.notifications.index') }}">Show All Notifications</a>
                     </li>                 
                   </ul>
                   @else

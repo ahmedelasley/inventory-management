@@ -85,6 +85,9 @@ class Order extends Model
      {
          return $this->morphTo();
      }
-  
 
+     public function movements()
+     {
+         return $this->hasMany(OrderStatus::class, 'order_id');
+     }
 }

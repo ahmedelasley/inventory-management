@@ -55,4 +55,11 @@ class Kitchen extends Model
         return $this->hasMany(KitchenStock::class, 'kitchen_id');
     }
 
+    
+    // Relationship to get child stocks
+    public function order()
+    {
+        return $this->hasMany(Order::class, 'kitchen_id');
+    }
+
 }

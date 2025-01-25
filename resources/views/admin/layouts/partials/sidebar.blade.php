@@ -18,7 +18,7 @@
             <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
               <a href="{{ route('admin.dashboard') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/dashboard.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics" class="fw-bolder">Dashboard</div>
               </a>
             </li>
 
@@ -66,7 +66,7 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/users.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Admins">Users</div>
+                <div data-i18n="Analytics" class="fw-bolder">Users</div>
               </a>
               <ul class="menu-sub">
 
@@ -226,7 +226,7 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/roles.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Admins">Roles</div>
+                <div data-i18n="Analytics" class="fw-bolder">Roles</div>
               </a>
               <ul class="menu-sub">
 
@@ -266,7 +266,7 @@
               <a href="{{ route('admin.kitchens.index') }}" class="menu-link">
                 {{-- <i class='bx bxs-dish'></i> --}}
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/kitchen.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Kitchens</div>
+                <div data-i18n="Analytics" class="fw-bolder">Kitchens</div>
               </a>
             </li>
 
@@ -275,7 +275,7 @@
               <a href="{{ route('admin.warehouses.index') }}" class="menu-link">
                 {{-- <i class='bx bx-store-alt' ></i> --}}
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/warehouse.png" alt="User" class="menu-icon tf-icons " />
-                <div data-i18n="Analytics">Warehouses</div>
+                <div data-i18n="Analytics" class="fw-bolder">Warehouses</div>
               </a>
             </li>
 
@@ -287,7 +287,7 @@
             <li class="menu-item {{ request()->routeIs('admin.suppliers.index') ? 'active' : '' }}">
               <a href="{{ route('admin.suppliers.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/supplier.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Suppliers</div>
+                <div data-i18n="Analytics" class="fw-bolder">Suppliers</div>
               </a>
             </li>
 
@@ -295,7 +295,7 @@
             <li class="menu-item {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
               <a href="{{ route('admin.categories.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/list.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Categories</div>
+                <div data-i18n="Analytics" class="fw-bolder">Categories</div>
               </a>
             </li>
 
@@ -303,7 +303,7 @@
             <li class="menu-item {{ request()->routeIs('admin.products.index') ? 'active' : '' }}">
               <a href="{{ route('admin.products.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/products.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Products</div>
+                <div data-i18n="Analytics" class="fw-bolder">Products</div>
               </a>
             </li>
 
@@ -311,7 +311,7 @@
             <li class="menu-item {{ request()->routeIs('admin.purchases.index') ? 'active' : '' }}">
               <a href="{{ route('admin.purchases.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/shopping-cart.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Purchases</div>
+                <div data-i18n="Analytics" class="fw-bolder">Purchases</div>
               </a>
             </li>
 
@@ -319,7 +319,7 @@
             <li class="menu-item {{ request()->routeIs('admin.orders.index') ? 'active' : '' }}">
               <a href="{{ route('admin.orders.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/transfer.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Transfers</div>
+                <div data-i18n="Analytics" class="fw-bolder">Transfers</div>
               </a>
             </li>
 
@@ -331,7 +331,7 @@
             <li class="menu-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
               <a href="{{ route('admin.settings') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/settings.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics">Settings</div>
+                <div data-i18n="Analytics" class="fw-bolder">Settings</div>
               </a>
             </li>
 

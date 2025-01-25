@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
+
+        /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('supervisor.pages.notifications.index');
+    }
+
+
     /**
      * Display a listing of the resource.
      */

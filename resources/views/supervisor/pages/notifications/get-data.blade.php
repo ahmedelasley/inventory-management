@@ -1,6 +1,5 @@
 
 <div class="row">
-
     <div class="col-md-12">
         <!-- Striped Rows -->
         <div class="card mb-2 ">
@@ -18,9 +17,8 @@
                         <i class='bx bx-filter-alt'></i>
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item {{ $field == 'code' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('code')">Reference</a></li>
-                          <li><a class="dropdown-item {{ $field == 'kitchen' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('kitchen')">Kitchen</a></li>
-                          <li><a class="dropdown-item {{ $field == 'warehouse' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('warehouse')">Warehouse</a></li>
+                          <li><a class="dropdown-item {{ $field == 'title' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('title')">Title</a></li>
+                          <li><a class="dropdown-item {{ $field == 'body' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('body')">Content</a></li>
                         </ul>
                     </div>
                     <div class="btn-group">
@@ -40,7 +38,12 @@
                             <li><a class="dropdown-item" href="javascript:void(0);" wire:click="exportExcel">Export Excel to Mail</a></li>
                         </ul>
                     </div>
-
+                    {{-- <button type="button" class="btn btn-sm btn-outline-primary ms-2" wire:click="exportPDF"><i class='bx bxs-file-pdf'></i> PDF</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-outline-danger ms-2" data-bs-toggle="modal" data-bs-target="#importModal"><i class='bx bx-spreadsheet' ></i> Import</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-outline-success ms-2" wire:click="exportExcel"><i class='bx bx-spreadsheet' ></i> Export</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteSelectedModal" @if(empty($selectedRows)) disabled @endif><i class="bx bx-trash me-1"></i> Delete</button>
+                    @include('supervisor.pages.kitchens.partials.import')
+                    @include('supervisor.pages.kitchens.partials.delete-selected') --}}
 
                 </div>
                 <select wire:model.live="paginate" class="form-control w-10 mt-3 me-3" style="width:75px" id="paginate">
@@ -61,57 +64,28 @@
                     <table class="table table-striped table-hover table-sm text-center">
                         <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
-                            {{-- <th class="fw-bolder fs-6">
-                                <input
-                                class="form-check-input mt-0"
-                                type="checkbox"
-                                wire:model="selectAllStatus"
-                                wire:click="selectAll"
-                                aria-label="Checkbox for following text input"
-                              />
-                            </th> --}}
                             <th class="fw-bolder fs-6">#</th>
-                            <th class="fw-bolder fs-6">Reference</th>
-                            <th class="fw-bolder fs-6">Kitchen</th>
-                            <th class="fw-bolder fs-6">Warehouse</th>
-                            <th class="fw-bolder fs-6">Type</th>
-                            <th class="fw-bolder fs-6">Status</th>
-                            <th class="fw-bolder fs-6">Response Date</th>
-                            <th class="fw-bolder fs-6">Created</th>
-                            <th class="fw-bolder fs-6">Actions</th>
+                            <th class="fw-bolder fs-6">Title</th>
+                            <th class="fw-bolder fs-6">Content</th>
+                            <th class="fw-bolder fs-6">Read At</th>
+                            <th class="fw-bolder fs-6">Created At</th>
                         </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            {{-- @dd($data) --}}
-                            @forelse ($data as $value)
+                            @forelse($data as $value)
 
-                                <tr>
-                                    <td>{{$loop->iteration }}</td>
-                                    <td><a href="{{ route('supervisor.orders.create.order', ['order' => $value]) }}"><strong>{{ $value->code }}</strong></a></td>
-                                    <td>{{ $value->kitchen?->name }}</td>
-                                    <td>{{ $value->warehouse?->name }}</td>
+                        <tr>
+                            <td>{{$loop->iteration }}</td>
+                             
+                            <td><b>{{ $value->data['details']['title'] }}</b></td>
+                            <td>{{ $value->data['details']['body'] }}</td>
+                            <td><b>{{ $value->read_at?->DiffForHumans() }}</b></td>
+                            <td><b>{{ $value->created_at->DiffForHumans() }}</b></td>
 
-                                    <td>{{ $value->type }}</td>
-                                    <td>{{ $value->status }}</td>
-
-                                    <td>{{ $value->response_date }}</td>
-                                    
-                                    {{-- <td><span class="badge bg-label-primary me-1">{{ $value->keeper?->name }}</span></td> --}}
-                                    <td>{{ $value->createable?->name }}<br>{{ $value->created_at }}</td>
-                                    {{-- <td>{{ $value->updater?->name }}<br>{{ $value->updated_at }}</td>
-                                    <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td> --}}
-
-                                    <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('supervisor.orders.show.transaction', ['order' => $value]) }}">
-                                            <i class='bx bx-transfer-alt'></i> Show Transactions
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <th colspan="9"><div class="alert alert-primary" role="alert">No data to display! - Add new data!</div></th>
-                                </tr>
-                            @endforelse
+                        </tr>
+                        @empty
+                        <p>No data to display! - Add new data</p>
+                        @endforelse
                         </tbody>
                     </table>
                     
@@ -119,12 +93,12 @@
                 <div class="demo-inline-spacing">
                     <nav aria-label="Page navigation">
                         <ul class="pagination pagination-sm justify-content-end">
-                            {{ $data->links() }}
+                            {{-- {{ $data->links() }} --}}
                         </ul>
                     </nav>
                 </div>
+  
             </div>
         </div>
     </div>
-
 </div>

@@ -1,13 +1,13 @@
 @extends('supervisor.layouts.master')
 
-@section('title', $data->product->name)
+@section('title', $data->code)
 @section('css')
 
 @section('content')
 <!-- Content -->
 <div class="container-fluid flex-grow-1 container-p-y">
       <div class="d-flex justify-content-between  mb-2">
-            <h5 class="fw-bolder fs-5">{{ $data->kitchen->name }} Transactions</h5>
+            <h5 class="fw-bolder fs-5">{{ $data->code }} Transactions</h5>
             <a href="{{ route('supervisor.kitchens.index') }}" class="btn btn-primary btn-round btn-sm d-block">
                   <span class="ion ion-md-arrow-back"></span> Back
             </a>      
@@ -81,10 +81,8 @@
                                 <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                                 <tr>
                                     <th class="fw-bolder fs-6">#</th>
-                                    <th class="fw-bolder fs-6">Name</th>
-                                    <th class="fw-bolder fs-6">SKU</th>
-                                    <th class="fw-bolder fs-6">Qty Stock</th>
-                                    <th class="fw-bolder fs-6">Status</th>
+                                    <th class="fw-bolder fs-6">Old Status</th>
+                                    <th class="fw-bolder fs-6">New Status</th>
                                     <th class="fw-bolder fs-6">Date</th>
                                     <th class="fw-bolder fs-6">Created At</th>
                                 </tr>
@@ -94,12 +92,10 @@
         
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td>{{ $value->kitchenStock->product->name }}</td>
-                                    <td>{{ $value->kitchenStock->product->sku }}</td>
-                                    <td>{{ $value->quantity }}</td>
-                                    <td>{{ $value->type }}</td>
+                                    <td>{{ $value->old_status }}</td>
+                                    <td>{{ $value->new_status }}</td>
                                     <td>{{ $value->date }}</td>
-                                    <td>{{ $value->createable?->name }}<br>{{ $value->created_at }}</td>
+                                    <td>{{ $value->statusable?->name }}<br>{{ $value->created_at }}</td>
                                 </tr>
                                 @empty
                                 <p>No data to display! - Add new data</p>

@@ -59,4 +59,5 @@ class KitchenStock extends Model
     public function movements()
     {
         return $this->hasMany(KitchenStockMovement::class, 'kitchen_stock_id');
-    }}
+    }
+}

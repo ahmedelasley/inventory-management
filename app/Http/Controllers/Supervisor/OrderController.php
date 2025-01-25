@@ -43,6 +43,18 @@ class OrderController extends Controller
         ]);
 
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function showTransaction(Order $order)
+    {
+        return view('supervisor.pages.orders.show-transaction', [
+            'data' => $order,
+        ]);
+    }
+
+
     
     /**
      * Store a newly print resource in storage.
