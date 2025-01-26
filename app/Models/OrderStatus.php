@@ -34,5 +34,11 @@ class OrderStatus extends Model
     {
         return $this->morphTo();
     }
-
+    
+    // Relationship to get the parent purchase
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+    
 }

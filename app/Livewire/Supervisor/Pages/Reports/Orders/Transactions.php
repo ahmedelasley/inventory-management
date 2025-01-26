@@ -4,19 +4,21 @@ namespace App\Livewire\Supervisor\Pages\Reports\Orders;
 
 use Livewire\Component;
 
-use App\Models\KitchenStockMovement;
-use App\Models\KitchenStock;
+use App\Models\Order;
+use App\Models\OrderStatus;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 class Transactions extends Component
 {
     use LivewireAlert, WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    public $stocks;
-    public $status ;
+    public $order;
+    public $oldStatus ;
+    public $newStatus ;
     public $fromDate;
     public $toDate;
     public $paginate;
@@ -36,8 +38,9 @@ class Transactions extends Component
 
     public function mount()
     {
-        $this->stocks = "All";
-        $this->status =  "All";
+        $this->order = "All";
+        $this->oldStatus =  "All";
+        $this->newStatus =  "All";
         $this->fromDate = now();
         $this->toDate = now();
         $this->paginate = getSetting('pagination');
@@ -50,8 +53,9 @@ class Transactions extends Component
 
     public function clearFilter()
     {
-        $this->stocks = "All";
-        $this->status =  "All";
+        $this->order = "All";
+        $this->oldStatus =  "All";
+        $this->newStatus =  "All";
         $this->fromDate = now();
         $this->toDate = now();
 
@@ -59,23 +63,27 @@ class Transactions extends Component
     
     public function render()
     {
-        $data = KitchenStockMovement::with(['createable', 'kitchenStock']);
+        $data = OrderStatus::with(['statusable', 'order'])->whereHas('order', function ($query) {
+                                $query->where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id); 
+                            });
 
-        if ($this->stocks != 'All') {
-            $data = $data->whereHas('kitchenStock', function ($query) {
-                $query->where('product_id', 'like', '%' . $this->stocks . '%'); 
-            });
+        if ($this->order != 'All') {
+            $data = $data->where('order_id', $this->order);
          }   
-         if ($this->status != 'All') {
-            $data = $data->where('type', 'like', '%' . $this->status . '%');
+         if ($this->oldStatus != 'All') {
+            $data = $data->where('old_status', $this->oldStatus);
          }   
-
+         
+         if ($this->newStatus != 'All') {
+            $data = $data->where('new_status', $this->newStatus);
+         }   
+         
         $data = $data->whereBetween('created_at', [$this->fromDate, $this->toDate])->latest()->paginate($this->paginate);
 
-         $products = KitchenStock::with('product')->get();
+         $orders = Order::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->get();
         return view('supervisor.pages.reports.orders.transactions', [
             'data' => $data,
-            'products' => $products,
+            'orders' => $orders,
         ]);
     }
 }

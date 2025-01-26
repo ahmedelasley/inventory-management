@@ -4,24 +4,38 @@
               <a wire:click.prevent='clearFilter()' class=" btn btn-danger text-white "><i class='bx bxs-filter-alt'></i></a>
         </div>
         <div class="btn-group m-1">
-              <select class="form-select"  wire:model.live="stocks">
-                    <option selected>Choose Product</option>
+              <select class="form-select" wire:model.live="order">
+                    <option selected>Choose Order</option>
                     <option value="All">All</option>
-                    @forelse ($products as $value)
-                        <option value="{{ $value->product?->id}}">{{ $value->product?->name}}</option>
+                    @forelse ($orders as $value)
+                        <option value="{{ $value->id}}">{{ $value->code}}</option>
                     @empty
                     @endforelse
               </select>
         </div>
         <div class="btn-group m-1">
-              <select class="form-select" i wire:model.live="status">
-                    <option selected>Choose Status Stock</option>
+              <select class="form-select" wire:model.live="oldStatus">
+                    <option selected>Choose Old Status</option>
                     <option value="All">All</option>
-                    <option value="Add">Add</option>
-                    <option value="Reduce">Reduce</option>
-                    <option value="Return">Return</option>
+                    <option value="Null">Null</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Send">Send</option>
+                    <option value="Processed">Processed</option>
+                    <option value="Shipped">Shipped</option>
               </select>
         </div>
+        <div class="btn-group m-1">
+            <select class="form-select" wire:model.live="newStatus">
+                  <option selected>Choose New Status</option>
+                  <option value="All">All</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Send">Send</option>
+                  <option value="Processed">Processed</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Received">Received</option>
+            </select>
+        </div>
+
         <div class="btn-group m-1">
               <input class="form-control" type="date" wire:model.live="fromDate"/>
         </div>
@@ -29,7 +43,9 @@
               <input class="form-control" type="date" wire:model.live="toDate"/>
         </div>
         <div class="input-group-append m-1 ">
-              <a wire:click.prevent='clearFilter()' class=" btn btn-primary text-white "><i class='bx bxs-printer'></i></a>
+            <a onclick="window.open('{{ route('supervisor.reports.print.orders.transactions', [$order, $oldStatus, $newStatus, $fromDate, $toDate]) }}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=900,height=900').print()" class="btn btn-primary text-white">
+                <i class="bx bx-printer"></i>
+            </a>
         </div>
   </div>
 
@@ -49,10 +65,9 @@
                             <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                             <tr>
                                 <th class="fw-bolder fs-6">#</th>
-                                <th class="fw-bolder fs-6">Name</th>
-                                <th class="fw-bolder fs-6">SKU</th>
-                                <th class="fw-bolder fs-6">Qty Stock</th>
-                                <th class="fw-bolder fs-6">Status</th>
+                                <th class="fw-bolder fs-6">Order</th>
+                                <th class="fw-bolder fs-6">Old Status</th>
+                                <th class="fw-bolder fs-6">New Status</th>
                                 <th class="fw-bolder fs-6">Date</th>
                                 <th class="fw-bolder fs-6">Created At</th>
                             </tr>
@@ -62,12 +77,11 @@
     
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td>{{ $value->kitchenStock->product->name }}</td>
-                                    <td>{{ $value->kitchenStock->product->sku }}</td>
-                                    <td>{{ $value->quantity }}</td>
-                                    <td>{{ $value->type }}</td>
+                                    <td>{{ $value->order?->code }}</td>
+                                    <td>{{ $value->old_status }}</td>
+                                    <td>{{ $value->new_status }}</td>
                                     <td>{{ $value->date }}</td>
-                                    <td>{{ $value->createable?->name }}<br>{{ $value->created_at }}</td>
+                                    <td>{{ $value->statusable?->name }}<br>{{ $value->created_at }}</td>
                                 </tr>
                                 @empty
                                 <tr>

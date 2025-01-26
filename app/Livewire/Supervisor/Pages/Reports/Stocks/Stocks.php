@@ -14,7 +14,7 @@ class Stocks extends Component
     use LivewireAlert, WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    public $stocks;
+    public $type;
     public $status ;
     public $fromDate;
     public $toDate;
@@ -35,7 +35,7 @@ class Stocks extends Component
 
     public function mount()
     {
-        $this->stocks = "All";
+        $this->type = "All";
         $this->status =  "All";
         $this->fromDate = date('Y-m-d H:i:s');
         $this->toDate = date('Y-m-d H:i:s');
@@ -49,7 +49,7 @@ class Stocks extends Component
     
     public function clearFilter()
     {
-        $this->stocks = "All";
+        $this->type = "All";
         $this->status =  "All";
         $this->fromDate = date('Y-m-d H:i:s');
         $this->toDate = date('Y-m-d H:i:s');
@@ -60,9 +60,9 @@ class Stocks extends Component
     {
         $data = KitchenStock::with(['createable', 'product', 'kitchen', 'movements']);
 
-        // if ($this->stocks != 'All') {
+        // if ($this->type != 'All') {
         //     $data = $data->whereHas('kitchenStock', function ($query) {
-        //         $query->where('product_id', 'like', '%' . $this->stocks . '%'); 
+        //         $query->where('product_id', 'like', '%' . $this->type . '%'); 
         //     });
         //  }   
         //  if ($this->status != 'All') {

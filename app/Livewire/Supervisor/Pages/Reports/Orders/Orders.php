@@ -8,6 +8,7 @@ use App\Models\Order;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 class Orders extends Component
 {
@@ -58,7 +59,7 @@ class Orders extends Component
 
     public function render()
     {
-        $data = Order::with(['kitchen', 'warehouse', 'products', 'createable']);
+        $data = Order::with(['kitchen', 'warehouse', 'products', 'createable'])->where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id);
 
         if ($this->type != 'All') {
             $data = $data->where('type', $this->type);

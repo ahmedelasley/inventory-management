@@ -29,7 +29,9 @@
               <input class="form-control" type="date" wire:model.live="toDate"/>
         </div>
         <div class="input-group-append m-1 ">
-              <a wire:click.prevent='clearFilter()' class=" btn btn-primary text-white "><i class='bx bxs-printer'></i></a>
+            <a onclick="window.open('{{ route('supervisor.reports.print.stocks.transactions', [$stocks, $status, $fromDate, $toDate]) }}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=900,height=900').print()" class="btn btn-primary text-white">
+                <i class="bx bx-printer"></i>
+            </a>
         </div>
   </div>
 
