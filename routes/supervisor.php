@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Supervisor\DashboardController;
 use App\Http\Controllers\Supervisor\ProfileController;
 use App\Http\Controllers\Supervisor\ProductController;
 use App\Http\Controllers\Supervisor\KitchenController;
@@ -25,12 +26,14 @@ Route::prefix('supervisor')->name('supervisor.')->group(function () {
 
     Route::middleware('auth.supervisor')->group(function () {
 
-        Route::get('/', function () {
-            return view('supervisor.dashboard');
-        });
-        Route::get('/dashboard', function () {
-            return view('supervisor.dashboard');
-        })->name('dashboard');
+        // Route::get('/', function () {
+        //     return view('supervisor.dashboard');
+        // });
+        // Route::get('/dashboard', function () {
+        //     return view('supervisor.dashboard');
+        // })->name('dashboard');
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::controller(ProfileController::class)->name('profile.')->group(function () {
             Route::get('/profile', 'edit')->name('edit');
