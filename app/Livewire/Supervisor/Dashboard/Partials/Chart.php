@@ -10,38 +10,74 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Order;
+use Livewire\Attributes\On; 
+
 
 class Chart extends Component
 {
     use WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    public function render()
-    {
 
-        $year = date('Y');
-        
+    public $yearChart;
+    public $lastYearChart;
+    public $ordersByMonth;
+    public $monthlyData;
+    public $lastOrdersByMonth;
+    public $lastMonthlyData;
+
+
+    public function mount()
+    {
+        $this->yearChart = (int) date('Y');
+        $this->lastYearChart = $this->yearChart - 1;
+        $this->loadChartData();  // Load the initial data when the component is mounted
+
+    }
+    
+    // public function setYear($year)
+    // {
+    //     $this->yearChart = $year;
+    //     $this->loadChartData();  // Load the initial data when the component is mounted
+    //     $this->dispatch('chartUpdated'); // Dispatch an event to notify the frontend
+
+    // }
+
+    // A method to load the chart data for the selected year
+    public function loadChartData()
+    {
+        // Group orders by month and sum quantities for the selected year
+        $this->ordersByMonth = Order::selectRaw('MONTH(created_at) as month, SUM(quantities) as total')
+            ->whereYear('created_at', $this->yearChart)
+            ->groupBy('month')
+            ->pluck('total', 'month');
+
+        // Populate data for all 12 months (default to 0 if no data exists)
+        $this->monthlyData = collect(range(1, 12))->map(function ($month) {
+            return $this->ordersByMonth[$month] ?? 0;
+        })->toArray();
+
+        // Last Year
+        // Group orders by month and sum quantities for the selected year
+        $this->lastOrdersByMonth = Order::selectRaw('MONTH(created_at) as month, SUM(quantities) as total')
+        ->whereYear('created_at', $this->lastYearChart)
+        ->groupBy('month')
+        ->pluck('total', 'month');
+
+        // Populate data for all 12 months (default to 0 if no data exists)
+        $this->lastMonthlyData = collect(range(1, 12))->map(function ($month) {
+            return $this->lastOrdersByMonth[$month] ?? 0;
+        })->toArray();
+
+    }
+
+    public function chart() 
+    {       
         // Generate month names dynamically
         $monthNames = collect(range(1, 12))->map(function ($month) {
             return Carbon::createFromDate(null, $month)->format('M'); // Generate month names dynamically
         })->toArray();
-    
-        // Generate dynamic colors for each month
-        $colors = collect(range(1, 12))->map(function () {
-            return '#' . substr(md5(mt_rand()), 0, 6); // Random hex color
-        })->toArray();
 
-        // Group orders by month and sum quantities
-        $ordersByMonth = Order::selectRaw('MONTH(created_at) as month, SUM(quantities) as total')
-            ->whereYear('created_at', $year)
-            ->groupBy('month')
-            ->pluck('total', 'month');
-    
-        // Populate data for all 12 months (default to 0 if no data exists)
-        $monthlyData = collect(range(1, 12))->map(function ($month) use ($ordersByMonth) {
-            return $ordersByMonth[$month] ?? 0;
-        })->toArray();
-    
         // Create the chart
         $barChartOrders = app()->chartjs
             ->name('barChartOrders')
@@ -50,16 +86,29 @@ class Chart extends Component
             ->labels($monthNames)
             ->datasets([
                 [
-                    "label" => "",
-                    'backgroundColor' => $colors,
-                    'data' => $monthlyData,
+                    "label" => $this->yearChart,
+                    'backgroundColor' => getColorSet(1)[0],
+                    'data' => $this->monthlyData,
+                ],
+                [
+                    "label" => $this->lastYearChart,
+                    'backgroundColor' => getColorSet(1)[1],
+                    'data' => $this->lastMonthlyData,
                 ]
+
             ])
             ->options([]);
-    
-        // Pass chart to the view
+
+        return $barChartOrders;
+    }
+
+    // #[On('refreshData')] 
+    public function render()
+    {
+        // dd($this->chart());
+
         return view('supervisor.dashboard.partials.chart', [
-            'barChartOrders' => $barChartOrders,
+            'barChartOrders' => $this->chart(),
         ]);
     }
 
