@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Pages\Orders\Partials;
 
 use Livewire\Component;
 use App\Models\Admin;
+use App\Models\Restaurant;
 use App\Models\Warehouse;
 use App\Models\Kitchen;
 use App\Models\Order;
@@ -115,10 +116,14 @@ class Create extends Component
     }
     public function render()
     {
-        $kitchens = Kitchen::select('id', 'name')->get();
+        // $restaurants = Restaurant::select('id', 'name')->get();
+        $restaurants = Restaurant::with(['creator', 'editor', 'user', 'kitchen'])->get();
+// dd($restaurants->kitchen());
+        // $kitchens = Kitchen::select('id', 'name')->get();
         $warehouses = Warehouse::select('id', 'name')->get();
         return view('admin.pages.orders.partials.create', [
-            'kitchens' => $kitchens,
+            'restaurants' => $restaurants,
+            // 'kitchens' => $kitchens,
             'warehouses' => $warehouses,
         ]);
     }

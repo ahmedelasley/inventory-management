@@ -57,5 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         );
     }
+
+    // Relationship to get the restaurant
+    public function restaurant()
+    {
+        return $this->hasOne(Restaurant::class);
+    }
     
 }

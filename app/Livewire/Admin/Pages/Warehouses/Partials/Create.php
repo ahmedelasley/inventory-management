@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Pages\Warehouses\Partials;
 
 use Livewire\Component;
+use App\Models\Restaurant;
 use App\Models\Keeper;
 use App\Models\Warehouse;
 use App\Livewire\Admin\Pages\Warehouses\GetData;
@@ -18,6 +19,7 @@ class Create extends Component
     public $name;
     public $code;
     public $location;
+    public $restaurant_id;
     public $keeper_id;
 
     protected function rules(): array 
@@ -91,9 +93,12 @@ class Create extends Component
     }
     public function render()
     {
-        $data = Keeper::with(['creator', 'updater'])->paginate(20);
+
+        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user', 'kitchen'])->get();
+        $dataKeeper = Keeper::with(['creator', 'updater', 'warehouse'])->doesntHave('warehouse')->get();
         return view('admin.pages.warehouses.partials.create', [
-            'data' => $data,
+            'dataRestaurant' => $dataRestaurant,
+            'dataKeeper' => $dataKeeper,
         ]);
     }
 }

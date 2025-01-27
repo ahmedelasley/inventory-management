@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kitchen extends Model
+class Restaurant extends Model
 {
     use HasFactory;
     /**
@@ -13,7 +13,7 @@ class Kitchen extends Model
      *
      * @var string
      */
-    protected $table = 'kitchens';
+    protected $table = 'restaurants';
 
     /**
      * The attributes that are mass assignable.
@@ -24,8 +24,7 @@ class Kitchen extends Model
         'name',
         'code',
         'location',
-        'restaurant_id',
-        'supervisor_id',
+        'user_id',
         'created_id',
         'updated_id',
     ];
@@ -39,34 +38,28 @@ class Kitchen extends Model
     }
 
     // Relationship to get the parent category
-    public function updater()
+    public function editor()
     {
         return $this->belongsTo(Admin::class, 'updated_id');
     }
 
     // Relationship to get the parent category
-    public function restaurant()
+    public function user()
     {
-        return $this->belongsTo(Restaurant::class, 'restaurant_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relationship to get the parent category
-    public function supervisor()
+    // Relationship to get the kitchen
+    public function kitchen()
     {
-        return $this->belongsTo(Supervisor::class, 'supervisor_id');
-    }
-
-    // Relationship to get child stocks
-    public function stocks()
-    {
-        return $this->hasMany(KitchenStock::class, 'kitchen_id');
+        return $this->hasMany(Kitchen::class);
     }
 
     
-    // Relationship to get child stocks
-    public function order()
+    // Relationship to get the warehouse
+    public function warehouse()
     {
-        return $this->hasMany(Order::class, 'kitchen_id');
+        return $this->hasMany(Warehouse::class);
     }
 
 }

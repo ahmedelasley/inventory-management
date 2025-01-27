@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire\Admin\Pages\Kitchens\Partials;
+namespace App\Livewire\Admin\Pages\Restaurants\Partials;
 
 use Livewire\Component;
+use App\Models\User;
 use App\Models\Restaurant;
-use App\Models\Supervisor;
-use App\Models\Kitchen;
-use App\Livewire\Admin\Pages\Kitchens\GetData;
-use App\Http\Requests\KitchenRequest;
+use App\Livewire\Admin\Pages\Restaurants\GetData;
+use App\Http\Requests\RestaurantRequest;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\DB;
@@ -19,12 +18,11 @@ class Create extends Component
     public $name;
     public $code;
     public $location;
-    public $restaurant_id;
-    public $supervisor_id;
+    public $user_id;
 
     protected function rules(): array 
     {
-        return (new KitchenRequest())->rules();
+        return (new RestaurantRequest())->rules();
     } 
  
     public function updated($field)
@@ -42,14 +40,14 @@ class Create extends Component
         DB::beginTransaction();
 
         try {
-            // dd(str_replace('kit-', '', Kitchen::latest()->first()->code));
+            // dd(str_replace('kit-', '', restaurant::latest()->first()->code));
             // Check of Validation
             $validatedData       = $this->validate();
             // Add creator
-            $validatedData['code'] = 'K-' . ( Kitchen::count() == 0 ? getSetting('kitchen_code') + 1 : (int) str_replace('K-', '', Kitchen::latest()->first()->code) + 1 );
+            $validatedData['code'] = 'R-' . ( Restaurant::count() == 0 ? getSetting('restaurant_code') + 1 : (int) str_replace('R-', '', Restaurant::latest()->first()->code) + 1 );
             $validatedData['created_id'] = Auth::guard('admin')->user()->id;
             // Query Create
-            Kitchen::create($validatedData);
+            Restaurant::create($validatedData);
 
             $this->reset();
 
@@ -93,11 +91,9 @@ class Create extends Component
     }
     public function render()
     {
-        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user', 'kitchen'])->get();
-        $dataSupervisor = Supervisor::with(['creator', 'updater', 'kitchen'])->doesntHave('kitchen')->get();
-        return view('admin.pages.kitchens.partials.create', [
-            'dataRestaurant' => $dataRestaurant,
-            'dataSupervisor' => $dataSupervisor,
+        $data = User::with(['restaurant'])->doesntHave('restaurant')->get();
+        return view('admin.pages.restaurants.partials.create', [
+            'data' => $data,
         ]);
     }
 }

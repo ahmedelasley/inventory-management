@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Add New Kitchen</h5>
+            <h5 class="modal-title" id="exampleModalLabel1">Add New Restaurant</h5>
             <button type="button" class="btn-close" wire:click.prevent="closeForm" ></button>
         </div>
         <form method="post" wire:submit.prevent="submit">
@@ -21,26 +21,15 @@
                 </div>
     
                 <div class="mb-3">
-                    <label for="restaurant_id" class="form-label">Restaurant</label><span class='text-danger'>*</span>
-                    <select wire:model.live="restaurant_id" class="form-control" id="supervisor_id">
-                        <option value="">Select a Restaurant...</option>
-                        @forelse ($dataRestaurant as $record)
-                            <option value="{{ $record->id }}" wire:key="restaurant-{{ $record->id }}" >{{ $record->name }}</option>
+                    <label for="user_id" class="form-label">User</label><span class='text-danger'>*</span>
+                    <select wire:model.live="user_id" class="form-control" id="user_id">
+                        <option value="">Select a User...</option>
+                        @forelse ($data as $record)
+                            <option value="{{ $record->id }}" wire:key="user-{{ $record->id }}" >{{ $record->name }}</option>
                         @empty
                         @endforelse
                     </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('restaurant_id')" />
-                </div>
-                <div class="mb-3">
-                    <label for="supervisor_id" class="form-label">Supervisor</label><span class='text-danger'>*</span>
-                    <select wire:model.live="supervisor_id" class="form-control" id="supervisor_id">
-                        <option value="">Select a Supervisor...</option>
-                        @forelse ($dataSupervisor as $record)
-                            <option value="{{ $record->id }}" wire:key="supervisor-{{ $record->id }}" >{{ $record->name }}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('supervisor_id')" />
+                    <x-input-error class="mt-2" :messages="$errors->get('user_id')" />
                 </div>
             </div>
             <div class="modal-footer">

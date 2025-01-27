@@ -26,6 +26,7 @@ class Warehouse extends Model
         'name',
         'code',
         'location',
+        'restaurant_id',
         'keeper_id',
         'created_id',
         'updated_id',
@@ -43,6 +44,12 @@ class Warehouse extends Model
     public function updater()
     {
         return $this->belongsTo(Admin::class, 'updated_id');
+    }
+
+    // Relationship to get the parent category
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 
     // Relationship to get the parent category

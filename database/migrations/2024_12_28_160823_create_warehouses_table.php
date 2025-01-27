@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('location')->nullable();
             $table->tinyInteger('is_default')->default(0); // Type (0 = Not Default, 1 = Defualt )
 
+            $table->unsignedBigInteger('restaurant_id')->nullable();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+
             $table->unsignedBigInteger('keeper_id')->nullable();
             $table->foreign('keeper_id')->references('id')->on('keepers')->onDelete('cascade');
 

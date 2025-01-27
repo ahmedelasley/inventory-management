@@ -22,10 +22,21 @@
     
     
                 <div class="mb-3">
+                    <label for="restaurant_id" class="form-label">Restaurant</label><span class='text-danger'>*</span>
+                    <select wire:model.live="restaurant_id" class="form-control" id="supervisor_id">
+                        <option value="">Select a Restaurant...</option>
+                        @forelse ($dataRestaurant as $record)
+                            <option value="{{ $record->id }}" wire:key="restaurant-{{ $record->id }}" >{{ $record->name }}</option>
+                        @empty
+                        @endforelse
+                    </select>
+                    <x-input-error class="mt-2" :messages="$errors->get('restaurant_id')" />
+                </div>
+                <div class="mb-3">
                     <label for="supervisor_id" class="form-label">Supervisor</label><span class='text-danger'>*</span>
                     <select wire:model.live="supervisor_id" class="form-control" id="supervisor_id">
                         <option value="">Select a Supervisor...</option>
-                        @forelse ($data as $record)
+                        @forelse ($dataSupervisor as $record)
                             <option value="{{ $record->id }}" wire:key="supervisor-{{ $record->id }}" >{{ $record->name }}</option>
                         @empty
                         @endforelse

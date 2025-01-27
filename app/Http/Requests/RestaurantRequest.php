@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Warehouse;
+use App\Models\Restaurant;
 
 use Illuminate\Validation\Rule;
 
-class WarehouseRequest extends FormRequest
+class RestaurantRequest extends FormRequest
 {
 
     protected $id;
@@ -37,21 +37,17 @@ class WarehouseRequest extends FormRequest
         switch ($this->method) {
             case 'POST': {
                 return [
-                    'name' => ['required', 'string', 'max:255', Rule::unique(Warehouse::class)],
-                    // 'code' => ['required', 'string', 'max:255', Rule::unique(Warehouse::class)],
+                    'name' => ['required', 'string', 'max:255', Rule::unique(Restaurant::class)],
                     'location' => 'nullable|string|min:3|max:255',
-                    'restaurant_id' => 'required|exists:restaurants,id',
-                    'keeper_id' => 'required|exists:keepers,id',
+                    'user_id' => 'required|exists:users,id',
                 ];
             }
             case 'PUT':
             case 'PATCH': {
                 return [
-                    'name' => ['required', 'string', 'max:255' , Rule::unique(Warehouse::class)->ignore($this->id)] ,
-                    // 'code' => ['required', 'string', 'max:255' , Rule::unique(Warehouse::class)->ignore($this->id)] ,
+                    'name' => ['required', 'string', 'max:255' , Rule::unique(Restaurant::class)->ignore($this->id)] ,
                     'location' => 'nullable|string|min:3|max:255',
-                    'restaurant_id' => 'required|exists:restaurants,id',
-                    'keeper_id' => 'required|exists:keepers,id',
+                    'user_id' => 'required|exists:users,id',
                 ];
             }
             default:

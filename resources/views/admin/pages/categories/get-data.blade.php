@@ -61,8 +61,7 @@
 
             <div class="card-body">
                 
-                @if (count($data) > 0)
-                    <div class="table-responsive text-wrap"  style="height : calc(100vh - 420px)">
+                <div class="table-responsive text-wrap"  style="height : calc(100vh - 420px)">
                     <table class="table table-striped table-hover table-sm text-center">
                         <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
@@ -133,24 +132,21 @@
                             </td>
                         </tr>
                         @empty
-                        <p>No data to display! - Add new data</p>
+                            <tr>
+                                <td colspan="7">No data to display! - Add new data</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>
                     
-                    </div>
-                    <div class="demo-inline-spacing">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination pagination-sm justify-content-end">
-                                {{ $data->links() }}
-                            </ul>
-                        </nav>
-                    </div>
-                @else
-                    <div class="alert alert-primary" role="alert">
-                    No data to display! - Add new data
-                    </div>
-                @endif
+                </div>
+                <div class="demo-inline-spacing">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-sm justify-content-end">
+                            {{ $data->links() }}
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

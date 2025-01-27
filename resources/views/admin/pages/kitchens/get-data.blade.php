@@ -65,8 +65,9 @@
                         <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
                             <th class="fw-bolder fs-6">#</th>
-                            <th class="fw-bolder fs-6">Name</th>
                             <th class="fw-bolder fs-6">Code</th>
+                            <th class="fw-bolder fs-6">Name</th>
+                            <th class="fw-bolder fs-6">Restaurant</th>
                             <th class="fw-bolder fs-6">Location</th>
                             <th class="fw-bolder fs-6">Supervisor</th>
                             <th class="fw-bolder fs-6">Created At</th>
@@ -79,8 +80,9 @@
 
                         <tr>
                             <td>{{$loop->iteration }}</td>
-                            <td><a href="{{ route('admin.kitchens.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a></td>
                             <td>{{ $value->code }}</td>
+                            <td><a href="{{ route('admin.kitchens.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a></td>
+                            <td><span class="badge bg-label-primary">{{ $value->restaurant?->name }}</span></td>
                             <td>{{ $value->location }}</td>
                             <td><span class="badge bg-label-primary">{{ $value->supervisor?->name }}</span></td>
                             <td>{{ $value->creator?->name }}<br>{{ $value->created_at }}</td>
@@ -119,7 +121,9 @@
                             </td>
                         </tr>
                         @empty
-                        <p>No data to display! - Add new data</p>
+                            <tr>
+                                <td colspan="9">No data to display! - Add new data</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

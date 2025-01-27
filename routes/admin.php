@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\SupervisorController;
 use App\Http\Controllers\Admin\SupervisorRoleController;
+use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\KitchenController;
 use App\Http\Controllers\Admin\KeeperController;
 use App\Http\Controllers\Admin\KeeperRoleController;
@@ -64,12 +65,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             '/supervisors' => SupervisorController::class,
             '/supervisors-roles' => SupervisorRoleController::class,
-            
-            '/kitchens' => KitchenController::class,
-            '/warehouses' => WarehouseController::class,
 
             '/keepers' => KeeperController::class,
             '/keepers-roles' => KeeperRoleController::class,
+            
+            '/restaurants' => RestaurantController::class,
+            '/kitchens' => KitchenController::class,
+            '/warehouses' => WarehouseController::class,
 
             '/suppliers' => SupplierController::class,
             '/categories' => CategoryController::class,

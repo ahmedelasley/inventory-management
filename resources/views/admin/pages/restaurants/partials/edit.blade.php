@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Edit Warehouse [ {{ $name }} ]</h5>
+            <h5 class="modal-title" id="exampleModalLabel1">Edit Restaurant [ {{ $name }} ]</h5>
             <button type="button" class="btn-close" wire:click="closeForm" ></button>
         </div>
         <form wire:submit.prevent="submit">
@@ -20,27 +20,17 @@
                     <x-input-error class="mt-2" :messages="$errors->get('location')" />
                 </div>
     
+    
                 <div class="mb-3">
-                    <label for="restaurant_id" class="form-label">Restaurant</label><span class='text-danger'>*</span>
-                    <select wire:model.live="restaurant_id" class="form-control" id="supervisor_id">
-                        <option value="">Select a Restaurant...</option>
-                        @forelse ($dataRestaurant as $record)
-                            <option value="{{ $record->id }}" wire:key="restaurant-{{ $record->id }}" >{{ $record->name }}</option>
+                    <label for="user_id" class="form-label">User</label><span class='text-danger'>*</span>
+                    <select wire:model.live="user_id" class="form-control" id="user_id">
+                        <option value="">Select a User...</option>
+                        @forelse ($data as $record)
+                            <option value="{{ $record->id }}" wire:key="user-{{ $record->id }}" >{{ $record->name }}</option>
                         @empty
                         @endforelse
                     </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('restaurant_id')" />
-                </div>
-                <div class="mb-3">
-                    <label for="keeper_id" class="form-label">Keepers</label><span class='text-danger'>*</span>
-                    <select wire:model.live="keeper_id" class="form-control" id="keeper_id">
-                        <option value="">Select a Keeper...</option>
-                        @forelse ($dataKeeper as $record)
-                            <option value="{{ $record->id }}" wire:key="keeper-{{ $record->id }}" >{{ $record->name }}</option>
-                        @empty
-                        @endforelse
-                    </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('keeper_id')" />
+                    <x-input-error class="mt-2" :messages="$errors->get('user_id')" />
                 </div>
             </div>
             <div class="modal-footer">

@@ -37,7 +37,8 @@
                             <li><a class="dropdown-item" href="javascript:void(0);" wire:click="exportPDF">Export PDF to Mail</a></li>
                             <li><a class="dropdown-item" href="javascript:void(0);" wire:click="exportExcel">Export Excel to Mail</a></li>
                         </ul>
-                      </div>
+                    </div>
+
                 </div>
                 <select wire:model.live="paginate" class="form-control w-10 mt-3 me-3" style="width:75px" id="paginate">
                     <option disabled value="">Select a Paginate...</option>
@@ -53,17 +54,15 @@
             </div>
 
             <div class="card-body">
-                
                 <div class="table-responsive text-wrap"  style="height : calc(100vh - 420px)">
                     <table class="table table-striped table-hover table-sm text-center">
                         <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
                             <th class="fw-bolder fs-6">#</th>
-                            <th class="fw-bolder fs-6">Code</th>
                             <th class="fw-bolder fs-6">Name</th>
-                            <th class="fw-bolder fs-6">Restaurant</th>
+                            <th class="fw-bolder fs-6">Code</th>
                             <th class="fw-bolder fs-6">Location</th>
-                            <th class="fw-bolder fs-6">Keeper</th>
+                            <th class="fw-bolder fs-6">User</th>
                             <th class="fw-bolder fs-6">Created At</th>
                             <th class="fw-bolder fs-6">Updated At</th>
                             <th class="fw-bolder fs-6">Actions</th>
@@ -74,14 +73,12 @@
 
                         <tr>
                             <td>{{$loop->iteration }}</td>
+                            <td>{{ $value->name }}</td>
                             <td>{{ $value->code }}</td>
-                            <td><a href="{{ route('admin.warehouses.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a></td>
-                            <td><span class="badge bg-label-primary me-1">{{ $value->restaurant?->name }}</span></td>
                             <td>{{ $value->location }}</td>
-                            <td><span class="badge bg-label-primary me-1">{{ $value->keeper?->name }}</span></td>
+                            <td><span class="badge bg-label-primary">{{ $value->user?->name }}</span></td>
                             <td>{{ $value->creator?->name }}<br>{{ $value->created_at }}</td>
-                            {{-- <td>{{ $value->updater?->name }}<br>{{ $value->updated_at }}</td> --}}
-                            <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td>
+                            <td>{{ $value->editor == NULL ? "" : $value->editor?->name }}<br>{{ $value->editor == NULL ? "" : $value->updated_at  }}</td>
                             <td>
                                 @if (!$value->is_default)
                                     <div class="dropdown">
@@ -90,17 +87,17 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('warehouseShow', { id: {{ $value->id }} })"
+                                                wire:click.prevent="$dispatch('kitchenShow', { id: {{ $value->id }} })"
                                             >
                                                 <i class="bx bx-show me-1"></i> Show
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('warehouseUpdate', { id: {{ $value->id }} })"
+                                                wire:click.prevent="$dispatch('kitchenUpdate', { id: {{ $value->id }} })"
                                             >
                                                 <i class="bx bx-edit-alt me-1"></i> Edit
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('warehouseDelete', { id: {{ $value->id }} })"
+                                                wire:click.prevent="$dispatch('kitchenDelete', { id: {{ $value->id }} })"
                                             >
                                                 <i class="bx bx-trash me-1"></i> Delete
                                             </a>
@@ -111,11 +108,12 @@
                                 @else
                                     <span class="badge bg-label-primary">Default</span>
                                 @endif
+
                             </td>
                         </tr>
                         @empty
                             <tr>
-                                <td colspan="9">No data to display! - Add new data</td>
+                                <td colspan="8">No data to display! - Add new data</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -129,7 +127,7 @@
                         </ul>
                     </nav>
                 </div>
-
+  
             </div>
         </div>
     </div>

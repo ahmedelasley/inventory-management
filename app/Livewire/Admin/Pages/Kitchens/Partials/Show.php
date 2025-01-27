@@ -15,6 +15,7 @@ class Show extends Component
     public $name;
     public $code;
     public $location;
+    public $restaurant;
     public $supervisor;
 
     protected $listeners = ['kitchenShow'];
@@ -32,6 +33,7 @@ class Show extends Component
         $this->name            = $this->kitchen->name;
         $this->code            = $this->kitchen->code;
         $this->location        = $this->kitchen->location;
+        $this->restaurant      = $this->kitchen->restaurant?->name;
         $this->supervisor      = $this->kitchen->supervisor?->name;
     
      

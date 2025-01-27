@@ -113,7 +113,9 @@
                                     </td>
                               </tr>
                             @empty
-                                <p>No data to display! - Add new data</p>
+                              <tr>
+                                  <td colspan="8">No data to display! - Add new data</td>
+                              </tr>
                             @endforelse
                         </tbody>
                     </table>

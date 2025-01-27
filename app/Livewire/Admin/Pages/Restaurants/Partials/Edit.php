@@ -1,48 +1,45 @@
 <?php
 
-namespace App\Livewire\Admin\Pages\Kitchens\Partials;
+namespace App\Livewire\Admin\Pages\Restaurants\Partials;
 
 use Livewire\Component;
+use App\Models\User;
 use App\Models\Restaurant;
-use App\Models\Supervisor;
-use App\Models\Kitchen;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\Rule;
-use App\Http\Requests\KitchenRequest;
+use App\Http\Requests\RestaurantRequest;
 
 use Illuminate\Support\Facades\DB;
-use App\Livewire\Admin\Pages\Kitchens\GetData;
+use App\Livewire\Admin\Pages\Restaurants\GetData;
 use Illuminate\Support\Facades\Auth;
 
 class Edit extends Component
 {
     use LivewireAlert;
 
-    public $kitchen;
+    public $restaurant;
     
     public $name;
     public $code;
     public $location;
-    public $restaurant_id;
-    public $supervisor_id;
+    public $user_id;
 
-    protected $listeners = ['kitchenUpdate'];
+    protected $listeners = ['restaurantUpdate'];
 
-    public function kitchenUpdate($id)
+    public function restaurantUpdate($id)
     {
-        $this->kitchen = Kitchen::find($id);
+        $this->restaurant = Restaurant::find($id);
     
-        if (!$this->kitchen) {
+        if (!$this->restaurant) {
             // Alert 
-            showAlert($this, 'error', 'Kitchen not found');
+            showAlert($this, 'error', 'restaurant not found');
         }
     
         // Set the properties
-        $this->name            = $this->kitchen->name;
-        $this->code            = $this->kitchen->code;
-        $this->location        = $this->kitchen->location;
-        $this->restaurant_id   = $this->kitchen->restaurant_id;
-        $this->supervisor_id   = $this->kitchen->supervisor_id;
+        $this->name            = $this->restaurant->name;
+        $this->code            = $this->restaurant->code;
+        $this->location        = $this->restaurant->location;
+        $this->user_id         = $this->restaurant->user_id;
     
     
         // Reset validation and errors
@@ -68,7 +65,7 @@ class Edit extends Component
     
     public function rules()
     {
-        return (new KitchenRequest('PUT', $this->kitchen->id))->rules();
+        return (new RestaurantRequest('PUT', $this->restaurant->id))->rules();
     } 
  
     public function updated($field)
@@ -90,7 +87,7 @@ class Edit extends Component
             $validatedData['updated_id'] = Auth::guard('admin')->user()->id;
 
             // Query Create
-            $this->kitchen->update($validatedData);
+            $this->restaurant->update($validatedData);
 
             $this->reset();
 
@@ -118,11 +115,9 @@ class Edit extends Component
     public function render()
     {
 
-        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user'])->get();
-        $dataSupervisor = Supervisor::with(['creator', 'updater', 'kitchen'])->doesntHave('kitchen')->get();
-        return view('admin.pages.kitchens.partials.edit', [
-            'dataRestaurant' => $dataRestaurant,
-            'dataSupervisor' => $dataSupervisor,
+        $data = User::with(['restaurant'])->doesntHave('restaurant')->get();
+        return view('admin.pages.restaurants.partials.edit', [
+            'data' => $data,
         ]);
     }
 }

@@ -40,6 +40,7 @@ class KitchenRequest extends FormRequest
                     'name' => ['required', 'string', 'max:255', Rule::unique(Kitchen::class)],
                     // 'code' => ['required', 'string', 'max:255', Rule::unique(Kitchen::class)],
                     'location' => 'nullable|string|min:3|max:255',
+                    'restaurant_id' => 'required|exists:restaurants,id',
                     'supervisor_id' => 'required|exists:supervisors,id',
                 ];
             }
@@ -49,6 +50,7 @@ class KitchenRequest extends FormRequest
                     'name' => ['required', 'string', 'max:255' , Rule::unique(Kitchen::class)->ignore($this->id)] ,
                     // 'code' => ['required', 'string', 'max:255' , Rule::unique(Kitchen::class)->ignore($this->id)] ,
                     'location' => 'nullable|string|min:3|max:255',
+                    'restaurant_id' => 'required|exists:restaurants,id',
                     'supervisor_id' => 'required|exists:supervisors,id',
                 ];
             }

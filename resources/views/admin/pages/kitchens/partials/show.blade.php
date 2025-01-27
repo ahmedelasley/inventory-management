@@ -9,10 +9,13 @@
             
         <div class="modal-body">
             <div class="mb-3">
+                <x-text-show :labelValue="__('Code')" :value=$code/>
+            </div>
+            <div class="mb-3">
                 <x-text-show :labelValue="__('Name')" :value=$name/>
             </div>
             <div class="mb-3">
-                <x-text-show :labelValue="__('Code')" :value=$code/>
+                <x-text-show :labelValue="__('Restaurant')" :value=$restaurant/>
             </div>
             <div class="mb-3">
                 <x-text-show :labelValue="__('location')" :value=$location/>
