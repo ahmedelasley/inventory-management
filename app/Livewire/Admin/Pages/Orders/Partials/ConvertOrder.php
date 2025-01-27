@@ -75,7 +75,7 @@ class ConvertOrder extends Component
     {
         return [
             'type' => 'required|in:Pending,Send,Processed,Shipped,Received',
-            'response_date' => 'required|date',
+            // 'response_date' => 'nullable|date|required_if:type,Processed', 
         ];
     } 
  
@@ -89,7 +89,6 @@ class ConvertOrder extends Component
     public function submit()
     {
 
-        // dd($this->order, $this->type);  
         DB::beginTransaction();
 
         try {
@@ -110,7 +109,10 @@ class ConvertOrder extends Component
 
             // Update order
             $this->order->type   = $validatedData['type'];
-            $this->order->response_date   = $validatedData['response_date'];
+
+            if ($this->order->type == $this->type) {
+                $this->order->response_date   = now();
+            }
 
             $this->order->updateable()->associate($service);
 
@@ -123,7 +125,7 @@ class ConvertOrder extends Component
                 'body' => "A products request has been Processing from '{$service->name}' to the '{$this->order->kitchen->name}' by '{$this->order->updateable->name}'",
             ];
             // Notify the user
-            foreach (Admin::get() as $admin) {
+            foreach (Admin::where('id', '!=', Auth::guard('admin')->user()->id)->get() as $admin) {
                 $admin->notify(new TrackOrderStatus($details));
             }
             $this->order->updateable->notify(new TrackOrderStatus($details));

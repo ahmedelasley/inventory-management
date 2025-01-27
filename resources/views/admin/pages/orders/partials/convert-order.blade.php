@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    @if($type == 'Processed')
+                    {{-- @if($type == 'Processed')
                         
                         <div class="row">
                             <div class="col mb-3">
@@ -44,7 +44,7 @@
                                 <x-input-error class="mt-2" :messages="$errors->get('response_date')" />
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
 
                 </div>
