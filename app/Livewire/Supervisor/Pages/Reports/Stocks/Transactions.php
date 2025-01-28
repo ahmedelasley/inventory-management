@@ -9,6 +9,7 @@ use App\Models\KitchenStock;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 class Transactions extends Component
 {
@@ -59,8 +60,9 @@ class Transactions extends Component
     
     public function render()
     {
-        $data = KitchenStockMovement::with(['createable', 'kitchenStock']);
-
+        $data = KitchenStockMovement::with(['createable', 'kitchenStock'])->whereHas('kitchenStock', function ($query) {
+                                        $query->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id); 
+                                    });
         if ($this->stocks != 'All') {
             $data = $data->whereHas('kitchenStock', function ($query) {
                 $query->where('product_id', 'like', '%' . $this->stocks . '%'); 

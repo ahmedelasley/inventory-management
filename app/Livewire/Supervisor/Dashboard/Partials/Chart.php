@@ -48,6 +48,7 @@ class Chart extends Component
     {
         // Group orders by month and sum quantities for the selected year
         $this->ordersByMonth = Order::selectRaw('MONTH(created_at) as month, SUM(quantities) as total')
+            ->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)
             ->whereYear('created_at', $this->yearChart)
             ->groupBy('month')
             ->pluck('total', 'month');
@@ -60,6 +61,7 @@ class Chart extends Component
         // Last Year
         // Group orders by month and sum quantities for the selected year
         $this->lastOrdersByMonth = Order::selectRaw('MONTH(created_at) as month, SUM(quantities) as total')
+        ->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)
         ->whereYear('created_at', $this->lastYearChart)
         ->groupBy('month')
         ->pluck('total', 'month');

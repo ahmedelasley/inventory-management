@@ -90,4 +90,8 @@ class Order extends Model
      {
          return $this->hasMany(OrderStatus::class, 'order_id');
      }
+     public function scopeofKitchen($query, $kitchen)
+     {
+         return $query->where('kitchen_id', $kitchen);
+     }
 }

@@ -119,10 +119,20 @@ class Create extends Component
     }
     public function render()
     {
-        $kitchens = Kitchen::select('id', 'name')->get();
-        $warehouses = Warehouse::select('id', 'name')->get();
+        // $kitchens = Kitchen::select('id', 'name')->get();
+        // جلب المستخدم الحالي (Supervisor)
+        $user = Auth::guard('supervisor')->user();
+
+        // جلب المطبخ (Kitchen) المرتبط بهذا المستخدم
+        $kitchen = $user->kitchen; // افترضنا أن العلاقة بين المستخدم والمطبخ هي `kitchen`
+
+        // جلب المطعم (Restaurant) المرتبط بنفس المطبخ
+        $restaurant = $kitchen->restaurant; // افترضنا أن العلاقة بين المطبخ والمطعم هي `restaurant`
+
+        // جلب المستودعات (Warehouses) المرتبطة بنفس المطعم
+        $warehouses = Warehouse::where('restaurant_id', $restaurant->id)->get();
         return view('supervisor.pages.orders.partials.create', [
-            'kitchens' => $kitchens,
+            // 'kitchens' => $kitchens,
             'warehouses' => $warehouses,
         ]);
     }

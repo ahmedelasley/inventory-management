@@ -8,6 +8,7 @@ use App\Models\KitchenStock;
 use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 class Stocks extends Component
 {
@@ -58,7 +59,7 @@ class Stocks extends Component
 
     public function render()
     {
-        $data = KitchenStock::with(['createable', 'product', 'kitchen', 'movements']);
+        $data = KitchenStock::with(['createable', 'product', 'kitchen', 'movements'])->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id);
 
         // if ($this->type != 'All') {
         //     $data = $data->whereHas('kitchenStock', function ($query) {

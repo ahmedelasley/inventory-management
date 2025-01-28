@@ -15,7 +15,7 @@ class LessInventory extends Component
 
     public function render()
     {
-        $data = KitchenStock::with('product') // جلب بيانات المنتج المرتبطة
+        $data = KitchenStock::with('product')->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id) // جلب بيانات المنتج المرتبطة
                 ->orderBy('quantity', 'asc') // ترتيب المنتجات تصاعدياً حسب الكمية
                 ->take(5) // أخذ أقل 5 منتجات فقط
                 ->get();

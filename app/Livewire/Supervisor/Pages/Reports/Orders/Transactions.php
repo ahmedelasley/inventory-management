@@ -64,7 +64,7 @@ class Transactions extends Component
     public function render()
     {
         $data = OrderStatus::with(['statusable', 'order'])->whereHas('order', function ($query) {
-                                $query->where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id); 
+                                $query->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id); 
                             });
 
         if ($this->order != 'All') {
@@ -80,7 +80,7 @@ class Transactions extends Component
          
         $data = $data->whereBetween('created_at', [$this->fromDate, $this->toDate])->latest()->paginate($this->paginate);
 
-         $orders = Order::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->get();
+         $orders = Order::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->get();
         return view('supervisor.pages.reports.orders.transactions', [
             'data' => $data,
             'orders' => $orders,

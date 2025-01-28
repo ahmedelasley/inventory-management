@@ -59,7 +59,7 @@ class Orders extends Component
 
     public function render()
     {
-        $data = Order::with(['kitchen', 'warehouse', 'products', 'createable'])->where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id);
+        $data = Order::with(['kitchen', 'warehouse', 'products', 'createable'])->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id);
 
         if ($this->type != 'All') {
             $data = $data->where('type', $this->type);

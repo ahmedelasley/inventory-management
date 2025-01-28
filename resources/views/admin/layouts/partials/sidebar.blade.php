@@ -1,6 +1,6 @@
         <!-- Menu -->
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="height : calc(100vh)">
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" >
           <div class="app-brand demo">
 
             @include('admin.layouts.partials.logo')

@@ -9,7 +9,7 @@
             </div>
             <h4 class="fw-semibold d-block mb-1 text-start">Transfers</h4>
           </div>
-          <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Order::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->count() > 0 ? \App\Models\Order::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->count() : 0  }}</h3>
+          <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Order::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->count() > 0 ? \App\Models\Order::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->count() : 0  }}</h3>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
             </div>
             <h4 class="fw-semibold d-block mb-1 text-start">Inventory</h4>
           </div>
-          <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\KitchenStock::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->sum('quantity') > 0 ? \App\Models\KitchenStock::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->sum('quantity') : 0  }}</h3>
+          <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\KitchenStock::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->sum('quantity') > 0 ? \App\Models\KitchenStock::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->sum('quantity') : 0  }}</h3>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
             </div>
             <h4 class="fw-semibold d-block mb-1 text-start">Products</h4>
           </div>
-          <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\KitchenStock::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->count() > 0 ? \App\Models\KitchenStock::where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->count() : 0  }}</h3>
+          <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\KitchenStock::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->count() > 0 ? \App\Models\KitchenStock::ofKitchen(Auth::guard('supervisor')->user()->kitchen->id)->count() : 0  }}</h3>
         </div>
       </div>
     </div>

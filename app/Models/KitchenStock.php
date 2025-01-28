@@ -60,4 +60,9 @@ class KitchenStock extends Model
     {
         return $this->hasMany(KitchenStockMovement::class, 'kitchen_stock_id');
     }
+
+    public function scopeofKitchen($query, $kitchen)
+    {
+        return $query->where('kitchen_id', $kitchen);
+    }
 }

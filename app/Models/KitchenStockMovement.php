@@ -46,4 +46,8 @@ class KitchenStockMovement extends Model
     {
         return $this->belongsTo(KitchenStock::class, 'kitchen_stock_id');
     }
+    public function scopeofKitchen($query, $kitchen)
+    {
+        return $query->where('kitchen_id', $kitchen);
+    }
 }
