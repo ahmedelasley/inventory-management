@@ -90,8 +90,7 @@
     //     });
     // });
 
-
-			window.addEventListener('close-modal', event => {
+	window.addEventListener('close-modal', event => {
 				$('#createModal').modal('toggle');
 				// $('#editModal').modal('toggle');
 			})
@@ -99,6 +98,20 @@
 			// window.addEventListener('createModalToggle', event => {
 			// 	$('#createModal').modal('toggle');
 			// })
+			
+
+			window.addEventListener('createItemModalToggle', event => {
+				$('#createItemModal').modal('toggle');
+			})
+
+			window.addEventListener('assignRoleModalToggle', event => {
+				$('#assignRoleModal').modal('toggle');
+			})
+
+			window.addEventListener('verifyModalToggle', event => {
+				$('#verifyModal').modal('toggle');
+			})
+			
 			window.addEventListener('showModalToggle', event => {
 				$('#showModal').modal('toggle');
 			})
@@ -106,6 +119,43 @@
 			window.addEventListener('editModalToggle', event => {
 				$('#editModal').modal('toggle');
 			})
+
+			window.addEventListener('savePurchaseModalToggle', event => {
+				$('#savePurchaseModal').modal('toggle');
+			})
+
+			window.addEventListener('convertPurchaseModalToggle', event => {
+				$('#convertPurchaseModal').modal('toggle');
+			})
+			
+			window.addEventListener('editPurchaseModalToggle', event => {
+				$('#editPurchaseModal').modal('toggle');
+			})
+
+
+			window.addEventListener('deletePurchaseModalToggle', event => {
+				$('#deletePurchaseModal').modal('toggle');
+			})
+
+
+
+			window.addEventListener('saveOrderModalToggle', event => {
+				$('#saveOrderModal').modal('toggle');
+			})
+
+			window.addEventListener('sendOrderModalToggle', event => {
+				$('#sendOrderModal').modal('toggle');
+			})
+			
+			window.addEventListener('editOrderModalToggle', event => {
+				$('#editOrderModal').modal('toggle');
+			})
+
+			window.addEventListener('convertOrderModalToggle', event => {
+				$('#convertOrderModal').modal('toggle');
+			})
+
+
 			window.addEventListener('deleteModalToggle', event => {
 				$('#deleteModal').modal('toggle');
 			})
@@ -115,33 +165,7 @@
 			window.addEventListener('importModalToggle', event => {
 				$('#importModal').modal('toggle');
 			})
-			// window.addEventListener('importProductsModalToggle', event => {
-			// 	$('#importProductsModal').modal('toggle');
-			// })
-			// window.addEventListener('close-modal', event => {
-				
-			// 	// CRUD Modal
-			// 	$('#basicModal').modal('toggle');
 
-			// 	$('#showModel').modal('hide');
-			// 	$('#createModal').modal('hide');
-			// 	$('#updateModal').modal('hide');
-			// 	$('#deleteModal').modal('hide');
-
-			// 	$('#showPhonesModal').modal('hide');
-			// 	$('#phoneModal').modal('hide');
-			// 	$('#deletePhoneModal').modal('hide');
-
-			// 	$('#passwordModal').modal('hide');
-			// 	$('#assignRoleModal').modal('hide');
-			// 	$('#assignPermissionModal').modal('hide');
-
-			// 	// $('#pictureModal').modal('hide');
-			// 	// $('#viewPictureModal').modal('hide');
-			// 	// $('#archiveModal').modal('hide');
-			// 	// $('#softDeleteModal').modal('hide');
-			// 	// $('#destroyModal').modal('hide');
-			// })
 
 
 		</script>

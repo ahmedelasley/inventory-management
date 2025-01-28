@@ -10,7 +10,7 @@
 		<title>@yield('title')</title>
 
 		@include('keeper.layouts.partials.guest.head-styles')
-		@vite(['resources/css/app.css', 'resources/js/app.js'])
+		{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
 	</head>
 

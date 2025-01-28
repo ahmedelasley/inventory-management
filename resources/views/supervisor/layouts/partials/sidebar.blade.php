@@ -26,8 +26,8 @@
             <li class="menu-item {{ request()->routeIs('supervisor.kitchens.index') ? 'active' : '' }}">
               <a href="{{ route('supervisor.kitchens.index') }}" class="menu-link">
                 {{-- <i class='bx bxs-dish'></i> --}}
-                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/kitchen.png" alt="User" class="menu-icon tf-icons" />
-                <div data-i18n="Analytics" class="fw-bolder">Kitchen Stock</div>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/products.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Inventory</div>
               </a>
             </li>
             

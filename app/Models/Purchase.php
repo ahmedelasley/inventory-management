@@ -88,7 +88,10 @@ class Purchase extends Model
          return $this->morphTo();
      }
   
-
+    public function scopeofWarehouse($query, $warehouse)
+    {
+        return $query->where('warehouse_id', $warehouse);
+    }
 
     // // Relationship to get the parent category
     // public function creator()

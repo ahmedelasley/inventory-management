@@ -40,11 +40,10 @@
                 </li> --}}
 
                 <!-- Languages -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown lh-1 me-2">
+                <li class="nav-item navbar-dropdown dropdown-languages dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar d-flex">
-                      {{-- <img src="{{ URL::asset('assets/admin') }}/img/icons/translate.png" alt class="w-px-40 h-auto me-2" /> --}}
-                      <x-bi-translate class="w-px-40 h-auto me-2 text-primary" />
+                      <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/translate.png" alt class="w-px-40 h-auto me-2" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -60,6 +59,12 @@
                   </ul>
                 </li>
                 <!--/ Languages -->
+
+                <!-- Notifications -->
+
+                @livewire('keeper.pages.notifications.notifications-navbar')
+
+                <!--/ Notifications -->
 
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">

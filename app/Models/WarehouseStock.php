@@ -61,4 +61,9 @@ class WarehouseStock extends Model
         return $this->hasMany(WarehouseStockMovement::class, 'warehouse_stock_id');
     }
 
+    public function scopeofWarehouse($query, $warehouse)
+    {
+        return $query->where('warehouse_id', $warehouse);
+    }
+
 }

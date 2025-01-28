@@ -17,77 +17,48 @@
             <!-- Dashboard -->
             <li class="menu-item {{ request()->routeIs('keeper.dashboard') ? 'active' : '' }}">
               <a href="{{ route('keeper.dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/dashboard.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Dashboard</div>
+              </a>
+            </li>
+
+            <!-- Inventory -->
+            <li class="menu-item {{ request()->routeIs('keeper.warehouses.index') ? 'active' : '' }}">
+              <a href="{{ route('keeper.warehouses.index') }}" class="menu-link">
+                {{-- <i class='bx bxs-dish'></i> --}}
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/products.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Inventory</div>
+              </a>
+            </li>
+            
+              <!-- Purchases -->
+              <li class="menu-item {{ request()->routeIs('keeper.purchases.index') ? 'active' : '' }}">
+                <a href="{{ route('keeper.purchases.index') }}" class="menu-link">
+                  <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/shopping-cart.png" alt="User" class="menu-icon tf-icons" />
+                  <div data-i18n="Analytics" class="fw-bolder">Purchases</div>
+                </a>
+              </li>
+              
+            <!-- Transfers -->
+            <li class="menu-item {{ request()->routeIs('keeper.orders.index') ? 'active' : '' }}">
+              <a href="{{ route('keeper.orders.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/transfer.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Transfers</div>
+              </a>
+            </li>
+
+            <!-- Report -->
+            <li class="menu-item {{ request()->routeIs('keeper.reports.index') ? 'active' : '' }}">
+              <a href="{{ route('keeper.reports.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/report.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Reports</div>
               </a>
             </li>
 
 
-            <!-- Purchases -->
-            <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bxs-user-circle"></i>
-              <div data-i18n="Admins">Purchases</div>
-            </a>
-            <ul class="menu-sub">
-
-              <!-- Administrates -->
-              <li class="menu-item {{ request()->routeIs(['keeper']) ? 'active' : '' }}">
-                <a href="{{ route('keeper.dashboard') }}" class="menu-link">
-                  {{-- <i class="menu-icon tf-icons bx bxs-user-detail"></i> --}}
-                  <div data-i18n="Admins Roles">Administrates</div>
-                </a>
-              </li>
-
-
-              
-            </ul>
-          </li>
-
-
-          <!-- Inventory -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bxs-user-circle"></i>
-              <div data-i18n="Admins">Inventory</div>
-            </a>
-            <ul class="menu-sub">
-
-              <!-- Administrates -->
-              <li class="menu-item {{ request()->routeIs(['keeper']) ? 'active' : '' }}">
-                <a href="{{ route('keeper.dashboard') }}" class="menu-link">
-                  {{-- <i class="menu-icon tf-icons bx bxs-user-detail"></i> --}}
-                  <div data-i18n="Admins Roles">Administrates</div>
-                </a>
-              </li>
-
-
-              
-            </ul>
-          </li>
 
 
 
-          <!-- Orders -->
-          <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bxs-user-circle"></i>
-              <div data-i18n="Admins">Orders</div>
-            </a>
-            <ul class="menu-sub">
-
-              <!-- Administrates -->
-              <li class="menu-item {{ request()->routeIs(['keeper']) ? 'active' : '' }}">
-                <a href="{{ route('keeper.dashboard') }}" class="menu-link">
-                  {{-- <i class="menu-icon tf-icons bx bxs-user-detail"></i> --}}
-                  <div data-i18n="Admins Roles">Administrates</div>
-                </a>
-              </li>
-
-
-              
-            </ul>
-          </li>
 
 
 
