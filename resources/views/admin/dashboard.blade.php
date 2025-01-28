@@ -4,15 +4,75 @@
 
 
 @php
+
+use App\Models\Restaurant;
+use App\Models\Kitchen;
+
+// استرجاع المطاعم مع المطابخ المرتبطة بها
+$restaurants = Restaurant::with('kitchens.stocks')->get();
+
+$datasets = [];
+$kitchenNames = [];
+$colorsKitchens = [];
+
+// جمع أسماء المطابخ الفريدة
+foreach ($restaurants as $restaurant) {
+    foreach ($restaurant->kitchens as $kitchen) {
+        if (!in_array($kitchen->name, $kitchenNames)) {
+            $kitchenNames[] = $kitchen->name;
+            $colorsKitchens[] = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+        }
+    }
+}
+
+// إعداد بيانات كل مطعم
+foreach ($restaurants as $restaurant) {
+    $kitchenCounts = array_fill(0, count($kitchenNames), 0); // تهيئة مصفوفة بالصفر
+
+    foreach ($restaurant->kitchens as $kitchen) {
+        $index = array_search($kitchen->name, $kitchenNames); // الحصول على موقع المطبخ
+        $kitchenCounts[$index] = $kitchen->stocks->sum('quantity'); // تعيين كمية المخزون
+    }
+
+    // إضافة بيانات المطعم إلى المخطط
+    $datasets[] = [
+        "label" => $restaurant->name, // اسم المطعم
+        'backgroundColor' => $colorsKitchens, // ألوان المطابخ
+        'data' => $kitchenCounts, // بيانات كمية المخزون
+    ];
+}
+
+// إنشاء المخطط
+$stackedBarChart = app()->chartjs
+    ->name('stackedBarChartKitchens')
+    ->type('bar')
+    ->size(['width' => 300, 'height' => 100])
+    ->labels($kitchenNames) // أسماء المطابخ كـ labels
+    ->datasets($datasets) // بيانات المطاعم والمطابخ
+    ->options([
+        'scales' => [
+            'x' => [
+                'stacked' => true, // تفعيل التكديس على المحور الأفقي
+            ],
+            'y' => [
+                'stacked' => true, // تفعيل التكديس على المحور الرأسي
+                'beginAtZero' => true,
+            ],
+        ],
+    ]);
+
+
+
+
   $WarehousesCount = \App\Models\Warehouse::get()->count();
   $KitchensCount = \App\Models\Kitchen::get()->count();
   
   $Warehouses = [];
   $WarehouseCount = [];
   $Kitchens = [];
-  $KitchenCount = [];
+  // $KitchenCount = [];
   $colorsWarehouses = [];
-  $colorsKitchens = [];
+  // $colorsKitchens = [];
   foreach (\App\Models\Warehouse::get() as $key => $value) {
     $WarehouseCount[] = $value->stocks->sum('quantity') ;
     $Warehouses[] = $value->name;
@@ -20,11 +80,11 @@
 
   }
 
-  foreach (\App\Models\Kitchen::get() as $key => $value) {
-    $KitchenCount[] = $value->stocks->sum('quantity') ;
-    $Kitchens[] = $value->name;
-    $colorsKitchens[] = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
-  }
+  // foreach (\App\Models\Kitchen::get() as $key => $value) {
+  //   $KitchenCount[] = $value->stocks->sum('quantity') ;
+  //   $Kitchens[] = $value->name;
+  //   $colorsKitchens[] = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+  // }
 
   $barChartWarehouses = app()->chartjs
         ->name('barChartWarehouses')
@@ -34,23 +94,23 @@
         ->datasets([
           [
             "label" => 'Warehouses [ ' . $WarehousesCount . ' ]' ,
-            'backgroundColor' => $colorsWarehouses,
+            'backgroundColor' => "#FFBD33",
             'data' => $WarehouseCount
           ],
   ])->options([]);
 
-  $barChartKitchens = app()->chartjs
-    ->name('barChartKitchens')
-    ->type('bar')
-    ->size(['width' => 300, 'height' => 100])
-    ->labels($Kitchens) // add labels
-    ->datasets([
-      [
-        "label" => 'Kitchens',
-        'backgroundColor' => $colorsKitchens,
-        'data' => $KitchenCount
-      ],
-  ])->options([]);
+  // $barChartKitchens = app()->chartjs
+  //   ->name('barChartKitchens')
+  //   ->type('bar')
+  //   ->size(['width' => 300, 'height' => 100])
+  //   ->labels($Kitchens) // add labels
+  //   ->datasets([
+  //       [
+  //         "label" => 'Kitchens',
+  //         'backgroundColor' => "#FF5733",
+  //         'data' => $KitchenCount
+  //       ],
+  // ])->options([]);
 
   $WarehousesStocks = \App\Models\WarehouseStock::sum('quantity');
   $KitchenStocks = \App\Models\KitchenStock::sum('quantity');
@@ -339,7 +399,7 @@
                       </div>
                     </div>
                     <div class="card-body">
-                      {!! $barChartKitchens->render() !!}
+                      {!! $stackedBarChart->render() !!}
                     </div>
                   </div>
                 </div>

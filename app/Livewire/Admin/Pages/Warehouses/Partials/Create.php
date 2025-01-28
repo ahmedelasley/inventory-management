@@ -94,7 +94,7 @@ class Create extends Component
     public function render()
     {
 
-        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user', 'kitchen'])->get();
+        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user', 'kitchens'])->get();
         $dataKeeper = Keeper::with(['creator', 'updater', 'warehouse'])->doesntHave('warehouse')->get();
         return view('admin.pages.warehouses.partials.create', [
             'dataRestaurant' => $dataRestaurant,

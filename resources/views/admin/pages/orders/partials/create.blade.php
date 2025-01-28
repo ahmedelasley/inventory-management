@@ -15,7 +15,7 @@
                         <option value="">Select a Kitchen...</option>
                         @forelse ($restaurants as $record)
                             <optgroup label="{{ $record->name }} Restaurant">
-                                @forelse ($record->kitchen as $kitchen)
+                                @forelse ($record->kitchens as $kitchen)
                                     <option value="{{ $kitchen->id }}" wire:key="kitchen-{{ $kitchen->id }}">
                                         {{ $kitchen->name }}
                                     </option>

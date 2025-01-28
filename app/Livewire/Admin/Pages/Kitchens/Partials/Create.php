@@ -93,7 +93,7 @@ class Create extends Component
     }
     public function render()
     {
-        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user', 'kitchen'])->get();
+        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user', 'kitchens'])->get();
         $dataSupervisor = Supervisor::with(['creator', 'updater', 'kitchen'])->doesntHave('kitchen')->get();
         return view('admin.pages.kitchens.partials.create', [
             'dataRestaurant' => $dataRestaurant,

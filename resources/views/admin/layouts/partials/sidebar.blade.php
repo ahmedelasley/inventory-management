@@ -1,6 +1,6 @@
         <!-- Menu -->
 
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="height : calc(100vh)">
           <div class="app-brand demo">
 
             @include('admin.layouts.partials.logo')
@@ -58,7 +58,7 @@
                 <!-- Normal Users -->
                 <li class="menu-item  {{ request()->routeIs(['admin.users-roles.index']) ? 'active' : '' }}">
                   <a href="{{ route('admin.users.index') }}" class="menu-link">
-                    <div data-i18n="Users Roles">Restaurant Admin</div>
+                    <div data-i18n="Users Roles">Restaurant Manager</div>
                   </a>
                 </li>
                 
@@ -95,7 +95,7 @@
 
                 <li class="menu-item  {{ request()->routeIs(['admin.users-roles.*']) ? 'active' : '' }}">
                   <a href="{{ route('admin.users-roles.index') }}" class="menu-link">
-                    <div data-i18n="Users Roles">Users Roles</div>
+                    <div data-i18n="Users Roles">Restaurant Managers Roles</div>
                   </a>
                 </li>
                 

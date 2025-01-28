@@ -50,7 +50,7 @@ class Restaurant extends Model
     }
 
     // Relationship to get the kitchen
-    public function kitchen()
+    public function kitchens()
     {
         return $this->hasMany(Kitchen::class);
     }

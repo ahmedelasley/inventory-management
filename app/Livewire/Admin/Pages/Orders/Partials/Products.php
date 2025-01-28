@@ -127,8 +127,10 @@ class Products extends Component
     
     public function render()
     {
+        // dd($this->order);
         $products = Product::with(['category', 'creator', 'updater', 'warehouseStocks'])
-                            ->whereHas('warehouseStocks');
+                            ->whereHas('warehouseStocks', function ($query) { $query->where('warehouse_id', $this->order->warehouse_id); });
+                            // ->whereHas('warehouseStocks');
 
 
         if ($this->field == 'category') {

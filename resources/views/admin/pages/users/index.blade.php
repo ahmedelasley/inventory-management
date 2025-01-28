@@ -7,7 +7,7 @@
 <!-- Content -->
 <div class="container-fluid flex-grow-1 container-p-y">
   <div class="d-flex justify-content-between  mb-2">
-    <h5 class="fw-bolder fs-5">Users</h5>
+    <h5 class="fw-bolder fs-5">Restaurant Managers</h5>
     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" >Add</button>
   </div>
 
