@@ -83,7 +83,7 @@
                                     <th class="fw-bolder fs-6">#</th>
                                     <th class="fw-bolder fs-6">Name</th>
                                     <th class="fw-bolder fs-6">SKU</th>
-                                    <th class="fw-bolder fs-6">Qty Stock</th>
+                                    <th class="fw-bolder fs-6">Live Qty Stock</th>
                                     <th class="fw-bolder fs-6">Production Date</th>
                                     <th class="fw-bolder fs-6">Expiration Date</th>
                                     <th class="fw-bolder fs-6">Created At</th>
