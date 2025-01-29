@@ -21,42 +21,65 @@
                     ).print();
                 }
             </script>
-            {{-- <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal" >
-                <i class='bx bx-edit-alt'></i> Edit
-            </button> --}}
             @if($order->status == 'Open')
-                @if($order->type != 'Shipped')
+                @if($order->type == 'Pending')
                     <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
                         wire:click.prevent="$dispatch('orderUpdate', { id: {{ $order->id }} })"
                     >
                         <i class='bx bx-edit-alt'></i>
                     </a>
+                    
                     @livewire('admin.pages.orders.partials.edit', ['order' => $order], key('order-edit-'.time()))
+                    
+                    {{-- @livewire('admin.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time())) --}}
                     <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderSend', { id: {{ $order->id }} })"
+                    >
+                        <i class='bx bx-send'></i>
+                    </a>
+                    @livewire('admin.pages.orders.partials.send', ['order' => $order], key('order-send-'.time()))
+                @endif
+
+                    {{-- <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
                         wire:click.prevent="$dispatch('orderConvert', { id: {{ $order->id }} })"
                     >
                         <i class='bx bx-repost'></i>
                     </a>
+                    @livewire('admin.pages.orders.partials.convert-order', ['order' => $order], key('order-convert-'.time())) --}}
 
-                    <a class="btn btn-sm btn-danger" href="javascript:void(0);"
-                        wire:click.prevent="$dispatch('orderDelete', { id: {{ $order->id }} })"
+                @if($order->type == 'Send')
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderProcessed', { id: {{ $order->id }} })"
                     >
-                        <i class="bx bx-trash me-1"></i>
+                        <i class='bx bx-loader-circle'></i>
                     </a>
-                    {{-- @livewire('admin.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time())) --}}
-
+                    @livewire('admin.pages.orders.partials.processed', ['order' => $order], key('order-processed-'.time()))
                 @endif
-                @livewire('admin.pages.orders.partials.convert-order', ['order' => $order], key('order-convert-'.time()))
+                @if($order->type == 'Processed')
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderShipped', { id: {{ $order->id }} })"
+                    >
+                        <i class='bx bxs-truck'></i>
+                    </a>
+                    @livewire('admin.pages.orders.partials.shipped', ['order' => $order], key('order-shipped-'.time()))
+                @endif
 
-                    @if($order->type == 'Shipped')
-                        <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
-                            wire:click.prevent="$dispatch('orderSave', { id: {{ $order->id }} })"
-                        >
-                            <i class='bx bx-save'></i>
-                        </a>
-                        @livewire('admin.pages.orders.partials.save', ['order' => $order], key('order-save-'.time()))
-                    @endif
+                @if($order->type == 'Shipped')
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderSave', { id: {{ $order->id }} })"
+                    >
+                        <i class='bx bx-save'></i>
+                    </a>
+                    @livewire('admin.pages.orders.partials.save', ['order' => $order], key('order-save-'.time()))
+                @endif
+            @endif
+            @if($order->status == 'Open' && $order->type == 'Pending')
 
+                <a class="btn btn-sm btn-danger" href="javascript:void(0);"
+                    wire:click.prevent="$dispatch('orderDelete', { id: {{ $order->id }} })"
+                >
+                    <i class="bx bx-trash me-1"></i>
+                </a>
             @endif
         </div>
     </div>

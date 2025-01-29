@@ -86,18 +86,25 @@
                         @endif
                         {{-- <td>{{ $value->cost }}</td>
                         <td>{{ $value->quantity * $value->cost }}</td> --}}
-                        @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))  
+                        @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))
+                        @if($order->type == 'Pending' || $order->type == 'Processed' )  
+
                             <td>
                                 <a class="text-success" href="javascript:void(0);"
                                     wire:click.prevent="$dispatch('orderItemUpdate', { id: {{ $value->id }} })"
                                 >
                                     <i class="bx bx-edit-alt me-1"></i>
                                 </a>
+                             @endif
+                            @if( $order->type == 'Pending')  
+
                                 <a class="text-danger" href="javascript:void(0);"
                                     wire:click.prevent="$dispatch('orderItemDelete', { id: {{ $value->id }} })"
                                 >
                                     <i class="bx bx-trash me-1"></i>
-                                </a>  
+                                </a> 
+                            @endif
+ 
                             </td>
                         @endif
                     </tr>

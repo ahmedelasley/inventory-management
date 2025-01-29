@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\DB;
 use App\Livewire\Admin\Pages\Orders\GetData;
 use Illuminate\Support\Facades\Auth;
 
-class Save extends Component
+class Shipped extends Component
 {
     use LivewireAlert;
 
@@ -40,9 +40,9 @@ class Save extends Component
         $this->order = $order;
     }
 
-    protected $listeners = ['orderSave'];
+    protected $listeners = ['orderShipped'];
 
-    public function orderSave($id)
+    public function orderShipped($id)
     {
         $this->order = Order::find($id);
     
@@ -60,7 +60,7 @@ class Save extends Component
         $this->resetErrorBag();
     
         // Open modal
-        $this->dispatch('saveOrderModalToggle');
+        $this->dispatch('shippedOrderModalToggle');
     }
 
     public function closeForm()
@@ -73,7 +73,7 @@ class Save extends Component
         $this->resetErrorBag();
     
         // Close modal
-        $this->dispatch('saveOrderModalToggle');
+        $this->dispatch('shippedOrderModalToggle');
     }
     
 
@@ -91,14 +91,14 @@ class Save extends Component
             $orderStatus = new OrderStatus();
             $orderStatus->order_id = $this->order->id;
             $orderStatus->old_status = $this->order->type;
-            $orderStatus->new_status = 'Received';
+            $orderStatus->new_status = 'Shipped';
             $orderStatus->date = now();
             $orderStatus->statusable()->associate($service);
             $orderStatus->save();
 
             // 1- Update order
-            $this->order->type   = 'Received';
-            $this->order->status = 'Closed';
+            $this->order->type   = 'Shipped';
+            // $this->order->status = 'Open';
 
             $this->order->updateable()->associate($service);
             $this->order->save();
@@ -194,8 +194,8 @@ class Save extends Component
             $this->reset();
 
             // Hide modal
-            $this->dispatch('saveOrderModalToggle');
-            $this->dispatch('refreshTitleSave'); 
+            $this->dispatch('shippedOrderModalToggle');
+            $this->dispatch('refreshTitleShipped'); 
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(GetData::class);
@@ -217,6 +217,6 @@ class Save extends Component
 
     public function render()
     {
-        return view('admin.pages.orders.partials.save');
+        return view('admin.pages.orders.partials.shipped');
     }
 }

@@ -148,7 +148,15 @@
 			})
 
 
-
+			window.addEventListener('sendOrderModalToggle', event => {
+				$('#sendOrderModal').modal('toggle');
+			})
+			window.addEventListener('processedOrderModalToggle', event => {
+				$('#processedOrderModal').modal('toggle');
+			})
+			window.addEventListener('shippedOrderModalToggle', event => {
+				$('#shippedOrderModal').modal('toggle');
+			})
 			window.addEventListener('saveOrderModalToggle', event => {
 				$('#saveOrderModal').modal('toggle');
 			})
