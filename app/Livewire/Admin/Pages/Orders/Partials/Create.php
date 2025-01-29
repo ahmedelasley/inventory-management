@@ -117,14 +117,14 @@ class Create extends Component
     public function render()
     {
         // $restaurants = Restaurant::select('id', 'name')->get();
-        $restaurants = Restaurant::with(['creator', 'editor', 'user', 'kitchens'])->get();
+        $restaurants = Restaurant::with(['creator', 'editor', 'user', 'kitchens', 'warehouses'])->get();
 // dd($restaurants->kitchen());
         // $kitchens = Kitchen::select('id', 'name')->get();
-        $warehouses = Warehouse::select('id', 'name')->get();
+        // $warehouses = Warehouse::select('id', 'name')->get();
         return view('admin.pages.orders.partials.create', [
             'restaurants' => $restaurants,
             // 'kitchens' => $kitchens,
-            'warehouses' => $warehouses,
+            // 'warehouses' => $warehouses,
         ]);
     }
 }

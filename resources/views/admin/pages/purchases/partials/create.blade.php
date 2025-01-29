@@ -24,8 +24,16 @@
                     <label for="warehouse_id" class="form-label">Warehouses</label><span class='text-danger'>*</span>
                     <select wire:model.live="warehouse_id" class="form-control" id="warehouse_id">
                         <option value="">Select a Warehouse...</option>
-                        @forelse ($warehouses as $record)
-                            <option value="{{ $record->id }}" wire:key="keeper-{{ $record->id }}" >{{ $record->name }}</option>
+                        @forelse ($restaurants as $record)
+                            <optgroup label="{{ $record->name }} Restaurant">
+                                @forelse ($record->warehouses as $kitchen)
+                                    <option value="{{ $kitchen->id }}" wire:key="kitchen-{{ $kitchen->id }}">
+                                        {{ $kitchen->name }}
+                                    </option>
+                                @empty
+                                    <option disabled>No Warehouses</option>
+                                @endforelse
+                            </optgroup>
                         @empty
                         @endforelse
                     </select>

@@ -24,16 +24,31 @@
 
             @if($order->status == 'Open')
                 @if($order->type != 'Shipped')
-                <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                {{-- <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
                     wire:click.prevent="$dispatch('orderConvert', { id: {{ $order->id }} })"
                 >
                     <i class='bx bx-repost'></i>
                 </a>
 
-                @livewire('keeper.pages.orders.partials.convert-order', ['order' => $order], key('order-convert-'.time()))
+                @livewire('keeper.pages.orders.partials.convert-order', ['order' => $order], key('order-convert-'.time())) --}}
 
                 @endif
-
+                @if($order->type == 'Send')
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderProcessed', { id: {{ $order->id }} })"
+                    >
+                        <i class='bx bx-loader-circle'></i>
+                    </a>
+                    @livewire('keeper.pages.orders.partials.processed', ['order' => $order], key('order-processed-'.time()))
+                @endif
+                @if($order->type == 'Processed')
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('orderShipped', { id: {{ $order->id }} })"
+                    >
+                        <i class='bx bxs-truck'></i>
+                    </a>
+                    @livewire('keeper.pages.orders.partials.shipped', ['order' => $order], key('order-shipped-'.time()))
+                @endif
             @endif
         </div>
     </div>

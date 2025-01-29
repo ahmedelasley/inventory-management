@@ -26,6 +26,7 @@ Route::prefix('keeper')->name('keeper.')->group(function () {
 
     Route::middleware('auth.keeper')->group(function () {
 
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::controller(ProfileController::class)->name('profile.')->group(function () {

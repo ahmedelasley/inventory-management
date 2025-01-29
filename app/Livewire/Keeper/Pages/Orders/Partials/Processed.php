@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Pages\Orders\Partials;
+namespace App\Livewire\Keeper\Pages\Orders\Partials;
 
 use Livewire\Component;
 use App\Models\Supplier;
@@ -17,16 +17,16 @@ use App\Models\KitchenStockMovement;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Admin;
+use App\Models\Keeper;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\DB;
-use App\Livewire\Admin\Pages\Orders\GetData;
+use App\Livewire\Keeper\Pages\Orders\GetData;
 use Illuminate\Support\Facades\Auth;
 
-class Shipped extends Component
+class Processed extends Component
 {
     use LivewireAlert;
 
@@ -40,9 +40,9 @@ class Shipped extends Component
         $this->order = $order;
     }
 
-    protected $listeners = ['orderShipped'];
+    protected $listeners = ['orderProcessed'];
 
-    public function orderShipped($id)
+    public function orderProcessed($id)
     {
         $this->order = Order::find($id);
     
@@ -60,7 +60,7 @@ class Shipped extends Component
         $this->resetErrorBag();
     
         // Open modal
-        $this->dispatch('shippedOrderModalToggle');
+        $this->dispatch('processedOrderModalToggle');
     }
 
     public function closeForm()
@@ -73,7 +73,7 @@ class Shipped extends Component
         $this->resetErrorBag();
     
         // Close modal
-        $this->dispatch('shippedOrderModalToggle');
+        $this->dispatch('processedOrderModalToggle');
     }
     
 
@@ -85,21 +85,20 @@ class Shipped extends Component
 
         try {
             // Add updater
-            $service = Admin::find(Auth::guard('admin')->user()->id);
+            $service = Keeper::find(Auth::guard('keeper')->user()->id);
             
             // Save Order Status
             $orderStatus = new OrderStatus();
             $orderStatus->order_id = $this->order->id;
             $orderStatus->old_status = $this->order->type;
-            $orderStatus->new_status = 'Shipped';
+            $orderStatus->new_status = 'Processed';
             $orderStatus->date = now();
             $orderStatus->statusable()->associate($service);
             $orderStatus->save();
 
             // 1- Update order
-            $this->order->type   = 'Shipped';
+            $this->order->type   = 'Processed';
             // $this->order->status = 'Open';
-            $this->order->response_date   = now();
 
             $this->order->updateable()->associate($service);
             $this->order->save();
@@ -195,8 +194,8 @@ class Shipped extends Component
             $this->reset();
 
             // Hide modal
-            $this->dispatch('shippedOrderModalToggle');
-            $this->dispatch('refreshTitleShipped'); 
+            $this->dispatch('processedOrderModalToggle');
+            $this->dispatch('refreshTitleProcessed'); 
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(GetData::class);
@@ -218,6 +217,6 @@ class Shipped extends Component
 
     public function render()
     {
-        return view('admin.pages.orders.partials.shipped');
+        return view('keeper.pages.orders.partials.processed');
     }
 }

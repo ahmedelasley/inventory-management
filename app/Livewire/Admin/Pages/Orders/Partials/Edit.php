@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Pages\Orders\Partials;
 
 use Livewire\Component;
+use App\Models\Restaurant;
 use App\Models\Kitchen;
 use App\Models\Warehouse;
 use App\Models\Order;
@@ -158,11 +159,15 @@ class Edit extends Component
 
     public function render()
     {
-        $kitchens = Kitchen::select('id', 'name')->get();
-        $warehouses = Warehouse::select('id', 'name')->get();
+        $restaurants = Restaurant::with(['creator', 'editor', 'user', 'kitchens', 'warehouses'])->get();
+
+        // $kitchens = Kitchen::select('id', 'name')->get();
+        // $warehouses = Warehouse::select('id', 'name')->get();
         return view('admin.pages.orders.partials.edit', [
-            'kitchens' => $kitchens,
-            'warehouses' => $warehouses,
+            'restaurants' => $restaurants,
+
+            // 'kitchens' => $kitchens,
+            // 'warehouses' => $warehouses,
         ]);
 
     }

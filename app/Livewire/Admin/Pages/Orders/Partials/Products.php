@@ -83,6 +83,7 @@ class Products extends Component
                     OrderItems::create([
                         'order_id' => $order_id,
                         'warehouse_stock_id' => $warehouse_stock->id,
+                        'cost' => $warehouse_stock->cost,
                         // 'quantity_available' => $warehouse_stock->quantity,
                     ]);
                     $this->order->update([

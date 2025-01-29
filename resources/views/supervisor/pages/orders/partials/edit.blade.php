@@ -9,7 +9,7 @@
         <form method="post" wire:submit.prevent="submit">
             <div class="modal-body">   
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col mb-3">
                         <label for="kitchen_id" class="form-label">Kitchens</label><span class='text-danger'>*</span>
                         <select wire:model.live="kitchen_id" class="form-control" id="kitchen_id">
@@ -21,8 +21,8 @@
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('kitchen_id')" />
                     </div>
-                </div>
-                <div class="row">
+                </div> --}}
+                {{-- <div class="row">
                     <div class="col mb-3">
                     <label for="warehouse_id" class="form-label">Warehouses</label><span class='text-danger'>*</span>
                     <select wire:model.live.debounce.250ms="warehouse_id" class="form-control" id="warehouse_id">
@@ -34,15 +34,15 @@
                     </select>
                     <x-input-error class="mt-2" :messages="$errors->get('warehouse_id')" />
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col mb-3">
                         <x-input-label for="request_date" class="form-label" :value="__('Request Date')" /><span class='text-danger'>*</span>
                         <x-text-input id="request_date" wire:model.live.debounce.250ms="request_date" type="datetime-local" class="form-control"/>
                         <x-input-error class="mt-2" :messages="$errors->get('request_date')" />
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col mb-3">
                         <x-input-label for="notes" class="form-label" :value="__('Notes')" /><span class='text-danger'>*</span>

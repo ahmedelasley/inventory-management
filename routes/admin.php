@@ -39,12 +39,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth.admin')->group(function () {
 
-        Route::get('/', function () {
-            return view('admin.dashboard');
-        });
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        // Route::get('/', function () {
+        //     return view('admin.dashboard');
+        // });
+        // Route::get('/dashboard', function () {
+        //     return view('admin.dashboard');
+        // })->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

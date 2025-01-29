@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Pages\Purchases\Partials;
 
 use Livewire\Component;
 use App\Models\Admin;
+use App\Models\Restaurant;
 use App\Models\Warehouse;
 use App\Models\Supplier;
 use App\Models\Purchase;
@@ -143,11 +144,14 @@ class Create extends Component
     }
     public function render()
     {
+        $restaurants = Restaurant::with(['creator', 'editor', 'user', 'kitchens', 'warehouses'])->get();
+
         $suppliers = Supplier::select('id', 'name')->get();
-        $warehouses = Warehouse::select('id', 'name')->get();
+        // $warehouses = Warehouse::select('id', 'name')->get();
         return view('admin.pages.purchases.partials.create', [
+            'restaurants' => $restaurants,
             'suppliers' => $suppliers,
-            'warehouses' => $warehouses,
+            // 'warehouses' => $warehouses,
         ]);
     }
 }

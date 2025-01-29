@@ -57,7 +57,7 @@ class Restaurant extends Model
 
     
     // Relationship to get the warehouse
-    public function warehouse()
+    public function warehouses()
     {
         return $this->hasMany(Warehouse::class);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Pages\Orders\Partials;
+namespace App\Livewire\Keeper\Pages\Orders\Partials;
 
 use Livewire\Component;
 use App\Models\Supplier;
@@ -17,13 +17,13 @@ use App\Models\KitchenStockMovement;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Admin;
+use App\Models\Keeper;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\DB;
-use App\Livewire\Admin\Pages\Orders\GetData;
+use App\Livewire\Keeper\Pages\Orders\GetData;
 use Illuminate\Support\Facades\Auth;
 
 class Shipped extends Component
@@ -85,7 +85,7 @@ class Shipped extends Component
 
         try {
             // Add updater
-            $service = Admin::find(Auth::guard('admin')->user()->id);
+            $service = Keeper::find(Auth::guard('keeper')->user()->id);
             
             // Save Order Status
             $orderStatus = new OrderStatus();
@@ -218,6 +218,6 @@ class Shipped extends Component
 
     public function render()
     {
-        return view('admin.pages.orders.partials.shipped');
+        return view('keeper.pages.orders.partials.shipped');
     }
 }

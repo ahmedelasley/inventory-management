@@ -14,10 +14,18 @@
                         <label for="kitchen_id" class="form-label">Kitchens</label><span class='text-danger'>*</span>
                         <select wire:model.live="kitchen_id" class="form-control" id="kitchen_id">
                             <option value="">Select a Kitchen...</option>
-                            @forelse ($kitchens as $record)
-                                <option value="{{ $record->id }}" wire:key="kitchen-{{ $record->id }}" >{{ $record->name }}</option>
-                            @empty
-                            @endforelse
+                            @forelse ($restaurants as $record)
+                            <optgroup label="{{ $record->name }} Restaurant">
+                                @forelse ($record->kitchens as $kitchen)
+                                    <option value="{{ $kitchen->id }}" wire:key="kitchen-{{ $kitchen->id }}">
+                                        {{ $kitchen->name }}
+                                    </option>
+                                @empty
+                                    <option disabled>No Kitchens</option>
+                                @endforelse
+                            </optgroup>
+                        @empty
+                        @endforelse
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('kitchen_id')" />
                     </div>
@@ -27,10 +35,18 @@
                     <label for="warehouse_id" class="form-label">Warehouses</label><span class='text-danger'>*</span>
                     <select wire:model.live.debounce.250ms="warehouse_id" class="form-control" id="warehouse_id">
                         <option value="">Select a Warehouse...</option>
-                        @forelse ($warehouses as $record)
-                            <option value="{{ $record->id }}" wire:key="warehouse-{{ $record->id }}" >{{ $record->name }}</option>
-                        @empty
-                        @endforelse
+                        @forelse ($restaurants as $record)
+                        <optgroup label="{{ $record->name }} Restaurant">
+                            @forelse ($record->warehouses as $kitchen)
+                                <option value="{{ $kitchen->id }}" wire:key="kitchen-{{ $kitchen->id }}">
+                                    {{ $kitchen->name }}
+                                </option>
+                            @empty
+                                <option disabled>No Warehouses</option>
+                            @endforelse
+                        </optgroup>
+                    @empty
+                    @endforelse
                     </select>
                     <x-input-error class="mt-2" :messages="$errors->get('warehouse_id')" />
                     </div>
@@ -39,7 +55,7 @@
                 <div class="row">
                     <div class="col mb-3">
                         <x-input-label for="request_date" class="form-label" :value="__('Request Date')" /><span class='text-danger'>*</span>
-                        <x-text-input id="request_date" wire:model.live.debounce.250ms="request_date" type="datetime-local" class="form-control"/>
+                        <x-text-input id="request_date" wire:model.live.debounce.250ms="request_date" type="datetime" class="form-control"/>
                         <x-input-error class="mt-2" :messages="$errors->get('request_date')" />
                     </div>
                 </div>

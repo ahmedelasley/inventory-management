@@ -62,7 +62,7 @@
                             <th class="fw-bolder">Send Qty</th>
                         {{-- <th class="fw-bolder">Cost</th>
                         <th class="fw-bolder">Total</th> --}}
-                        @if($order->status == 'Open' &&  $order->type != 'Shipped')
+                        @if($order->status == 'Open' &&  $order->type == 'Processed')
                             <th class="fw-bolder">Action</th>
                         @endif
                     </tr>
@@ -82,7 +82,7 @@
                         <td>{{ $value->quantity_available }} {{ $value->stock?->product?->storge_unit }}</td>
                         {{-- <td>{{ $value->cost }}</td>
                         <td>{{ $value->quantity * $value->cost }}</td> --}}
-                        @if($order->status == 'Open' && $order->type != 'Shipped' )  
+                        @if($order->status == 'Open' && $order->type == 'Processed' )  
                             <td>
                                 <a class="text-success" href="javascript:void(0);"
                                     wire:click.prevent="$dispatch('orderItemUpdate', { id: {{ $value->id }} })"
