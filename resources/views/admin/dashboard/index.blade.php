@@ -1,14 +1,21 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        @livewire('admin.dashboard.partials.welcome')
-        {{-- @livewire('admin.dashboard.partials.card-statiscs') --}}
-        {{-- @livewire('admin.dashboard.partials.less-inventory')
-        @livewire('admin.dashboard.partials.chart')
-        @livewire('admin.dashboard.partials.top-inventory') --}}
 
+    @livewire('admin.dashboard.partials.statiscs.card-statiscs')
+
+    {{-- <div class="row">
+        @livewire('admin.dashboard.partials.welcome')
+        @livewire('admin.dashboard.partials.chart-pie-inventory')
+        @livewire('admin.dashboard.partials.card-statiscs')
     </div>
+    <div class="row">
+        @livewire('admin.dashboard.partials.chart-bar-warehouses')
+        @livewire('admin.dashboard.partials.inventory-warehouses')
+        @livewire('admin.dashboard.partials.chart-bar-kitchens')
+        @livewire('admin.dashboard.partials.inventory-kitchens')
+
+    </div> --}}
               
 @endsection
 @section('js')

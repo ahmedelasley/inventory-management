@@ -12,7 +12,7 @@
                     <i class="bx bx-power-off me-2"></i>
                     <span class="align-middle">Sign Out</span>
                 </a>
-            </form>
+              </form>
             </div>
           </div>
           <div class="col-sm-5 text-center text-sm-left">

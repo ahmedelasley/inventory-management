@@ -1,13 +1,26 @@
         <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" >
-          <div class="app-brand demo">
-
+          <div class="app-brand demo shadow-sm">
             @include('admin.layouts.partials.logo')
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
+          <!-- User Info -->
+          <div class="d-flex justify-content-evenly mt-5">
+            <div class="flex-shrink-0 mx-3">
+              <div class="avatar avatar-online">
+                <img src="{{ URL::asset('assets/admin') }}/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+              </div>
+            </div>
+            <div class="flex-grow-1">
+              <span class="fw-semibold d-block">{{ Auth::guard('admin')->user()->name }}</span>
+              <small class="fw-semibold d-block">{{ Auth::guard('admin')->user()->email }}</small>
+              <small class="text-primary">Administrate</small>
+            </div>
+          </div>
+          <!-- User Info -->
 
           <div class="menu-inner-shadow"></div>
           <li class="menu-header small text-uppercase">
