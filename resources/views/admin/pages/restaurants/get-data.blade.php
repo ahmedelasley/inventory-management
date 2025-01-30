@@ -87,17 +87,17 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('kitchenShow', { id: {{ $value->id }} })"
+                                                wire:click.prevent="$dispatch('restaurantShow', { id: {{ $value->id }} })"
                                             >
                                                 <i class="bx bx-show me-1"></i> Show
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('kitchenUpdate', { id: {{ $value->id }} })"
+                                                wire:click.prevent="$dispatch('restaurantUpdate', { id: {{ $value->id }} })"
                                             >
                                                 <i class="bx bx-edit-alt me-1"></i> Edit
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('kitchenDelete', { id: {{ $value->id }} })"
+                                                wire:click.prevent="$dispatch('restaurantDelete', { id: {{ $value->id }} })"
                                             >
                                                 <i class="bx bx-trash me-1"></i> Delete
                                             </a>
