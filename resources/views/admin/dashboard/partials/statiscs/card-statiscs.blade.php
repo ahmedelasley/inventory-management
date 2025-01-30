@@ -3,7 +3,7 @@
     <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="row">
             <!-- Products -->
-            <div class="col-lg-4 col-md-4 col-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-12 mb-4">
                 <div class="card bg-primary p-0">
                     <div class="card-body">
                         <h4 class="text-white text-center">Welcome 🎉 in Administrator Panel</h4>
@@ -12,7 +12,7 @@
             </div>
 
             <!-- Suppliers -->
-            <div class="col-lg-4 col-md-4 col-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
                 <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex  justify-content-between">
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Categories -->
-            <div class="col-lg-4 col-md-4 col-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
                 <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex  justify-content-between">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Products -->
-            <div class="col-lg-4 col-md-4 col-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
                 <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex  justify-content-between">
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <!-- Products -->
-            <div class="col-lg-4 col-md-4 col-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
                 <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex  justify-content-between">
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <!-- Products -->
-            <div class="col-lg-4 col-md-4 col-4 col-12 mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-4">
                 <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex  justify-content-between">
@@ -108,7 +108,7 @@
     $warehousesCount = Warehouse::count();
 @endphp
 
-<div class="col-lg-6 col-md-6 col-12 mb-4">
+<div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-4">
     <div class="row">
         <!-- Inventory -->
         <div class="col-lg-12 col-md-12 col-12 mb-4">
@@ -190,7 +190,7 @@
 
 
 
-      {{-- <div class="col-lg-4 col-md-4 col-4 mb-4">
+      {{-- <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
         <div class="card">
           <div class="card-body">
             <div class="card-title d-flex  justify-content-between">
@@ -204,7 +204,7 @@
         </div>
       </div> --}}
   
-      {{-- <div class="col-lg-4 col-md-4 col-4 mb-4">
+      {{-- <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
         <div class="card">
           <div class="card-body">
             <div class="card-title d-flex  justify-content-between">
