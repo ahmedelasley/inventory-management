@@ -3,10 +3,10 @@
 @section('content')
     <div class="row">
         @livewire('keeper.dashboard.partials.welcome')
-        @livewire('keeper.dashboard.partials.card-statiscs')
+        {{-- @livewire('keeper.dashboard.partials.card-statiscs')
         @livewire('keeper.dashboard.partials.less-inventory')
         @livewire('keeper.dashboard.partials.chart')
-        @livewire('keeper.dashboard.partials.top-inventory')
+        @livewire('keeper.dashboard.partials.top-inventory') --}}
 
     </div>
               
