@@ -195,6 +195,6 @@ class Save extends Component
 
     public function render()
     {
-        return view('keeper.pages.Purchases.partials.save');
+        return view('keeper.pages.purchases.partials.save');
     }
 }
