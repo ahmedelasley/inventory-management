@@ -32,8 +32,8 @@ class Show extends Component
         // Set the properties
         $this->name            = $this->warehouse->name;
         $this->code            = $this->warehouse->code;
-        $this->location        = $this->kitchen->location;
-        $this->restaurant      = $this->kitchen->restaurant?->name;
+        $this->location        = $this->warehouse->location;
+        $this->restaurant      = $this->warehouse->restaurant?->name;
         $this->keeper          = $this->warehouse->keeper?->name;
     
      
