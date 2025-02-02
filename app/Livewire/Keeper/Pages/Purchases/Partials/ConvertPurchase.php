@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Supplier;
 use App\Models\Warehouse;
 use App\Models\Purchase;
-use App\Models\keeper;
+use App\Models\Keeper;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\Rule;
