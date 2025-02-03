@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->string('phone')->unique();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->tinyInteger('is_default')->default(0); // Type (0 = Not Default, 1 = Defualt )
 

@@ -37,7 +37,7 @@ class SupplierRequest extends FormRequest
                 return [
                     'name' => 'required|string|min:3|max:255|unique:suppliers,name',
                     'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|unique:suppliers,phone',
-                    'email' => 'required|email|unique:suppliers,email',
+                    'email' => 'nullable|email',
                     'address' => 'nullable|string|min:3',
                 ];
             }
@@ -46,7 +46,7 @@ class SupplierRequest extends FormRequest
                 return [
                     'name' => ['required', 'string', 'min:3', 'max:255' , Rule::unique('suppliers')->ignore($this->id)] ,
                     'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', Rule::unique('suppliers')->ignore($this->id)],
-                    'email' => ['required', 'email', Rule::unique('suppliers')->ignore($this->id)],
+                    'email' => 'nullable|email',
                     'address' => 'nullable|string|min:3',
                 ];
             }
