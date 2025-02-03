@@ -21,7 +21,7 @@
                     </div>
                     <h6 class="fw-semibold d-block mb-1 text-start">Suppliers</h6>
                     </div>
-                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Purchase::count() > 0 ? \App\Models\Purchase::count() : 0  }}</h3>
+                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Supplier::count() > 0 ? \App\Models\Supplier::count() : 0  }}</h3>
                 </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     </div>
                     <h6 class="fw-semibold d-block mb-1 text-start">Categories</h6>
                     </div>
-                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Purchase::count() > 0 ? \App\Models\Purchase::count() : 0  }}</h3>
+                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Category::count() > 0 ? \App\Models\Category::count() : 0  }}</h3>
                 </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </div>
                     <h6 class="fw-semibold d-block mb-1 text-start">Products</h6>
                     </div>
-                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Purchase::count() > 0 ? \App\Models\Purchase::count() : 0  }}</h3>
+                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Product::count() > 0 ? \App\Models\Product::count() : 0  }}</h3>
                 </div>
                 </div>
             </div>
