@@ -1,7 +1,6 @@
 <?php
 
 
-
     if (!function_exists('getSetting')) {
         function getSetting($key, $default = null)
         {
@@ -9,9 +8,6 @@
             return $setting ? $setting->value : $default;
         }
     }
-
-
-
 
     if (!function_exists('showAlert')) {
         function showAlert($component, $type, $message) {
@@ -21,6 +17,15 @@
                 'toast' => true,
                 'timerProgressBar' => true,
             ]);
+        }
+    }
+
+    if (!function_exists('getInitials')) {
+
+        function getInitials($string)
+        {
+            preg_match_all('/\b\w/u', $string, $matches);
+            return strtoupper(implode('', $matches[0]));
         }
     }
 

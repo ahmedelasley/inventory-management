@@ -17,36 +17,39 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function index(): View
     {
-        // dd( Auth::guard('admin')->user());
-        return view('admin.pages.profile.profile', [
-            'user' => Auth::guard('admin')->user(),
-        ]);
-    }
-
-    /**
-     * Update the user's profile information.
-     */
-    public function update(Request $request): RedirectResponse
-    {
-        $admin = Auth::guard('admin')->user();
-
-        $validate = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Admin::class)->ignore($admin->id)],
+        return view('admin.pages.profile.index',[
+            'profile' => Auth::guard('admin')->user(),
         ]);
 
-        $admin->fill($validate);
-
-        if ($admin->isDirty('email')) {
-            $admin->email_verified_at = null;
-        }
-
-        $admin->save();
-
-        return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
+        // return view('admin.pages.profile.profile', [
+        //     'user' => Auth::guard('admin')->user(),
+        // ]);
     }
+
+    // /**
+    //  * Update the user's profile information.
+    //  */
+    // public function update(Request $request): RedirectResponse
+    // {
+    //     $admin = Auth::guard('admin')->user();
+
+    //     $validate = $request->validate([
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Admin::class)->ignore($admin->id)],
+    //     ]);
+
+    //     $admin->fill($validate);
+
+    //     if ($admin->isDirty('email')) {
+    //         $admin->email_verified_at = null;
+    //     }
+
+    //     $admin->save();
+
+    //     return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
+    // }
 
     /**
      * Delete the user's account.

@@ -17,11 +17,10 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function index(): View
     {
-        // dd( Auth::guard('admin')->user());
-        return view('keeper.pages.profile.profile', [
-            'user' => Auth::guard('keeper')->user(),
+        return view('keeper.pages.profile.index',[
+            'profile' => Auth::guard('keeper')->user(),
         ]);
     }
 

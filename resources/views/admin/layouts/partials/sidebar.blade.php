@@ -11,7 +11,7 @@
           <div class="d-flex justify-content-evenly mt-5">
             <div class="flex-shrink-0 mx-3">
               <div class="avatar avatar-online">
-                <img src="{{ URL::asset('assets/admin') }}/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                <img src="https://placehold.co/800x800/696cff/ffffff?font=roboto&text={{ getInitials(Auth::guard('admin')->user()->name) }}" alt class="w-px-40 h-auto rounded-circle" />
               </div>
             </div>
             <div class="flex-grow-1">

@@ -160,7 +160,15 @@
 			})
 
 
+			window.addEventListener('editProfileModalToggle', event => {
+				$('#editProfileModal').modal('toggle');
+			})
 
+			window.addEventListener('editPasswordModalToggle', event => {
+				$('#editPasswordModal').modal('toggle');
+			})
+
+			
 		</script>
 
 	</body>
