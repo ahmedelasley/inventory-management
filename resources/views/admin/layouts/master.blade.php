@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
+<html class="light-style layout-menu-fixed"  lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
@@ -36,10 +36,11 @@
 						<div class="content-wrapper">
 						
 							<div class="container-fluid flex-grow-1 container-p-y">
-							@yield('content')
+								@yield('content')
+							</div>
 						</div>
 						<!-- / Content -->
-						@include('admin.layouts.partials.footer')
+					@include('admin.layouts.partials.footer')
 					<div class="content-backdrop fade"></div>
 				</div>
 				<!-- Content wrapper -->

@@ -1,12 +1,13 @@
         <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" >
-          <div class="app-brand demo shadow-sm">
+          <div class="app-brand demo">
             @include('admin.layouts.partials.logo')
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
+          <div class="menu-inner-shadow"></div>
           <!-- User Info -->
           <div class="d-flex justify-content-evenly mt-5">
             <div class="flex-shrink-0 mx-3">
@@ -22,11 +23,14 @@
           </div>
           <!-- User Info -->
 
-          <div class="menu-inner-shadow"></div>
-          <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Dashboard</span>
-          </li>
-          <ul class="menu-inner py-1">
+          {{-- <div class="menu-inner-shadow"></div> --}}
+
+          <ul class="menu-inner py-5">
+
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Dashboard</span>
+            </li>
+
             <!-- Dashboard -->
             <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
               <a href="{{ route('admin.dashboard') }}" class="menu-link">

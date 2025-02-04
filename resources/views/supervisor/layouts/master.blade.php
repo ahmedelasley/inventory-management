@@ -36,10 +36,11 @@
 						<div class="content-wrapper">
 						
 							<div class="container-fluid flex-grow-1 container-p-y">
-							@yield('content')
+								@yield('content')
+							</div>
 						</div>
 						<!-- / Content -->
-						@include('supervisor.layouts.partials.footer')
+					@include('admin.layouts.partials.footer')
 					<div class="content-backdrop fade"></div>
 				</div>
 				<!-- Content wrapper -->
