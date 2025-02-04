@@ -18,7 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->decimal('quantity', 14, 4)->default(0);
-
+            $table->decimal('cost', 14, 4)->default(0);
+            $table->decimal('total', 14, 4)->default(0);
+            $table->string('unit')->nullable();
             $table->morphs('createable'); // Create Fileds 
             $table->string('updateable_type')->nullable();
             $table->unsignedBigInteger('updateable_id')->nullable();

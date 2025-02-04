@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->tinyInteger('is_default')->default(0); // Type (0 = Not Default, 1 = Defualt )
+            $table->tinyInteger('type')->default(0); // Type (0 = stock, 1 = menu )
 
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('created_id')->nullable();
