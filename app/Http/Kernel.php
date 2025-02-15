@@ -63,12 +63,14 @@ class Kernel extends HttpKernel
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        // 'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'verified.admin' => \App\Http\Middleware\EnsureEmailIsVerifiedAdmin::class,
 
         /**** OTHER Authenticate MIDDLEWARE ****/
 
         /**** Authenticate MIDDLEWARE ****/
         'auth.admin' => \App\Http\Middleware\AuthenticateAdmin::class,
+        'auth.manager' => \App\Http\Middleware\AuthenticateManager::class,
         'auth.supervisor' => \App\Http\Middleware\AuthenticateSupervisor::class,
         'auth.keeper' => \App\Http\Middleware\AuthenticateKeeper::class,
 

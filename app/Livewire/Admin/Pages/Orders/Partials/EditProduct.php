@@ -53,7 +53,7 @@ class EditProduct extends Component
         $this->name                 = $this->item->stock?->product?->name;
         $this->sku                  = $this->item->stock?->product?->sku;
         $this->quantity_request     = $this->item->quantity_request;
-        $this->quantity_available   = $this->item->quantity_available;
+        $this->quantity_available   = $this->item->quantity_request;
 
     
     

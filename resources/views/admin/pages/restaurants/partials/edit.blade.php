@@ -22,15 +22,15 @@
     
     
                 <div class="mb-3">
-                    <label for="user_id" class="form-label">User</label><span class='text-danger'>*</span>
-                    <select wire:model.live="user_id" class="form-control" id="user_id">
-                        <option value="">Select a User...</option>
+                    <label for="manager_id" class="form-label">Manager</label><span class='text-danger'>*</span>
+                    <select wire:model.live="manager_id" class="form-control" id="manager_id">
+                        <option value="">Select a Manager...</option>
                         @forelse ($data as $record)
-                            <option value="{{ $record->id }}" wire:key="user-{{ $record->id }}" >{{ $record->name }}</option>
+                            <option value="{{ $record->id }}" wire:key="manager-{{ $record->id }}" >{{ $record->name }}</option>
                         @empty
                         @endforelse
                     </select>
-                    <x-input-error class="mt-2" :messages="$errors->get('user_id')" />
+                    <x-input-error class="mt-2" :messages="$errors->get('manager_id')" />
                 </div>
             </div>
             <div class="modal-footer">

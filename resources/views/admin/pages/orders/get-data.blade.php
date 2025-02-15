@@ -87,7 +87,9 @@
 
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><strong>{{ $value->code }}</strong></td>
+                                    {{-- <td><strong>{{ $value->code }}</strong></td> --}}
+                                    <td><a href="{{ route('admin.orders.create.order', ['order' => $value]) }}"><i class='bx bx-receipt'></i><strong>{{ $value->code }}</strong></a></td>
+
                                     <td>{{ $value->kitchen?->name }}</td>
                                     <td>{{ $value->warehouse?->name }}</td>
 
@@ -102,8 +104,11 @@
                                     <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td> --}}
 
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.create.order', ['order' => $value]) }}">
+                                        {{-- <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.create.order', ['order' => $value]) }}">
                                             <i class="bx bx-show me-1"></i> Show
+                                        </a> --}}
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.show.transaction', ['order' => $value]) }}">
+                                            <i class="bx bx-show me-1"></i> Show Transactions
                                         </a>
                                     </td>
                                 </tr>

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             
-            $table->unsignedBigInteger('kitchen_id')->nullable();
-            $table->foreign('kitchen_id')->references('id')->on('kitchens')->onDelete('cascade');
+            $table->unsignedBigInteger('restaurant_id')->nullable();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
 
             $table->unsignedBigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->decimal('tax', 14, 4)->default(0);
 
 
-            $table->enum('type', ['Pending', 'Send', 'Processed', 'Shipped', 'Received'])->default('Pending'); // Data Type (Pending, Send, Processed, Shipped, Received)
+            $table->enum('type', ['Pending', 'Completed'])->default('Pending'); // Data Type (Pending, Completed)
             $table->enum('status', ['Open', 'Closed', 'Draft'])->default('Open'); // Data Type (Open, Closed, Draft)
             $table->timestamp('date')->nullable();
             $table->text('notes')->nullable();

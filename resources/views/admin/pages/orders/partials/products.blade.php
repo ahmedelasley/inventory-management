@@ -15,11 +15,11 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item {{ $field == 'name' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('name')">Name</a></li>
                   <li><a class="dropdown-item {{ $field == 'sku' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('sku')">SKU</a></li>
-                  <li><a class="dropdown-item {{ $field == 'storge_unit' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('storge_unit')">Storge Unit</a></li>
-                  <li>
+                  {{-- <li><a class="dropdown-item {{ $field == 'storge_unit' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('storge_unit')">Storge Unit</a></li> --}}
+                  {{-- <li>
                     <hr class="dropdown-divider" />
-                  </li>
-                  <li><a class="dropdown-item {{ $field == 'category' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('category')">Categry</a></li>
+                  </li> --}}
+                  {{-- <li><a class="dropdown-item {{ $field == 'category' ? 'active' : ''}}" href="javascript:void(0);" wire:click="searchField('category')">Categry</a></li> --}}
                 </ul>
             </div>
         </div>
@@ -36,24 +36,24 @@
     </div>
     <div class="card-body table-wrapper-scroll-y my-custom-scrollbar" style="height : calc(100vh - 250px)">
         <div class="row d-flex justify-content-between">
-        @forelse ($products as $value)
-            @if($order->status == 'Open' && $order->type == 'Pending')
-                <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $order->id }}', '{{ $value->id }}')" href="javascript:void(0);">
-            @else
-                <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"href="javascript:void(0);">
-            @endif
-                <div class="card backgroundEffect shadow action-button">
-                    <div class="card-body">
-                        <h6> {{ $value->sku }}</h6>
-                        <h6> {{ $value->name }}</h6>
-                        <h6>Qty : {{ $value->warehouseStocks[0]['quantity'] }}</h6>
-                        
+            @forelse ($products as $value)
+                @if($order->status == 'Open' && $order->type == 'Pending')
+                    <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $order->id }}', '{{ $value->product_id }}')" href="javascript:void(0);">
+                @else
+                    <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"href="javascript:void(0);">
+                @endif
+                    <div class="card backgroundEffect shadow action-button">
+                        <div class="card-body">
+                            <h6> {{ $value->product?->sku }}</h6>
+                            <h6> {{ $value->product?->name }}</h6>
+                            <h6>Qty : {{ $value->quantity }}</h6>
+                            
+                        </div>
                     </div>
-                </div>
-            </a>
-        @empty
-            <div class="alert alert-primary" role="alert">No Products to display!</div>
-        @endforelse
+                </a>
+            @empty
+                <div class="alert alert-primary" role="alert">No Products to display!</div>
+            @endforelse
         </div>
     </div>
     <div class="card-footer">

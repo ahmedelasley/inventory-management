@@ -55,5 +55,11 @@ class OrderController extends Controller
         ]);
     }
 
+    public function showTransaction(Order $order)
+    {
+        return view('admin.pages.orders.show-transaction', [
+            'data' => $order,
+        ]);
+    }
 
 }

@@ -65,7 +65,7 @@ class DeleteProduct extends Component
         $this->resetErrorBag();
     
         // Open modal
-        $this->dispatch('deleteModalToggle');
+        $this->dispatch('deleteItemModalToggle');
     }
 
     public function closeForm()
@@ -78,7 +78,7 @@ class DeleteProduct extends Component
         $this->resetErrorBag();
     
         // Close modal
-        $this->dispatch('deleteModalToggle');
+        $this->dispatch('deleteItemModalToggle');
     }
     
     // public function rules()
@@ -142,7 +142,7 @@ class DeleteProduct extends Component
             $this->reset();
 
             // Hide modal
-            $this->dispatch('deleteModalToggle');
+            $this->dispatch('deleteItemModalToggle');
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(Index::class);

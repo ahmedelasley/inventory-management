@@ -24,7 +24,7 @@ class Restaurant extends Model
         'name',
         'code',
         'location',
-        'user_id',
+        'manager_id',
         'created_id',
         'updated_id',
     ];
@@ -44,9 +44,9 @@ class Restaurant extends Model
     }
 
     // Relationship to get the parent category
-    public function user()
+    public function manager()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Manager::class, 'manager_id');
     }
 
     // Relationship to get the kitchen

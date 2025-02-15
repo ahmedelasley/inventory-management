@@ -1,6 +1,6 @@
 <div >
     <!-- Modal -->
-    <div  wire:ignore.self  class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div  wire:ignore.self  class="modal fade" id="editItemModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -14,12 +14,12 @@
                     <div class="row g-3">
                         <div class="col mb-3">
                             <x-input-label for="quantity" class="form-label" :value="__('Quantity')" /><span class='text-danger'>*</span>
-                            <x-text-input id="quantity" wire:model="quantity" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                            <x-text-input id="quantity" wire:model.blur="quantity" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
                             <x-input-error class="mt-2" :messages="$errors->get('quantity')" />
                         </div>
                         <div class="col mb-3">
                             <x-input-label for="cost" class="form-label" :value="__('Cost')" /><span class='text-danger'>*</span>
-                            <x-text-input id="cost" wire:model="cost" type="text" class="form-control" step="1" min="0" pattern="^\d+(?:\.\d{12,4})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"/>
+                            <x-text-input id="cost" wire:model.blur="cost" type="text" class="form-control" step="1" min="0" pattern="^\d+(?:\.\d{12,4})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"/>
                             <x-input-error class="mt-2" :messages="$errors->get('cost')" />
                         </div>
                         <div class="col mb-3">

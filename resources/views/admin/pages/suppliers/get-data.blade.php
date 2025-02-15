@@ -40,9 +40,9 @@
                         </ul>
                     </div>
                     {{-- <button type="button" class="btn btn-sm btn-outline-primary ms-2" wire:click="exportPDF"><i class='bx bxs-file-pdf'></i> PDF</button> --}}
-                    <button type="button" class="btn btn-sm btn-outline-danger ms-2" data-bs-toggle="modal" data-bs-target="#importModal"><i class='bx bx-spreadsheet' ></i> Import</button>
+                    {{-- <button type="button" class="btn btn-sm btn-outline-danger ms-2" data-bs-toggle="modal" data-bs-target="#importModal"><i class='bx bx-spreadsheet' ></i> Import</button> --}}
                     {{-- <button type="button" class="btn btn-sm btn-outline-success ms-2" wire:click="exportExcel"><i class='bx bx-spreadsheet' ></i> Export</button> --}}
-                    <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteSelectedModal" @if(empty($selectedRows)) disabled @endif><i class="bx bx-trash me-1"></i> Delete</button>
+                    {{-- <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteSelectedModal" @if(empty($selectedRows)) disabled @endif><i class="bx bx-trash me-1"></i> Delete</button> --}}
                     @include('admin.pages.suppliers.partials.import')
                     @include('admin.pages.suppliers.partials.delete-selected')
 
@@ -66,7 +66,7 @@
                     <table class="table table-striped table-hover table-sm text-center">
                         <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
-                            <th class="fw-bolder fs-6">
+                            {{-- <th class="fw-bolder fs-6">
                                 <input
                                 class="form-check-input mt-0"
                                 type="checkbox"
@@ -74,7 +74,7 @@
                                 wire:click="selectAll"
                                 aria-label="Checkbox for following text input"
                               />
-                            </th>
+                            </th> --}}
                             <th class="fw-bolder fs-6">#</th>
                             <th class="fw-bolder fs-6">Code</th>
                             <th class="fw-bolder fs-6">Name</th>
@@ -90,7 +90,7 @@
                             @forelse ($data as $value)
 
                         <tr>
-                            <td>
+                            {{-- <td>
                                 @if (!$value->is_default)
                                     <input
                                     class="form-check-input mt-0"
@@ -99,7 +99,7 @@
                                     aria-label="Checkbox for following text input"
                                 />
                               @endif
-                            </td>
+                            </td> --}}
                             <td>{{$loop->iteration }}</td>
                             <td><strong>{{ $value->code }}</strong></td>
                             <td><strong>{{ $value->name }}</strong></td>

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Show Kitchen [ {{ $name }} ]</h5>
+            <h5 class="modal-title" id="exampleModalLabel1">Show Restaurant [ {{ $name }} ]</h5>
             <button type="button" class="btn-close" wire:click="closeForm" ></button>
         </div>
             
@@ -18,7 +18,7 @@
                 <x-text-show :labelValue="__('location')" :value=$location/>
             </div>
             <div class="mb-3">
-                <x-text-show :labelValue="__('Supervisor')" :value=$user/>
+                <x-text-show :labelValue="__('Manager')" :value=$manager/>
             </div>
         </div>
         <div class="modal-footer">

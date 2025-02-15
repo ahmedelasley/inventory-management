@@ -54,7 +54,9 @@
                     <th class="fw-bolder">Qty</th>
                     <th class="fw-bolder">Cost</th>
                     <th class="fw-bolder">Total</th>
-                    <th class="fw-bolder">Action</th>
+                    @if($purchase->status == 'Pending')
+                        <th class="fw-bolder">Action</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">

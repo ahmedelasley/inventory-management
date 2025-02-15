@@ -3,7 +3,7 @@
 namespace App\Livewire\Admin\Pages\Restaurants\Partials;
 
 use Livewire\Component;
-use App\Models\User;
+use App\Models\Manager;
 use App\Models\Restaurant;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Validation\Rule;
@@ -22,7 +22,7 @@ class Edit extends Component
     public $name;
     public $code;
     public $location;
-    public $user_id;
+    public $manager_id;
 
     protected $listeners = ['restaurantUpdate'];
 
@@ -39,7 +39,7 @@ class Edit extends Component
         $this->name            = $this->restaurant->name;
         $this->code            = $this->restaurant->code;
         $this->location        = $this->restaurant->location;
-        $this->user_id         = $this->restaurant->user_id;
+        $this->manager_id         = $this->restaurant->manager_id;
     
     
         // Reset validation and errors
@@ -115,7 +115,7 @@ class Edit extends Component
     public function render()
     {
 
-        $data = User::with(['restaurant'])->doesntHave('restaurant')->get();
+        $data = Manager::with(['restaurant'])->doesntHave('restaurant')->get();
         return view('admin.pages.restaurants.partials.edit', [
             'data' => $data,
         ]);

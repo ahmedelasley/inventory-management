@@ -58,6 +58,13 @@
                   </a>
                 </li>
 
+                <!-- Normal Users -->
+                <li class="menu-item  {{ request()->routeIs(['admin.managers.index']) ? 'active' : '' }}">
+                  <a href="{{ route('admin.managers.index') }}" class="menu-link">
+                    <div data-i18n="Managers Roles">Restaurant Manager</div>
+                  </a>
+                </li>
+
                 <!-- Kitchen Supervisors -->
                 <li class="menu-item  {{ request()->routeIs(['admin.supervisors.index']) ? 'active' : '' }}">
                   <a href="{{ route('admin.supervisors.index') }}" class="menu-link">
@@ -72,12 +79,7 @@
                   </a>
                 </li>
 
-                <!-- Normal Users -->
-                <li class="menu-item  {{ request()->routeIs(['admin.users-roles.index']) ? 'active' : '' }}">
-                  <a href="{{ route('admin.users.index') }}" class="menu-link">
-                    <div data-i18n="Users Roles">Restaurant Manager</div>
-                  </a>
-                </li>
+
                 
               </ul>
             </li>
@@ -98,6 +100,12 @@
                   </a>
                 </li>
 
+                <li class="menu-item  {{ request()->routeIs(['admin.managers-roles.*']) ? 'active' : '' }}">
+                  <a href="{{ route('admin.managers-roles.index') }}" class="menu-link">
+                    <div data-i18n="Managers Roles">Restaurant Managers Roles</div>
+                  </a>
+                </li>
+
                 <li class="menu-item  {{ request()->routeIs(['admin.supervisors-roles.*']) ? 'active' : '' }}">
                   <a href="{{ route('admin.supervisors-roles.index') }}" class="menu-link">
                     <div data-i18n="Supervisors Roles">Kitchen Supervisors Roles</div>
@@ -110,11 +118,7 @@
                   </a>
                 </li>
 
-                <li class="menu-item  {{ request()->routeIs(['admin.users-roles.*']) ? 'active' : '' }}">
-                  <a href="{{ route('admin.users-roles.index') }}" class="menu-link">
-                    <div data-i18n="Users Roles">Restaurant Managers Roles</div>
-                  </a>
-                </li>
+
                 
               </ul>
             </li>
@@ -147,6 +151,14 @@
               </a>
             </li>
 
+            <!-- Menus -->
+            <li class="menu-item {{ request()->routeIs('admin.menus.index') ? 'active' : '' }}">
+              <a href="{{ route('admin.menus.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/menu.png" alt="User" class="menu-icon tf-icons " />
+                <div data-i18n="Analytics" class="fw-bolder">Menus</div>
+              </a>
+            </li>
+
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Suppliers & Products</span>
             </li>
@@ -156,6 +168,14 @@
               <a href="{{ route('admin.suppliers.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/supplier.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics" class="fw-bolder">Suppliers</div>
+              </a>
+            </li>
+
+            <!-- Clients -->
+            <li class="menu-item {{ request()->routeIs('admin.clients.index') ? 'active' : '' }}">
+              <a href="{{ route('admin.clients.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/client.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Clients</div>
               </a>
             </li>
 
@@ -188,6 +208,14 @@
               <a href="{{ route('admin.orders.index') }}" class="menu-link">
                 <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/transfer.png" alt="User" class="menu-icon tf-icons" />
                 <div data-i18n="Analytics" class="fw-bolder">Transfers</div>
+              </a>
+            </li>
+
+            <!-- Sales -->
+            <li class="menu-item {{ request()->routeIs('admin.sales.index') ? 'active' : '' }}">
+              <a href="{{ route('admin.sales.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/sales.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Sales</div>
               </a>
             </li>
 

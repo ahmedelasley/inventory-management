@@ -144,7 +144,7 @@ class Create extends Component
     }
     public function render()
     {
-        $restaurants = Restaurant::with(['creator', 'editor', 'user', 'kitchens', 'warehouses'])->get();
+        $restaurants = Restaurant::with(['creator', 'editor', 'manager', 'kitchens', 'warehouses'])->get();
 
         $suppliers = Supplier::select('id', 'name')->get();
         // $warehouses = Warehouse::select('id', 'name')->get();

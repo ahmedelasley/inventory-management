@@ -118,7 +118,7 @@ class Edit extends Component
     public function render()
     {
 
-        $dataRestaurant = Restaurant::with(['creator', 'editor', 'user'])->get();
+        $dataRestaurant = Restaurant::with(['creator', 'editor', 'manager'])->get();
         $dataSupervisor = Supervisor::with(['creator', 'updater', 'kitchen'])->doesntHave('kitchen')->get();
         return view('admin.pages.kitchens.partials.edit', [
             'dataRestaurant' => $dataRestaurant,

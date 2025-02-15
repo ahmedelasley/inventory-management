@@ -110,76 +110,76 @@ class Processed extends Component
 
 
             // Handle return logic
-            foreach ($this->order->products as $product) {
+            // foreach ($this->order->products as $product) {
 
-                $warehouseStock = WarehouseStock::where('id', $product->warehouse_stock_id)->where('warehouse_id', $this->order->warehouse_id)->first();
-                if ($warehouseStock) {
-                    $warehouseStock->quantity -= $product->quantity_available;
-                    $warehouseStock->save();
-                }
+            //     $warehouseStock = WarehouseStock::where('id', $product->warehouse_stock_id)->where('warehouse_id', $this->order->warehouse_id)->first();
+            //     if ($warehouseStock) {
+            //         $warehouseStock->quantity -= $product->quantity_available;
+            //         $warehouseStock->save();
+            //     }
 
-                // Save warehouse stock movements
-                $warehouseStockMovement = new WarehouseStockMovement();
-                $warehouseStockMovement->warehouse_stock_id = $warehouseStock->id;
-                $warehouseStockMovement->type = 'Reduce';
-                $warehouseStockMovement->date = now();
-                $warehouseStockMovement->quantity = $product->quantity_available;
-                $warehouseStockMovement->notes = 'Reduce';
-                $warehouseStockMovement->createable()->associate($service);
-                $warehouseStockMovement->save();
-
-
+            //     // Save warehouse stock movements
+            //     $warehouseStockMovement = new WarehouseStockMovement();
+            //     $warehouseStockMovement->warehouse_stock_id = $warehouseStock->id;
+            //     $warehouseStockMovement->type = 'Reduce';
+            //     $warehouseStockMovement->date = now();
+            //     $warehouseStockMovement->quantity = $product->quantity_available;
+            //     $warehouseStockMovement->notes = 'Reduce';
+            //     $warehouseStockMovement->createable()->associate($service);
+            //     $warehouseStockMovement->save();
 
 
-                // $kitchenStock = KitchenStock::where('product_id', $product->product_id)->where('kitchen_id', $this->order->kitchen_id)->first();
-                // if ($kitchenStock) {
-                //     $kitchenStock->quantity += $product->quantity_available;
-                //     $kitchenStock->save();
-                // } else {
-                //     $kitchenStock = new KitchenStock();
-                //     $kitchenStock->kitchen_id = $kitchen->id;
-                //     $kitchenStock->product_id = $product->product_id;
-                //     $kitchenStock->quantity = $product->quantity_available;
-                //     $kitchenStock->notes = '';
-                //     $kitchenStock->createable()->associate($service);
-                //     $kitchenStock->save();
-                // }
 
 
-// dd($product->stock->product_id);
+            //     // $kitchenStock = KitchenStock::where('product_id', $product->product_id)->where('kitchen_id', $this->order->kitchen_id)->first();
+            //     // if ($kitchenStock) {
+            //     //     $kitchenStock->quantity += $product->quantity_available;
+            //     //     $kitchenStock->save();
+            //     // } else {
+            //     //     $kitchenStock = new KitchenStock();
+            //     //     $kitchenStock->kitchen_id = $kitchen->id;
+            //     //     $kitchenStock->product_id = $product->product_id;
+            //     //     $kitchenStock->quantity = $product->quantity_available;
+            //     //     $kitchenStock->notes = '';
+            //     //     $kitchenStock->createable()->associate($service);
+            //     //     $kitchenStock->save();
+            //     // }
 
-                // Save warehouse stock
-                $kitchenStock = KitchenStock::where('product_id', $product->stock->product_id)->where('kitchen_id', $this->order->kitchen_id)->first();
-                if ($kitchenStock) {
-                    $kitchenStock->quantity        += $product->quantity_available;
-                    $kitchenStock->cost            = $product->cost;
-                    // $kitchenStock->production_date = $product->production_date;
-                    // $kitchenStock->expiration_date = $product->expiration_date;
-                    $kitchenStock->save();
-                } else {
-                    $kitchenStock = new KitchenStock();
-                    $kitchenStock->kitchen_id         = $this->order->kitchen_id;
-                    $kitchenStock->product_id         = $product->stock->product_id;
-                    $kitchenStock->quantity           = $product->quantity_available;
-                    $kitchenStock->cost               = $product->cost;
-                    // $kitchenStock->production_date    = $product->production_date;
-                    // $kitchenStock->expiration_date    = $product->expiration_date;
-                    $kitchenStock->notes              = 'Add';
-                    $kitchenStock->createable()->associate($service);
-                    $kitchenStock->save();
-                }
 
-                // Save Kitchen stock movements
-                $kitchenStockMovement = new KitchenStockMovement();
-                $kitchenStockMovement->kitchen_stock_id = $kitchenStock->id;
-                $kitchenStockMovement->type = 'Add';
-                $kitchenStockMovement->date = now();
-                $kitchenStockMovement->quantity = $product->quantity_available;
-                $kitchenStockMovement->notes = 'Add';
-                $kitchenStockMovement->createable()->associate($service);
-                $kitchenStockMovement->save();
+            //     // dd($product->stock->product_id);
 
-            }
+            //     // Save warehouse stock
+            //     $kitchenStock = KitchenStock::where('product_id', $product->stock->product_id)->where('kitchen_id', $this->order->kitchen_id)->first();
+            //     if ($kitchenStock) {
+            //         $kitchenStock->quantity        += $product->quantity_available;
+            //         $kitchenStock->cost            = $product->cost;
+            //         // $kitchenStock->production_date = $product->production_date;
+            //         // $kitchenStock->expiration_date = $product->expiration_date;
+            //         $kitchenStock->save();
+            //     } else {
+            //         $kitchenStock = new KitchenStock();
+            //         $kitchenStock->kitchen_id         = $this->order->kitchen_id;
+            //         $kitchenStock->product_id         = $product->stock->product_id;
+            //         $kitchenStock->quantity           = $product->quantity_available;
+            //         $kitchenStock->cost               = $product->cost;
+            //         // $kitchenStock->production_date    = $product->production_date;
+            //         // $kitchenStock->expiration_date    = $product->expiration_date;
+            //         $kitchenStock->notes              = 'Add';
+            //         $kitchenStock->createable()->associate($service);
+            //         $kitchenStock->save();
+            //     }
+
+            //     // Save Kitchen stock movements
+            //     $kitchenStockMovement = new KitchenStockMovement();
+            //     $kitchenStockMovement->kitchen_stock_id = $kitchenStock->id;
+            //     $kitchenStockMovement->type = 'Add';
+            //     $kitchenStockMovement->date = now();
+            //     $kitchenStockMovement->quantity = $product->quantity_available;
+            //     $kitchenStockMovement->notes = 'Add';
+            //     $kitchenStockMovement->createable()->associate($service);
+            //     $kitchenStockMovement->save();
+
+            // }
 
 
 

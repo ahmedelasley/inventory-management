@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sale_id')->nullable();
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
-            $table->enum('old_status', ['Null', 'Pending', 'Send', 'Processed', 'Shipped'])->default('Null'); // Data Type (Pending, Processed, Shipped)
-            $table->enum('new_status', ['Pending', 'Send', 'Processed', 'Shipped', 'Received'])->default('Pending'); // Data Type (Pending, Processed, Shipped)
+            $table->enum('old_status', ['Null', 'Pending', 'Completed'])->default('Null'); // Data Type (Pending, Processed, Shipped)
+            $table->enum('new_status', ['Pending', 'Completed'])->default('Pending'); // Data Type (Pending, Processed, Shipped)
             $table->timestamp('date')->nullable();
             $table->morphs('statusable'); // Create Fileds statusable_id , statusable
             $table->timestamps();

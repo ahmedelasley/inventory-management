@@ -102,7 +102,7 @@ class ConvertPurchase extends Component
 
             // Hide modal
             $this->dispatch('convertPurchaseModalToggle');
-            $this->dispatch('refreshTitle'); 
+            // $this->dispatch('refreshTitle'); 
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(GetData::class);

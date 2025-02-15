@@ -62,7 +62,7 @@
                             <th class="fw-bolder fs-6">Name</th>
                             <th class="fw-bolder fs-6">Code</th>
                             <th class="fw-bolder fs-6">Location</th>
-                            <th class="fw-bolder fs-6">User</th>
+                            <th class="fw-bolder fs-6">Manager</th>
                             <th class="fw-bolder fs-6">Created At</th>
                             <th class="fw-bolder fs-6">Updated At</th>
                             <th class="fw-bolder fs-6">Actions</th>
@@ -76,7 +76,7 @@
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->code }}</td>
                             <td>{{ $value->location }}</td>
-                            <td><span class="badge bg-label-primary">{{ $value->user?->name }}</span></td>
+                            <td><span class="badge bg-label-primary">{{ $value->manager?->name }}</span></td>
                             <td>{{ $value->creator?->name }}<br>{{ $value->created_at }}</td>
                             <td>{{ $value->editor == NULL ? "" : $value->editor?->name }}<br>{{ $value->editor == NULL ? "" : $value->updated_at  }}</td>
                             <td>

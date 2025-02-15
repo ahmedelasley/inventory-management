@@ -16,7 +16,7 @@ class Show extends Component
     public $name;
     public $code;
     public $location;
-    public $user;
+    public $manager;
 
     protected $listeners = ['restaurantShow'];
 
@@ -33,7 +33,7 @@ class Show extends Component
         $this->name            = $this->restaurant->name;
         $this->code            = $this->restaurant->code;
         $this->location        = $this->restaurant->location;
-        $this->user            = $this->restaurant->user?->name;
+        $this->manager         = $this->restaurant->manager?->name;
     
      
         // Open modal

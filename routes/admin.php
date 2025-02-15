@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminRoleController;
+use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\ManagerRoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\SupervisorController;
@@ -14,11 +16,14 @@ use App\Http\Controllers\Admin\KitchenController;
 use App\Http\Controllers\Admin\KeeperController;
 use App\Http\Controllers\Admin\KeeperRoleController;
 use App\Http\Controllers\Admin\WarehouseController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\NotificationController;
 
 
@@ -38,7 +43,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::middleware('auth.admin')->group(function () {
+    Route::middleware(['auth.admin', 'verified.admin'])->group(function () {
 
         // Route::get('/', function () {
         //     return view('admin.dashboard');
@@ -63,6 +68,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             '/admins' => AdminController::class,
             '/admins-roles' => AdminRoleController::class,
 
+            '/managers' => ManagerController::class,
+            '/managers-roles' => ManagerRoleController::class,
+
             '/users' => UserController::class,
             '/users-roles' => UserRoleController::class,
 
@@ -75,13 +83,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             '/restaurants' => RestaurantController::class,
             '/kitchens' => KitchenController::class,
             '/warehouses' => WarehouseController::class,
+            '/menus' => MenuController::class,
 
             '/suppliers' => SupplierController::class,
+            '/clients' => ClientController::class,
             '/categories' => CategoryController::class,
             '/products' => ProductController::class,
 
             '/purchases' => PurchaseController::class,
             '/orders' => OrderController::class,
+            '/sales' => SaleController::class,
             // '/purchases-items' => PurchaseItemController::class,
 
 
@@ -94,7 +105,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
         Route::get('/orders/create/order/{order}', [OrderController::class, 'createOrder'])->name('orders.create.order');
+        Route::get('/orders/show/transaction/{order}', [OrderController::class, 'showTransaction'])->name('orders.show.transaction');
         Route::get('/orders/print/order/{order}', [OrderController::class, 'printOrder'])->name('orders.print.order');
+
+        Route::get('/sales/create/sale/{sale}', [SaleController::class, 'createSale'])->name('sales.create.sale');
+        Route::get('/sales/show/transaction/{sale}', [SaleController::class, 'showTransaction'])->name('sales.show.transaction');
+        Route::get('/sales/print/sale/{sale}', [SaleController::class, 'printSale'])->name('sales.print.sale');
         
         // Read All Notifications
         Route::get('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read.all');
@@ -102,7 +118,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::controller(AdminController::class)->group(function () {
             Route::patch('/admins/verify/{admin}', 'verify')->name('admins.verify');
             Route::patch('/admins/assign-role/{admin}', 'assignRole')->name('admins.assign.role');
+        });
 
+        Route::controller(ManagerController::class)->group(function () {
+            Route::patch('/managers/verify/{manager}', 'verify')->name('managers.verify');
+            Route::patch('/managers/assign-role/{manager}', 'assignRole')->name('managers.assign.role');
         });
 
         Route::controller(SupervisorController::class)->group(function () {

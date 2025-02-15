@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Client extends Model
 {
@@ -34,19 +35,19 @@ class Client extends Model
     ];
     public $timestamps = true;
     
-   /**
-    * Get the parent creator model (Admin or User or Keeper).
-    */
+    /**
+     * العلاقة مع المنشئ (Admin أو User أو Keeper)
+     */
     public function creator(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo('createable');
     }
 
     /**
-    * Get the parent editor model (Admin or User or Keeper).
-    */
+     * العلاقة مع المعدّل (Admin أو User أو Keeper)
+     */
     public function editor(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo('updateable');
     }
 }

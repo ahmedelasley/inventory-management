@@ -48,7 +48,15 @@ class LoginRequest extends FormRequest
                 'email' => trans('auth.failed'),
             ]);
         }
+        // التحقق من أن الحساب قد تم التحقق منه عبر البريد الإلكتروني
+        $user = Auth::guard($guard)->user();
+        if (is_null($user->email_verified_at)) {
+            Auth::guard($guard)->logout();
 
+            throw ValidationException::withMessages([
+                'email' => __('Your email is not verified. Please check your inbox.'),
+            ]);
+        }
         RateLimiter::clear($this->throttleKey());
     }
 

@@ -20,6 +20,8 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
 		@include('admin.layouts.partials.head-styles')
 		@livewireStyles
+		@livewireAssets
+
 	</head>
 
 	<body>
@@ -66,20 +68,7 @@
 		<x-livewire-alert::scripts />
 
 		
-		{{-- Solve this problem page has expired --}}
-		<script>
-			document.addEventListener('livewire:init', () => {
-				Livewire.hook('request', ({ fail }) => { 
-					fail(({ status, preventDefault }) => {
-						if (status === 419) {
-							preventDefault()
-							confirm('Your session has expired...')
-							location.reload();
-						}
-					})
-				})
-			})
-		</script>
+
 		
 {{-- <script>
     document.addEventListener('livewire:init', () => {
@@ -135,6 +124,12 @@
 			window.addEventListener('editModalToggle', event => {
 				$('#editModal').modal('toggle');
 			})
+			window.addEventListener('editItemModalToggle', event => {
+				$('#editItemModal').modal('toggle');
+			})
+			window.addEventListener('deleteItemModalToggle', event => {
+				$('#deleteItemModal').modal('toggle');
+			})
 
 			window.addEventListener('savePurchaseModalToggle', event => {
 				$('#savePurchaseModal').modal('toggle');
@@ -170,7 +165,12 @@
 				$('#editOrderModal').modal('toggle');
 			})
 
-
+			window.addEventListener('editSaleModalToggle', event => {
+				$('#editSaleModal').modal('toggle');
+			})
+			window.addEventListener('saveSaleModalToggle', event => {
+				$('#saveSaleModal').modal('toggle');
+			})
 
 
 			window.addEventListener('deleteModalToggle', event => {
@@ -192,7 +192,9 @@
 			window.addEventListener('editPasswordModalToggle', event => {
 				$('#editPasswordModal').modal('toggle');
 			})
-
+			window.addEventListener('activeModalToggle', event => {
+				$('#activeModal').modal('toggle');
+			})
 
 
 
@@ -207,5 +209,38 @@
 
 		</script>
 		@livewireScripts
+
+				{{-- Solve this problem page has expired --}}
+				{{-- <script>
+					document.addEventListener('livewire:init', () => {
+						Livewire.hook('request', ({ fail }) => { 
+							fail(({ status, preventDefault }) => {
+								if (status === 419) {
+									preventDefault()
+									confirm('Your session has expired...')
+									location.reload();
+								}
+							})
+						})
+					})
+				</script> --}}
+				<script>
+				let isRedirecting = false; // Flag to prevent multiple redirects
+				
+				Livewire.hook('request', ({ fail }) => {
+					fail(({ status, preventDefault }) => {
+						if (status === 419) {
+							preventDefault(); // Stop Livewire's default behavior
+							
+							if (!isRedirecting) {
+								isRedirecting = true; // Set the flag to true
+								window.location.href = '/admin/login'; // Redirect to login route
+							}
+						}
+					});
+				});
+				</script>
+
+
 	</body>
 </html>

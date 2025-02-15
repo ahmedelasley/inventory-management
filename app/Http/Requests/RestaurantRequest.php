@@ -39,7 +39,7 @@ class RestaurantRequest extends FormRequest
                 return [
                     'name' => ['required', 'string', 'max:255', Rule::unique(Restaurant::class)],
                     'location' => 'nullable|string|min:3|max:255',
-                    'user_id' => 'required|exists:users,id',
+                    'manager_id' => 'required|exists:managers,id',
                 ];
             }
             case 'PUT':
@@ -47,7 +47,7 @@ class RestaurantRequest extends FormRequest
                 return [
                     'name' => ['required', 'string', 'max:255' , Rule::unique(Restaurant::class)->ignore($this->id)] ,
                     'location' => 'nullable|string|min:3|max:255',
-                    'user_id' => 'required|exists:users,id',
+                    'manager_id' => 'required|exists:managers,id',
                 ];
             }
             default:

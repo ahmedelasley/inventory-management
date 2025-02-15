@@ -65,7 +65,7 @@ class EditProduct extends Component
         $this->resetErrorBag();
     
         // Open modal
-        $this->dispatch('editModalToggle');
+        $this->dispatch('editItemModalToggle');
     }
 
     public function closeForm()
@@ -78,7 +78,7 @@ class EditProduct extends Component
         $this->resetErrorBag();
     
         // Close modal
-        $this->dispatch('editModalToggle');
+        $this->dispatch('editItemModalToggle');
     }
     
     public function rules()
@@ -142,7 +142,7 @@ class EditProduct extends Component
             $this->reset();
 
             // Hide modal
-            $this->dispatch('editModalToggle');
+            $this->dispatch('editItemModalToggle');
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(Index::class);

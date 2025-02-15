@@ -58,7 +58,7 @@ class GetData extends Component
 
     public function render()
     {
-        $data = Restaurant::with(['user', 'creator', 'editor'])->where($this->field, 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
+        $data = Restaurant::with(['manager', 'creator', 'editor'])->where($this->field, 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
         return view('admin.pages.restaurants.get-data', [
             'data' => $data,
         ]);

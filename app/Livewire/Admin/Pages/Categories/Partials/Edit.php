@@ -19,6 +19,11 @@ class Edit extends Component
     public $description;
     public $parent_id; 
 
+    public function updatedParentId($value)
+{
+    $this->parent_id = $value === "" ? null : $value;
+}
+
     protected $listeners = ['categoryUpdate'];
 
     public function categoryUpdate($id)
@@ -70,11 +75,15 @@ class Edit extends Component
                         'required',
                         'string',
                     ],
-                    'parent_id' => [
-                        'nullable',
-                        'integer',
-                        Rule::exists('categories', 'id'),
-                    ],
+'parent_id' => [
+    'nullable',
+    'integer',
+    function ($attribute, $value, $fail) {
+        if (!is_null($value) && !Category::where('id', $value)->exists()) {
+            $fail(__('The selected parent category is invalid.'));
+        }
+    },
+],
                 ];
     } 
  
@@ -89,9 +98,11 @@ class Edit extends Component
         DB::beginTransaction();
 
         try {
+            // dd($this->parent_id);
+
             // Check of Validation
             $validatedData       = $this->validate();
-
+// dd($validatedData); 
             // Add updater
             $validatedData['updated_id'] = Auth::guard('admin')->user()->id;
 

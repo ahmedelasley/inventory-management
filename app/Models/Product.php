@@ -61,5 +61,16 @@ class Product extends Model
         return $this->hasMany(WarehouseStock::class, 'product_id');
     }
 
+    // علاقة المنتج إلى KitchenStock (كل منتج يمكن أن يكون له عدة سجلات في المخزون)
+    public function kitchenStocks()
+    {
+        return $this->hasMany(KitchenStock::class);
+    }
+
+    // علاقة المنتج إلى MenuItems (كل منتج يمكن أن يكون له عدة سجلات في القائمة)
+    public function menuItems()
+    {
+        return $this->hasMany(MenuItems::class);
+    }
 
 }

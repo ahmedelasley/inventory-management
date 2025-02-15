@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MenuItems extends Model
 {
@@ -37,7 +40,7 @@ class MenuItems extends Model
     */
     public function creator(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo('createable');
     }
 
     /**
@@ -45,7 +48,7 @@ class MenuItems extends Model
     */
     public function editor(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo('updateable');
     }
 
     

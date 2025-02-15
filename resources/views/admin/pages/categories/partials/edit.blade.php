@@ -24,7 +24,7 @@
             <label for="parent_id" class="form-label">Parent Category</label>
             <select wire:model.live="parent_id" class="form-control" id="parent_id">
                 <option disabled value="">Select a Category...</option>
-                <option value="0">None</option>
+                <option value="">None</option>
                 @forelse ($data as $cat)
                     <option value="{{ $cat->id }}" {{ old('parent_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                 @empty

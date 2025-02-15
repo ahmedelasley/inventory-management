@@ -3,7 +3,7 @@
 namespace App\Livewire\Admin\Pages\Restaurants\Partials;
 
 use Livewire\Component;
-use App\Models\User;
+use App\Models\Manager;
 use App\Models\Restaurant;
 use App\Livewire\Admin\Pages\Restaurants\GetData;
 use App\Http\Requests\RestaurantRequest;
@@ -18,7 +18,7 @@ class Create extends Component
     public $name;
     public $code;
     public $location;
-    public $user_id;
+    public $manager_id;
 
     protected function rules(): array 
     {
@@ -91,7 +91,7 @@ class Create extends Component
     }
     public function render()
     {
-        $data = User::with(['restaurant'])->doesntHave('restaurant')->get();
+        $data = Manager::with(['restaurant'])->doesntHave('restaurant')->get();
         return view('admin.pages.restaurants.partials.create', [
             'data' => $data,
         ]);

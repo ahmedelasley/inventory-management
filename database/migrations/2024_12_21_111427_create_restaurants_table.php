@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('location')->nullable();
             $table->tinyInteger('is_default')->default(0); // Type (0 = Not Default, 1 = Defualt )
 
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('manager_id')->nullable();
+            $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
 
             $table->unsignedBigInteger('created_id')->nullable();
             $table->foreign('created_id')->references('id')->on('admins')->onDelete('cascade');
