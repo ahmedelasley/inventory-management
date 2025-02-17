@@ -38,7 +38,7 @@
                 <div data-i18n="Analytics" class="fw-bolder">Dashboard</div>
               </a>
             </li>
-
+            @if(admin()->can('administration-list'))
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Users & Roles-Permissions</span>
             </li>
@@ -86,7 +86,8 @@
                 
               </ul>
             </li>
-
+            @endif
+            @if(admin()->can('administration-role-list'))
 
 
             <!-- Roles -->
@@ -128,7 +129,8 @@
                 
               </ul>
             </li>
-            
+            @endif
+
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Kitchens & Warehouses</span>
             </li>
