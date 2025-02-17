@@ -16,8 +16,8 @@
               </div>
             </div>
             <div class="flex-grow-1">
-              <span class="fw-semibold d-block">{{ Auth::guard('admin')->user()->name }}</span>
-              <small class="fw-semibold d-block">{{ Auth::guard('admin')->user()->email }}</small>
+              <span class="fw-semibold d-block text-wrap">{{ Auth::guard('admin')->user()->name }}</span>
+              <small class="fw-semibold d-block text-wrap">{{ Auth::guard('admin')->user()->email }}</small>
               <small class="text-primary">Administrate</small>
             </div>
           </div>
