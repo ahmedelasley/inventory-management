@@ -10,25 +10,19 @@
       <div class="d-flex justify-content-between  mb-2">
             <h5 class="fw-bolder fs-5">orders</h5>
             <div>
-                  <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" >
-                        Add
-                  </button>
-                  @livewire('admin.pages.orders.partials.create')
-      
-                  {{-- <a href="{{ route('admin.orders.create.order') }}" class="btn btn-sm btn-primary"  >
-                        Create
-                  </a> --}}
+                  @if(admin()->can('transfer-create'))
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" >
+                              Add
+                        </button>
+                        @livewire('admin.pages.orders.partials.create')
+                  @endif
             </div>
 
       
       </div>
-
-      @livewire('admin.pages.orders.get-data')
-      {{-- @livewire('admin.pages.orders.partials.delete') --}}
-
-      {{-- @livewire('admin.pages.orders.partials.save')
-      @livewire('admin.pages.orders.partials.edit') --}}
-  
+      @if(admin()->can('transfer-list'))
+            @livewire('admin.pages.orders.get-data')
+      @endif  
 </div>
 <!-- / Content -->
 

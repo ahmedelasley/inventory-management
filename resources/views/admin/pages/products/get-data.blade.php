@@ -122,22 +122,30 @@
                                 Actions <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                        wire:click.prevent="$dispatch('productShow', { id: {{ $value->id }} })"
-                                    >
-                                        <i class="bx bx-show me-1"></i> Show
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                        wire:click.prevent="$dispatch('productUpdate', { id: {{ $value->id }} })"
-                                    >
-                                        <i class="bx bx-edit-alt me-1"></i> Edit
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:void(0);"
-                                        wire:click.prevent="$dispatch('productDelete', { id: {{ $value->id }} })"
-                                    >
-                                        <i class="bx bx-trash me-1"></i> Delete
-                                    </a>
 
+                                    @if(admin()->can('product-read'))
+                                        <a class="dropdown-item" href="javascript:void(0);"
+                                            wire:click.prevent="$dispatch('productShow', { id: {{ $value->id }} })"
+                                        >
+                                            <i class="bx bx-show me-1"></i> Show
+                                        </a>
+                                    @endif
+
+                                    @if(admin()->can('product-edit'))
+                                        <a class="dropdown-item" href="javascript:void(0);"
+                                            wire:click.prevent="$dispatch('productUpdate', { id: {{ $value->id }} })"
+                                        >
+                                            <i class="bx bx-edit-alt me-1"></i> Edit
+                                        </a>
+                                    @endif
+
+                                    @if(admin()->can('product-delete'))
+                                        <a class="dropdown-item" href="javascript:void(0);"
+                                            wire:click.prevent="$dispatch('productDelete', { id: {{ $value->id }} })"
+                                        >
+                                            <i class="bx bx-trash me-1"></i> Delete
+                                        </a>
+                                    @endif
 
                                 </div>
                             </div>

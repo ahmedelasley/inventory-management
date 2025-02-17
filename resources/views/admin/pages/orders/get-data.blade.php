@@ -88,7 +88,13 @@
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
                                     {{-- <td><strong>{{ $value->code }}</strong></td> --}}
-                                    <td><a href="{{ route('admin.orders.create.order', ['order' => $value]) }}"><i class='bx bx-receipt'></i><strong>{{ $value->code }}</strong></a></td>
+                                    <td>
+                                        @if(admin()->can('transfer-read'))
+                                            <a href="{{ route('admin.orders.create.order', ['order' => $value]) }}"><i class='bx bx-receipt'></i><strong>{{ $value->code }}</strong></a>
+                                        @else
+                                            <strong>{{ $value->code }}</strong>
+                                        @endif
+                                    </td>
 
                                     <td>{{ $value->kitchen?->name }}</td>
                                     <td>{{ $value->warehouse?->name }}</td>
@@ -107,9 +113,11 @@
                                         {{-- <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.create.order', ['order' => $value]) }}">
                                             <i class="bx bx-show me-1"></i> Show
                                         </a> --}}
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.show.transaction', ['order' => $value]) }}">
-                                            <i class="bx bx-show me-1"></i> Show Transactions
-                                        </a>
+                                        @if(admin()->can('transfer-show-transactions'))
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.show.transaction', ['order' => $value]) }}">
+                                                <i class="bx bx-show me-1"></i> Show Transactions
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

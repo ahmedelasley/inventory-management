@@ -10,6 +10,7 @@
             @endif
         </div>
         <div>
+            @if(admin()->can('purchasing-print'))
             <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="openPrintReceipt({{ $purchase->id }})" ><i class='bx bx-printer'></i></a>
 
             <script type="text/javascript">
@@ -21,38 +22,43 @@
                     ).print();
                 }
             </script>
+            @endif
             {{-- <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal" >
                 <i class='bx bx-edit-alt'></i> Edit
             </button> --}}
             @if($purchase->status == 'Pending')
-                <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
-                    wire:click.prevent="$dispatch('purchaseUpdate', { id: {{ $purchase->id }} })"
-                >
-                    <i class='bx bx-edit-alt'></i>
-                </a>
-                @livewire('admin.pages.purchases.partials.edit', ['purchase' => $purchase], key('purchase-edit-'.time()))
-
-
-                <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
-                    wire:click.prevent="$dispatch('purchaseConvert', { id: {{ $purchase->id }} })"
-                >
-                    <i class='bx bx-repost'></i>
-                </a>
-                @livewire('admin.pages.purchases.partials.convert-purchase', ['purchase' => $purchase], key('purchase-convert-'.time()))
-
-                <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
-                    wire:click.prevent="$dispatch('purchaseSave', { id: {{ $purchase->id }} })"
-                >
-                    <i class='bx bx-save'></i>
-                </a>
-                @livewire('admin.pages.purchases.partials.save', ['purchase' => $purchase], key('purchase-save-'.time()))
-
-                <a class="btn btn-sm btn-danger" href="javascript:void(0);"
-                    wire:click.prevent="$dispatch('purchaseDelete', { id: {{ $purchase->id }} })"
-                >
-                    <i class="bx bx-trash me-1"></i>
-                </a>
-                @livewire('admin.pages.purchases.partials.delete', ['purchase' => $purchase], key('purchase-delete-'.time()))
+                @if(admin()->can('purchasing-edit'))
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('purchaseUpdate', { id: {{ $purchase->id }} })"
+                    >
+                        <i class='bx bx-edit-alt'></i>
+                    </a>
+                    @livewire('admin.pages.purchases.partials.edit', ['purchase' => $purchase], key('purchase-edit-'.time()))
+                @endif  
+                @if(admin()->can('purchasing-convert'))
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('purchaseConvert', { id: {{ $purchase->id }} })"
+                    >
+                        <i class='bx bx-repost'></i>
+                    </a>
+                    @livewire('admin.pages.purchases.partials.convert-purchase', ['purchase' => $purchase], key('purchase-convert-'.time()))
+                @endif  
+                @if(admin()->can('purchasing-save'))
+                    <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('purchaseSave', { id: {{ $purchase->id }} })"
+                    >
+                        <i class='bx bx-save'></i>
+                    </a>
+                    @livewire('admin.pages.purchases.partials.save', ['purchase' => $purchase], key('purchase-save-'.time()))
+                @endif  
+                @if(admin()->can('purchasing-delete'))
+                    <a class="btn btn-sm btn-danger" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('purchaseDelete', { id: {{ $purchase->id }} })"
+                    >
+                        <i class="bx bx-trash me-1"></i>
+                    </a>
+                    @livewire('admin.pages.purchases.partials.delete', ['purchase' => $purchase], key('purchase-delete-'.time()))
+                @endif  
             @endif
         </div>
     </div>

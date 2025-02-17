@@ -10,47 +10,52 @@
             @endif
         </div>
         <div>
-            <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="openPrintReceipt({{ $sale->id }})" ><i class='bx bx-printer'></i></a>
+            @if(admin()->can('sale-print'))
+                <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="openPrintReceipt({{ $sale->id }})" ><i class='bx bx-printer'></i></a>
 
-            <script type="text/javascript">
-                function openPrintReceipt(id) {
-                    window.open(
-                        "{{ URL::to('admin/sales/print/sale/') }}/" + id ,
-                        "_blank",
-                        "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=800,height=800"
-                    ).print();
-                }
-            </script>
+                <script type="text/javascript">
+                    function openPrintReceipt(id) {
+                        window.open(
+                            "{{ URL::to('admin/sales/print/sale/') }}/" + id ,
+                            "_blank",
+                            "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=800,height=800"
+                        ).print();
+                    }
+                </script>
+            @endif
             @if($sale->status == 'Open')
                 @if($sale->type == 'Pending')
-                    <a class="btn btn-sm btn-success" href="javascript:void(0);"
-                        wire:click.prevent="$dispatch('saleUpdate', { id: {{ $sale->id }} })"
-                    >
-                        <i class='bx bx-edit-alt'></i>
-                    </a>
-                    
-                    
-                    <a class="btn btn-sm btn-primary" href="javascript:void(0);"
-                        wire:click.prevent="$dispatch('saleSave', { id: {{ $sale->id }} })"
-                    >
-                        <i class='bx bx-save'></i>
-                    </a>
+                    @if(admin()->can('sale-edit'))
+                        <a class="btn btn-sm btn-success" href="javascript:void(0);"
+                            wire:click.prevent="$dispatch('saleUpdate', { id: {{ $sale->id }} })"
+                        >
+                            <i class='bx bx-edit-alt'></i>
+                        </a>
+                        @livewire('admin.pages.sales.partials.edit', ['sale' => $sale], key('sale-edit-'.time()))
+                    @endif
+                    @if(admin()->can('sale-save'))
+                        <a class="btn btn-sm btn-primary" href="javascript:void(0);"
+                            wire:click.prevent="$dispatch('saleSave', { id: {{ $sale->id }} })"
+                        >
+                            <i class='bx bx-save'></i>
+                        </a>
+                        @livewire('admin.pages.sales.partials.save', ['sale' => $sale], key('sale-save-'.time()))
+                    @endif
                 @endif
             @endif
             
             @if($sale->status == 'Open' && $sale->type == 'Pending')
-
-                <a class="btn btn-sm btn-danger" href="javascript:void(0);"
-                    wire:click.prevent="$dispatch('saleDelete', { id: {{ $sale->id }} })"
-                >
-                    <i class="bx bx-trash me-1"></i>
-                </a>
-                @livewire('admin.pages.sales.partials.delete', ['sale' => $sale], key('sale-delete-'.time()))
+                @if(admin()->can('sale-delete'))
+                    <a class="btn btn-sm btn-danger" href="javascript:void(0);"
+                        wire:click.prevent="$dispatch('saleDelete', { id: {{ $sale->id }} })"
+                    >
+                        <i class="bx bx-trash me-1"></i>
+                    </a>
+                    @livewire('admin.pages.sales.partials.delete', ['sale' => $sale], key('sale-delete-'.time()))
+                @endif
             @endif
 
-            @livewire('admin.pages.sales.partials.edit', ['sale' => $sale], key('sale-edit-'.time()))
             
-            @livewire('admin.pages.sales.partials.save', ['sale' => $sale], key('sale-save-'.time()))
             
         </div>
     </div>

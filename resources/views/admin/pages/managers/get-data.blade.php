@@ -73,36 +73,47 @@
                                                 Actions <i class="bx bx-dots-vertical-rounded"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="javascript:void(0);"
-                                                        wire:click.prevent="$dispatch('managerShow', { id: {{ $value->id }} })"
-                                                    >
-                                                        <i class="bx bx-show me-1"></i> show
-                                                    </a>
-                                                    <a class="dropdown-item" href="javascript:void(0);"
-                                                        wire:click.prevent="$dispatch('managerAssignRole', { id: {{ $value->id }} })"
-                                                    >
-                                                        <i class="bx bx-check me-1"></i> Assign Role
-                                                    </a>
 
-                                                    <a class="dropdown-item" href="javascript:void(0);"
-                                                        wire:click.prevent="$dispatch('managerVerify', { id: {{ $value->id }} })"
-                                                    >
-                                                        <i class="bx bx-envelope me-1"></i> {{ $value->email_verified_at ? 'Not Verify' : 'Verify' }}
-                                                    </a>
+                                                    @if(admin()->can('manager-read'))
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                            wire:click.prevent="$dispatch('managerShow', { id: {{ $value->id }} })"
+                                                        >
+                                                            <i class="bx bx-show me-1"></i> show
+                                                        </a>
+                                                    @endif
 
+                                                    @if(admin()->can('manager-assign-role'))
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                            wire:click.prevent="$dispatch('managerAssignRole', { id: {{ $value->id }} })"
+                                                        >
+                                                            <i class="bx bx-check me-1"></i> Assign Role
+                                                        </a>
+                                                    @endif
 
-                                                    <a class="dropdown-item" href="javascript:void(0);"
-                                                        wire:click.prevent="$dispatch('managerUpdate', { id: {{ $value->id }} })"
-                                                    >
-                                                        <i class="bx bx-edit-alt me-1"></i> Edit
-                                                    </a>
-                        
-                                                    <a class="dropdown-item" href="javascript:void(0);"
-                                                        wire:click.prevent="$dispatch('managerDelete', { id: {{ $value->id }} })"
-                                                    >
-                                                        <i class="bx bx-trash me-1"></i> Delete
-                                                    </a>
-                
+                                                    @if(admin()->can('manager-is-verify'))
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                            wire:click.prevent="$dispatch('managerVerify', { id: {{ $value->id }} })"
+                                                        >
+                                                            <i class="bx bx-envelope me-1"></i> {{ $value->email_verified_at ? 'Not Verify' : 'Verify' }}
+                                                        </a>
+                                                    @endif
+
+                                                    @if(admin()->can('manager-edit'))
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                            wire:click.prevent="$dispatch('managerUpdate', { id: {{ $value->id }} })"
+                                                        >
+                                                            <i class="bx bx-edit-alt me-1"></i> Edit
+                                                        </a>
+                                                    @endif
+
+                                                    @if(admin()->can('manager-delete'))
+                                                        <a class="dropdown-item" href="javascript:void(0);"
+                                                            wire:click.prevent="$dispatch('managerDelete', { id: {{ $value->id }} })"
+                                                        >
+                                                            <i class="bx bx-trash me-1"></i> Delete
+                                                        </a>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         @else

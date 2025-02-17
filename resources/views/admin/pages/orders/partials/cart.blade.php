@@ -50,75 +50,78 @@
 
     </div>
     <div class="card-body">
-        <div class="table-responsive text-wrap table-wrapper-scroll-y my-custom-scrollbar" style="height : calc(100vh - 530px)" >
-            <table class="table table-striped table-hover table-sm text-center">
-                <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
-                    <tr>
-                        <th class="fw-bolder">#</th>
-                        <th class="fw-bolder">Name</th>
-                        <th class="fw-bolder">SKU</th>
-                        <th class="fw-bolder">Request Qty</th>
-                        <th class="fw-bolder">Stock Qty</th>
-                        @if($order->type != 'Pending')
-                            <th class="fw-bolder">Send Qty</th>
-                        @endif
-                        {{-- <th class="fw-bolder">Cost</th>
-                        <th class="fw-bolder">Total</th> --}}
-                        @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))
-                            <th class="fw-bolder">Action</th>
-                        @endif
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @forelse ($order->products as $value)
-                    <tr  wire:key="product-{{$value->id}}" class="{{ $value->stock?->quantity < $value->quantity_request ? 'table-danger' : '' }}">
-                        <td>{{$loop->iteration }}</td>
-
-
-                        {{--  get the product name from the product table and display it in the table  --}}
-
-                        <td>{{ $value->stock?->product?->name }}</td>
-                        <td>{{ $value->stock?->product?->sku }}</td>
-                        <td>{{ $value->quantity_request }} {{ $value->stock?->product?->storge_unit }}</td>
-                        <td>{{ $value->stock?->quantity }} {{ $value->stock?->product?->storge_unit }}</td>
-                        @if($order->type != 'Pending')
-                        <td>{{ $value->quantity_available }} {{ $value->stock?->product?->storge_unit }}</td>
-                        @endif
-                        {{-- <td>{{ $value->cost }}</td>
-                        <td>{{ $value->quantity * $value->cost }}</td> --}}
-                        @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))
-                            @if($order->type == 'Pending' || $order->type == 'Processed' )  
-
-                            <td>
-                                <a class="text-success" href="javascript:void(0);"
-                                    wire:click.prevent="$dispatch('orderItemUpdate', { id: {{ $value->id }} })"
-                                >
-                                    <i class="bx bx-edit-alt me-1"></i>
-                                </a>
-                            @endif
-                            @if( $order->type == 'Pending')  
-
-                                <a class="text-danger" href="javascript:void(0);"
-                                    wire:click.prevent="$dispatch('orderItemDelete', { id: {{ $value->id }} })"
-                                >
-                                    <i class="bx bx-trash me-1"></i>
-                                </a> 
-                            @endif
- 
-                            </td>
-                        @endif
-                    </tr>
-                    @empty
+        @if(admin()->can('transfer-all-items'))
+            <div class="table-responsive text-wrap table-wrapper-scroll-y my-custom-scrollbar" style="height : calc(100vh - 530px)" >
+                <table class="table table-striped table-hover table-sm text-center">
+                    <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
-                            <th colspan="10"><div class="alert alert-primary" role="alert">No data to display!</div></th>
+                            <th class="fw-bolder">#</th>
+                            <th class="fw-bolder">Name</th>
+                            <th class="fw-bolder">SKU</th>
+                            <th class="fw-bolder">Request Qty</th>
+                            <th class="fw-bolder">Stock Qty</th>
+                            @if($order->type != 'Pending')
+                                <th class="fw-bolder">Send Qty</th>
+                            @endif
+                            {{-- <th class="fw-bolder">Cost</th>
+                            <th class="fw-bolder">Total</th> --}}
+                            @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))
+                                <th class="fw-bolder">Action</th>
+                            @endif
                         </tr>
-                    @endforelse
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @forelse ($order->products as $value)
+                        <tr  wire:key="product-{{$value->id}}" class="{{ $value->stock?->quantity < $value->quantity_request ? 'table-danger' : '' }}">
+                            <td>{{$loop->iteration }}</td>
 
-                </tbody>
-            </table>
-        
-        </div>
 
+                            {{--  get the product name from the product table and display it in the table  --}}
+
+                            <td>{{ $value->stock?->product?->name }}</td>
+                            <td>{{ $value->stock?->product?->sku }}</td>
+                            <td>{{ $value->quantity_request }} {{ $value->stock?->product?->storge_unit }}</td>
+                            <td>{{ $value->stock?->quantity }} {{ $value->stock?->product?->storge_unit }}</td>
+                            @if($order->type != 'Pending')
+                            <td>{{ $value->quantity_available }} {{ $value->stock?->product?->storge_unit }}</td>
+                            @endif
+                            {{-- <td>{{ $value->cost }}</td>
+                            <td>{{ $value->quantity * $value->cost }}</td> --}}
+                            @if($order->status == 'Open' && ( $order->type == 'Pending' || $order->type == 'Processed' ))
+                                <td>
+                                @if($order->type == 'Pending' || $order->type == 'Processed' )  
+                                    @if(admin()->can('transfer-edit-qty-request-item') || admin()->can('transfer-edit-qty-send-item'))
+                                        <a class="text-success" href="javascript:void(0);"
+                                            wire:click.prevent="$dispatch('orderItemUpdate', { id: {{ $value->id }} })"
+                                        >
+                                            <i class="bx bx-edit-alt me-1"></i>
+                                        </a>
+                                    @endif
+                                @endif
+                                @if( $order->type == 'Pending')  
+                                    @if(admin()->can('transfer-delete-item'))
+                                        <a class="text-danger" href="javascript:void(0);"
+                                            wire:click.prevent="$dispatch('orderItemDelete', { id: {{ $value->id }} })"
+                                        >
+                                            <i class="bx bx-trash me-1"></i>
+                                        </a> 
+                                    @endif
+                                @endif
+    
+                                </td>
+                            @endif
+                        </tr>
+                        @empty
+                            <tr>
+                                <th colspan="10"><div class="alert alert-primary" role="alert">No data to display!</div></th>
+                            </tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
+            
+            </div>
+        @endif
     </div>
     <div class="card-footer">
         {{-- <div class="row g-1">

@@ -37,24 +37,15 @@
         <div class="row d-flex justify-content-between">
             @forelse ($products as $value)
                 @if($sale->status == 'Open' && $sale->type == 'Pending')
-                    <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $sale->id }}', '{{ $value->id }}')" href="javascript:void(0);">
+                    @if(admin()->can('sale-add-item'))    
+                        <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $sale->id }}', '{{ $value->id }}')" href="javascript:void(0);">
+                    @else
+                        <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"href="javascript:void(0);">
+                    @endif
                 @else
                     <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"href="javascript:void(0);">
                 @endif
                     <div class="backgroundEffect shadow action-button">
-                        {{-- <div class="card-header">
-                            <div class="d-flex justify-content-between ">
-                                <strong class="text-primary fw-bold"><span class="badge bg-label-primary me-1">{{ $value->category?->name }}</span></strong>
-                                <strong class="text-primary fw-bold">
-                                    @if( $value->is_active)
-                                        <span class="badge bg-label-success me-1">Active</span>
-                                    @else
-                                        <span class="badge bg-label-danger me-1">Inactive</span>
-                                    @endif
-                                </strong>
-            
-                            </div>
-                        </div> --}}
                         <div class="text-center" style="height: 160px;">
                             @if($value->image)
                                 <img src="{{ $value->image }}" alt="{{ $value->name }}" class="rounded" width="100%" height="100" />

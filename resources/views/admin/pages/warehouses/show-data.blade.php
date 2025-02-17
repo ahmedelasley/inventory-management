@@ -79,7 +79,13 @@
         
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><a href="{{ route('admin.warehouses.show.transaction', $value) }}">{{ $value->product->name }}</a></td>
+                                    <td>
+                                        @if(admin()->can('warehouse-show-transactions'))
+                                            <a href="{{ route('admin.warehouses.show.transaction', $value) }}">{{ $value->product->name }}</a>
+                                        @else
+                                            <strong><i class='bx bxs-store'></i> {{ $value->product->name }}</strong>
+                                        @endif
+                                    </td>
                                     <td>{{ $value->product->sku }}</td>
                                     <td>{{ $value->quantity }}</td>
                                     <td>{{ $value->production_date }}</td>

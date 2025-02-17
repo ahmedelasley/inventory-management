@@ -17,26 +17,37 @@
             </div>
         
             <div class="row mb-3">
-        
-              <strong>Permission:</strong>
-        
-              <br/>
-        
-              @if (count($groups) > 0)
-                @foreach ($groups as $key => $permission)
-                  <div class="col-md-6">
-                    <div class=" mt-1">
-                        <label>
-                            <input class="form-check-input" wire:model.live='permissions' type="checkbox" @if(in_array($permission->id, $permissions)) checked @endif value="{{ $permission->id }}">
-                            {{ $permission->name }}
-                        </label>
-                      
+                <x-input-label for="name" class="form-label" :value="__('Permission')" />
+
+                @foreach (\Spatie\Permission\Models\Permission::select('guard_name', 'type', 'type_name')->where('guard_name', 'manager')->groupBy('guard_name', 'type', 'type_name')->get() as $data)
+                    <div class="col-md-12 border p-2">
+                        <h6 class="mt-2">
+                            <label>
+                                <input class="form-check-input" type="checkbox" wire:click="toggleType('{{ $data->type }}')">
+                                {{-- {{ $data->type_name }} --}}
+                                {{ \Illuminate\Support\Str::title(str_replace('-', ' ', $data->type_name)) }}
+                            </label>
+                        </h6>
+
+                        <div class="row">
+                            @php
+                                $permissionsPluck = $groups->where('type', $data->type);
+                            @endphp
+                            @foreach($permissionsPluck->pluck('name', 'id')->all() as $id => $value)
+                                <div class="col-xs-4 col-sm-4 col-md-3 mt-1">
+                                    <label>
+                                        <input class="form-check-input" type="checkbox" wire:model.defer="permissions"@if(in_array($id, $permissions)) checked @endif value="{{ $id }}">
+                                        {{ \Illuminate\Support\Str::title(str_replace('-', ' ', $value)) }}
+                                        
+                                    </label>
+                                    <br/>
+                                </div>
+                            @endforeach
+                        </div> 
                     </div>
-                  </div>
                 @endforeach
-              @endif
-        
                 <x-input-error class="mt-2" :messages="$errors->get('permissions')" />
+
             </div>
 
         </div>

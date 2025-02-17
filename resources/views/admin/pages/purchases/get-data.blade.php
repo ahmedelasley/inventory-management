@@ -87,7 +87,15 @@
 
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><strong>{{ $value->code }}</strong></td>
+                                    <td>
+                                        @if(admin()->can('purchasing-read'))
+                                            <a href="{{ route('admin.purchases.create.purchase', ['purchase' => $value]) }}">
+                                                <strong><i class='bx bx-cart'></i> {{ $value->code }}</strong>
+                                            </a>
+                                        @else
+                                            <strong>{{ $value->code }}</strong>
+                                        @endif
+                                    </td>
                                     <td>{{ $value->supplier?->name }}</td>
                                     <td>{{ $value->warehouse?->name }}</td>
 
@@ -96,15 +104,14 @@
 
                                     <td>{{ $value->business_date }}</td>
                                     
-                                    {{-- <td><span class="badge bg-label-primary me-1">{{ $value->keeper?->name }}</span></td> --}}
                                     <td>{{ $value->createable?->name }}<br>{{ $value->created_at }}</td>
-                                    {{-- <td>{{ $value->updater?->name }}<br>{{ $value->updated_at }}</td>
-                                    <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td> --}}
-
+  
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.purchases.create.purchase', ['purchase' => $value]) }}">
-                                            <i class="bx bx-show me-1"></i> Show
-                                        </a>
+                                        @if(admin()->can('purchasing-show-transactions'))
+                                            <a class="btn btn-primary btn-sm" href="{{ route('admin.purchases.create.purchase', ['purchase' => $value]) }}">
+                                                <i class="bx bx-show me-1"></i> Show Transactions
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

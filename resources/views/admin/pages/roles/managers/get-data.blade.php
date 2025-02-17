@@ -58,24 +58,31 @@
                                                 Actions <i class="bx bx-dots-vertical-rounded"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
+
+                                                    @if(admin()->can('manager-role-read'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('roleShow', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-show me-1"></i> show
                                                     </a>
+                                                    @endif
 
+                                                    @if(admin()->can('manager-role-edit'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('roleUpdate', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-edit-alt me-1"></i> Edit
                                                     </a>
-                        
+                                                    @endif
+
+                                                    @if(admin()->can('manager-role-delete'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('roleDelete', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-trash me-1"></i> Delete
                                                     </a>
-                
+                                                    @endif
+
                                                 </div>
                                             </div>    
                                         @else

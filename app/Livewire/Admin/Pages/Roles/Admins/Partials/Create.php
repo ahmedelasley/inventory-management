@@ -21,7 +21,19 @@ class Create extends Component
     public $name;
     public $permissions = [];
 
-
+    public function toggleType($type)
+    {
+        $permissions = \Spatie\Permission\Models\Permission::where('type', $type)->pluck('id')->toArray();
+    
+        // إذا كانت جميع الصلاحيات موجودة في المصفوفة، قم بإلغاء التحديد
+        if (count(array_intersect($this->permissions, $permissions)) == count($permissions)) {
+            $this->permissions = array_diff($this->permissions, $permissions);
+        } else {
+            // إضافة الصلاحيات التي لم يتم تحديدها بعد
+            $this->permissions = array_unique(array_merge($this->permissions, $permissions));
+        }
+    }
+    
     protected function rules(): array 
     {
         // return [

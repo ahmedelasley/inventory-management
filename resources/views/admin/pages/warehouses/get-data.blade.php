@@ -75,7 +75,13 @@
                         <tr>
                             <td>{{$loop->iteration }}</td>
                             <td>{{ $value->code }}</td>
-                            <td><a href="{{ route('admin.warehouses.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a></td>
+                            <td>
+                                @if(admin()->can('warehouse-show-inventory'))
+                                    <a href="{{ route('admin.warehouses.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a>
+                                @else
+                                    <strong><i class='bx bxs-store'></i> {{ $value->name }}</strong>
+                                @endif
+                            </td>
                             <td><span class="badge bg-label-primary me-1">{{ $value->restaurant?->name }}</span></td>
                             <td>{{ $value->location }}</td>
                             <td><span class="badge bg-label-primary me-1">{{ $value->keeper?->name }}</span></td>
@@ -89,21 +95,30 @@
                                         Actions <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('warehouseShow', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-show me-1"></i> Show
-                                            </a>
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('warehouseUpdate', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-edit-alt me-1"></i> Edit
-                                            </a>
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('warehouseDelete', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-trash me-1"></i> Delete
-                                            </a>
+
+                                            @if(admin()->can('warehouse-read'))
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    wire:click.prevent="$dispatch('warehouseShow', { id: {{ $value->id }} })"
+                                                >
+                                                    <i class="bx bx-show me-1"></i> Show
+                                                </a>
+                                            @endif
+
+                                            @if(admin()->can('warehouse-edit'))
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    wire:click.prevent="$dispatch('warehouseUpdate', { id: {{ $value->id }} })"
+                                                >
+                                                    <i class="bx bx-edit-alt me-1"></i> Edit
+                                                </a>
+                                            @endif
+
+                                            @if(admin()->can('warehouse-delete'))
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    wire:click.prevent="$dispatch('warehouseDelete', { id: {{ $value->id }} })"
+                                                >
+                                                    <i class="bx bx-trash me-1"></i> Delete
+                                                </a>
+                                            @endif
 
 
                                         </div>

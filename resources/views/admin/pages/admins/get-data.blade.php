@@ -73,35 +73,45 @@
                                                 Actions <i class="bx bx-dots-vertical-rounded"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
+                                                    @if(admin()->can('administration-read'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('adminShow', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-show me-1"></i> show
                                                     </a>
+                                                    @endif
+
+                                                    @if(admin()->can('administration-assign-role'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('adminAssignRole', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-check me-1"></i> Assign Role
                                                     </a>
-
+                                                    @endif
+                                                    
+                                                    @if(admin()->can('administration-is-verify'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('adminVerify', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-envelope me-1"></i> {{ $value->email_verified_at ? 'Not Verify' : 'Verify' }}
                                                     </a>
+                                                    @endif
 
-
+                                                    @if(admin()->can('administration-edit'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('adminUpdate', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-edit-alt me-1"></i> Edit
                                                     </a>
+                                                    @endif
                         
+                                                    @if(admin()->can('administration-delete'))
                                                     <a class="dropdown-item" href="javascript:void(0);"
                                                         wire:click.prevent="$dispatch('adminDelete', { id: {{ $value->id }} })"
                                                     >
                                                         <i class="bx bx-trash me-1"></i> Delete
                                                     </a>
+                                                    @endif
                 
                                                 </div>
                                             </div>

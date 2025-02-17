@@ -37,14 +37,19 @@
     <div class="card-body table-wrapper-scroll-y my-custom-scrollbar" style="height : calc(100vh - 250px)">
         <div class="row d-flex justify-content-between">
         @forelse ($products as $value)
-        <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $purchase->id }}', '{{ $value->id }}')" href="javascript:void(0);">
-            <div class="card backgroundEffect shadow action-button">
-                <div class="card-body">
-                    <h6> {{ $value->sku }}</h6>
-                    <span> {{ $value->name }}</span>
+            @if(admin()->can('purchasing-add-item'))
+                <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $purchase->id }}', '{{ $value->id }}')" href="javascript:void(0);">
+            @else
+                <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" href="javascript:void(0);">
+            @endif
+
+                <div class="card backgroundEffect shadow action-button">
+                    <div class="card-body">
+                        <h6> {{ $value->sku }}</h6>
+                        <span> {{ $value->name }}</span>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
         @empty
             <div class="alert alert-primary" role="alert">No Products to display!</div>
         @endforelse

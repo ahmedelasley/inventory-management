@@ -61,8 +61,13 @@
             <div class="card-body">
                 <div class="row d-flex justify-content-between">
                     @forelse ($data as $value)
-                        <a class="col-xs-6 col-sm-3 col-md-2 col-lg-2 col-xl-2" href="{{ route('admin.menus.show', ['menu' => $value]) }}">
-                       
+
+                        @if(admin()->can('menu-read'))
+                            <a class="col-xs-6 col-sm-3 col-md-2 col-lg-2 col-xl-2" href="{{ route('admin.menus.show', ['menu' => $value]) }}">
+                        @else
+                            <a class="col-xs-6 col-sm-3 col-md-2 col-lg-2 col-xl-2" href="javascript:void(0);">
+                        @endif
+
                             <div class="card backgroundEffect shadow action-button">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between ">

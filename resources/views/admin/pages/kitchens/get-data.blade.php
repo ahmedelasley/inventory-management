@@ -81,7 +81,13 @@
                         <tr>
                             <td>{{$loop->iteration }}</td>
                             <td>{{ $value->code }}</td>
-                            <td><a href="{{ route('admin.kitchens.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a></td>
+                            <td>
+                                @if(admin()->can('kitchen-show-inventory'))
+                                    <a href="{{ route('admin.kitchens.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a>
+                                @else
+                                    <strong><i class='bx bxs-store'></i> {{ $value->name }}</strong>
+                                @endif
+                            </td>
                             <td><span class="badge bg-label-primary">{{ $value->restaurant?->name }}</span></td>
                             <td>{{ $value->location }}</td>
                             <td><span class="badge bg-label-primary">{{ $value->supervisor?->name }}</span></td>
@@ -95,21 +101,31 @@
                                         Actions <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('kitchenShow', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-show me-1"></i> Show
-                                            </a>
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('kitchenUpdate', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-edit-alt me-1"></i> Edit
-                                            </a>
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('kitchenDelete', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-trash me-1"></i> Delete
-                                            </a>
+                                            @endif
+
+                                            @if(admin()->can('kitchen-read'))
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    wire:click.prevent="$dispatch('kitchenShow', { id: {{ $value->id }} })"
+                                                >
+                                                    <i class="bx bx-show me-1"></i> Show
+                                                </a>
+                                            @endif
+
+                                            @if(admin()->can('kitchen-edit'))
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    wire:click.prevent="$dispatch('kitchenUpdate', { id: {{ $value->id }} })"
+                                                >
+                                                    <i class="bx bx-edit-alt me-1"></i> Edit
+                                                </a>
+                                            @endif
+
+                                            @if(admin()->can('kitchen-delete'))
+                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                    wire:click.prevent="$dispatch('kitchenDelete', { id: {{ $value->id }} })"
+                                                >
+                                                    <i class="bx bx-trash me-1"></i> Delete
+                                                </a>
+                                            @endif
 
 
                                         </div>

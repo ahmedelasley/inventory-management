@@ -43,6 +43,7 @@
 <div class="container-fluid flex-grow-1 ">
       {{-- <h1>{{ $purchase }}</h1> --}}
       <div class="row">
+            @if(admin()->can('purchasing-read'))
             <div class="col-md-5">
                   @livewire('admin.pages.purchases.partials.title', ['purchase' => $purchase])
                   @livewire('admin.pages.purchases.partials.cart', ['purchase' => $purchase])
@@ -50,7 +51,7 @@
             <div class="col-md-7">
                   @livewire('admin.pages.purchases.partials.products' , ['purchase' => $purchase])
             </div>
-
+            @endif
       </div>
   
 </div>

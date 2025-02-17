@@ -12,26 +12,31 @@
                 <div class="modal-body">   
 
                         @if($type == 'Pending')
-                        <div class="row g-1">
-                            <div class="col mb-3">
-                                <x-input-label for="quantity_request" class="form-label" :value="__('Quantity Request')" /><span class='text-danger'>*</span>
-                                <x-text-input id="quantity_request" wire:model="quantity_request" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
-                                <x-input-error class="mt-2" :messages="$errors->get('quantity_request')" />
-                            </div>
-                        </div>
+                            @if(admin()->can('transfer-edit-qty-request-item'))
+                                <div class="row g-1">
+                                    <div class="col mb-3">
+                                        <x-input-label for="quantity_request" class="form-label" :value="__('Quantity Request')" /><span class='text-danger'>*</span>
+                                        <x-text-input id="quantity_request" wire:model="quantity_request" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('quantity_request')" />
+                                    </div>
+                                </div>
+                            @endif
                         @else
-                        <div class="row g-1">
-                            <div class="col mb-3">
-                                <x-text-show class='text-center' :labelValue="__('Quantity Request')" :value="$quantity_request"/> 
-                           </div>
-                        </div>
-                        <div class="row g-1">
-                            <div class="col mb-3">
-                                <x-input-label for="quantity_available" class="form-label" :value="__('Quantity Available')" /><span class='text-danger'>*</span>
-                                <x-text-input id="quantity_available" wire:model="quantity_available" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
-                                <x-input-error class="mt-2" :messages="$errors->get('quantity_available')" />
+                            <div class="row g-1">
+                                <div class="col mb-3">
+                                    <x-text-show class='text-center' :labelValue="__('Quantity Request')" :value="$quantity_request"/> 
+                                </div>
                             </div>
-                        </div>
+                            
+                            @if(admin()->can('transfer-edit-qty-send-item'))
+                                <div class="row g-1">
+                                    <div class="col mb-3">
+                                        <x-input-label for="quantity_available" class="form-label" :value="__('Quantity Available')" /><span class='text-danger'>*</span>
+                                        <x-text-input id="quantity_available" wire:model="quantity_available" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                                        <x-input-error class="mt-2" :messages="$errors->get('quantity_available')" />
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                 </div>
                 <div class="modal-footer">

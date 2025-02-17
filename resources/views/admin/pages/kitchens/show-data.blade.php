@@ -79,7 +79,12 @@
         
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><a href="{{ route('admin.kitchens.show.transaction', $value) }}">{{ $value->product->name }}</a></td>
+                                    <td>
+                                        @if(admin()->can('kitchen-show-transactions'))
+                                            <a href="{{ route('admin.kitchens.show.transaction', $value) }}">{{ $value->product->name }}</a></td>
+                                        @else
+                                            <strong><i class='bx bxs-store'></i> {{ $value->product->name }}</strong>
+                                        @endif
                                     <td>{{ $value->product->sku }}</td>
                                     <td>{{ $value->quantity }}</td>
                                     <td>{{ $value->production_date }}</td>

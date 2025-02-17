@@ -68,21 +68,16 @@
       </div>
 
       <div class="row justify-content-center">
-            <div class="col-md-5">
-                  {{-- <div class="d-flex justify-content-between">
-                        <h6 class="p-2 rounded-pill {{ $order->type == 'Pending' ? 'bg-warning text-center text-white' : '' }}" ><img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/pending.png" alt="User" style="width: 20px; height: 20px;"/></h6>
-                        <h6 class="p-2 rounded-pill {{ $order->type == 'Send' ? 'bg-info text-center text-white' : '' }}" >Send</h6>
-                        <h6 class="p-2 rounded-pill {{ $order->type == 'Processed' ? 'bg-success text-center text-white' : '' }}" >Processed</h6>
-                        <h6 class="p-2 rounded-pill {{ $order->type == 'Shipped' ? 'bg-dark text-center text-white' : '' }}" >Shipped</h6>
-                        <h6 class="p-2 rounded-pill {{ $order->type == 'Received' ? 'bg-primary text-center text-white' : '' }}" >Received</h6>
-                  </div> --}}
-                  @livewire('admin.pages.orders.partials.title', ['order' => $order])
-                  @livewire('admin.pages.orders.partials.cart', ['order' => $order])
-            </div>
-            <div class="col-md-7">
-                  @livewire('admin.pages.orders.partials.products' , ['order' => $order])
-            </div>
+            @if(admin()->can('transfer-read'))
+                <div class="col-md-5">
 
+                    @livewire('admin.pages.orders.partials.title', ['order' => $order])
+                    @livewire('admin.pages.orders.partials.cart', ['order' => $order])
+                </div>
+                <div class="col-md-7">
+                    @livewire('admin.pages.orders.partials.products' , ['order' => $order])
+                </div>
+            @endif
       </div>
   
 </div>

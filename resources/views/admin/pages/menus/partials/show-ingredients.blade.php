@@ -26,16 +26,23 @@
                     <td>{{ number_format($value->cost, 4)}}</td>
                     <td>{{ number_format($value->total, 4)}}</td>
                     <td>
-                        <a class="text-success me-1" href="javascript:void(0);"
-                            wire:click.prevent="$dispatch('itemUpdate', { id: {{ $value->id }} })"
-                        >
-                            <i class="bx bx-edit-alt me-1"></i>
-                        </a>
-                        <a class="text-danger ms-1" href="javascript:void(0);"
-                            wire:click.prevent="$dispatch('itemDelete', { id: {{ $value->id }} })"
-                        >
-                            <i class="bx bx-trash me-1"></i>
-                        </a>
+
+                        @if(admin()->can('menu-edit-ingredients'))
+                            <a class="text-success me-1" href="javascript:void(0);"
+                                wire:click.prevent="$dispatch('itemUpdate', { id: {{ $value->id }} })"
+                            >
+                                <i class="bx bx-edit-alt me-1"></i>
+                            </a>
+                        @endif
+
+                        @if(admin()->can('menu-delete-ingredients'))
+                            <a class="text-danger ms-1" href="javascript:void(0);"
+                                wire:click.prevent="$dispatch('itemDelete', { id: {{ $value->id }} })"
+                            >
+                                <i class="bx bx-trash me-1"></i>
+                            </a>
+                        @endif
+
                     </td>
                 </tr>
                 @empty

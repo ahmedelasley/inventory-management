@@ -28,17 +28,28 @@
 <div class="container-fluid flex-grow-1 container-p-y">
       <div class="d-flex justify-content-between  mb-2">
             <h5 class="fw-bolder fs-5">Menus</h5>
-            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" >
-                  Add
-            </button>
-            @livewire('admin.pages.menus.partials.create')
-      
+
+            @if(admin()->can('menu-create'))
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" >
+                    Add
+                </button>
+                @livewire('admin.pages.menus.partials.create')
+            @endif
+
       </div>
 
-      @livewire('admin.pages.menus.get-data')
-      {{-- @livewire('admin.pages.menus.partials.show') --}}
-      @livewire('admin.pages.menus.partials.edit')
-      @livewire('admin.pages.menus.partials.delete')
+      @if(admin()->can('menu-list'))
+        @livewire('admin.pages.menus.get-data')
+      @endif
+
+      @if(admin()->can('menu-edit'))
+        @livewire('admin.pages.menus.partials.edit')
+      @endif
+
+      @if(admin()->can('menu-delete'))
+        @livewire('admin.pages.menus.partials.delete')
+      @endif
+
 
 </div>
 <!-- / Content -->

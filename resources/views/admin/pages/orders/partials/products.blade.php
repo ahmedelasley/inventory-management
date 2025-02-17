@@ -38,7 +38,11 @@
         <div class="row d-flex justify-content-between">
             @forelse ($products as $value)
                 @if($order->status == 'Open' && $order->type == 'Pending')
-                    <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $order->id }}', '{{ $value->product_id }}')" href="javascript:void(0);">
+                    @if(admin()->can('transfer-add-item'))
+                        <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" wire:click.prevent="addItem('{{ $order->id }}', '{{ $value->product_id }}')" href="javascript:void(0);">
+                    @else
+                        <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"href="javascript:void(0);">
+                    @endif
                 @else
                     <a class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"href="javascript:void(0);">
                 @endif

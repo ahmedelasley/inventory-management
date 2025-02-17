@@ -93,15 +93,25 @@
                                                 Actions <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#" wire:click.prevent="$dispatch('clientShow', { id: {{ $value->id }} })">
-                                                    <i class="bx bx-show me-1"></i> Show
-                                                </a>
-                                                <a class="dropdown-item" href="#" wire:click.prevent="$dispatch('clientUpdate', { id: {{ $value->id }} })">
-                                                    <i class="bx bx-edit-alt me-1"></i> Edit
-                                                </a>
-                                                <a class="dropdown-item text-danger" href="#" wire:click.prevent="$dispatch('clientDelete', { id: {{ $value->id }} })">
-                                                    <i class="bx bx-trash me-1"></i> Delete
-                                                </a>
+
+                                                @if(admin()->can('client-read'))
+                                                    <a class="dropdown-item" href="#" wire:click.prevent="$dispatch('clientShow', { id: {{ $value->id }} })">
+                                                        <i class="bx bx-show me-1"></i> Show
+                                                    </a>                                  
+                                                @endif
+
+                                                @if(admin()->can('client-edit'))
+                                                    <a class="dropdown-item" href="#" wire:click.prevent="$dispatch('clientUpdate', { id: {{ $value->id }} })">
+                                                        <i class="bx bx-edit-alt me-1"></i> Edit
+                                                    </a>                                  
+                                                @endif
+                                    
+                                                @if(admin()->can('client-delete'))
+                                                    <a class="dropdown-item text-danger" href="#" wire:click.prevent="$dispatch('clientDelete', { id: {{ $value->id }} })">
+                                                        <i class="bx bx-trash me-1"></i> Delete
+                                                    </a>
+                                                @endif
+
                                             </div>
                                         </div>
                                     @else

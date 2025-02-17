@@ -87,7 +87,13 @@
 
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><a href="{{ route('admin.sales.create.sale', ['sale' => $value]) }}"><i class='bx bx-receipt'></i><strong>{{ $value->code }}</strong></a></td>
+                                    <td>
+                                        @if(admin()->can('sale-read'))
+                                            <a href="{{ route('admin.sales.create.sale', ['sale' => $value]) }}"><i class='bx bx-receipt'></i><strong>{{ $value->code }}</strong></a>
+                                        @else
+                                            <strong>{{ $value->code }}</strong>
+                                        @endif
+                                    </td>
                                     <td>{{ $value->restaurant?->name }}</td>
                                     <td>{{ $value->client?->name }}</td>
 
@@ -102,9 +108,11 @@
                                     <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td> --}}
 
                                     <td>
+                                        @if(admin()->can('sale-show.transactions'))
                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.sales.show.transaction', ['sale' => $value]) }}">
                                             <i class="bx bx-show me-1"></i> Show Transactions
                                         </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

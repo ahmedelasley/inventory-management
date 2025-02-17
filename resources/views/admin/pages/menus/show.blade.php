@@ -12,7 +12,10 @@
             <a class="btn btn-sm btn-primary pt-1" href="{{ route('admin.menus.index') }}" >Back</a>
       
       </div>
-      @livewire('admin.pages.menus.get-show', ['menu' => $menu])
+
+      @if(admin()->can('menu-read'))
+            @livewire('admin.pages.menus.get-show', ['menu' => $menu])
+      @endif
 
 
 </div>
