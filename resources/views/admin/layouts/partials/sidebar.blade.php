@@ -50,35 +50,38 @@
                 <div data-i18n="Analytics" class="fw-bolder">Users</div>
               </a>
               <ul class="menu-sub">
-
+                @if(admin()->can('administration-list'))
                 <!-- Administrates -->
                 <li class="menu-item {{ request()->routeIs(['admin.admins.index']) ? 'active' : '' }}">
                   <a href="{{ route('admin.admins.index') }}" class="menu-link">
                     <div data-i18n="Admins Roles">Administrates</div>
                   </a>
                 </li>
-
+                @endif
+                @if(admin()->can('manager-list'))
                 <!-- Normal Users -->
                 <li class="menu-item  {{ request()->routeIs(['admin.managers.index']) ? 'active' : '' }}">
                   <a href="{{ route('admin.managers.index') }}" class="menu-link">
                     <div data-i18n="Managers Roles">Restaurant Manager</div>
                   </a>
                 </li>
-
+                @endif
+                @if(admin()->can('supervisor-list'))
                 <!-- Kitchen Supervisors -->
                 <li class="menu-item  {{ request()->routeIs(['admin.supervisors.index']) ? 'active' : '' }}">
                   <a href="{{ route('admin.supervisors.index') }}" class="menu-link">
                     <div data-i18n="Supervisors Roles">Kitchen Supervisors</div>
                   </a>
                 </li>
-
+                @endif
+                @if(admin()->can('keeper-list'))
                 <!-- Warehouse Keepers -->
                 <li class="menu-item  {{ request()->routeIs(['admin.keepers.index']) ? 'active' : '' }}">
                   <a href="{{ route('admin.keepers.index') }}" class="menu-link">
                     <div data-i18n="Keepers Roles">Warehouse Keepers</div>
                   </a>
                 </li>
-
+                @endif
 
                 
               </ul>
@@ -93,31 +96,34 @@
                 <div data-i18n="Analytics" class="fw-bolder">Roles</div>
               </a>
               <ul class="menu-sub">
-
+                @if(admin()->can('administration-role-list'))
                 <li class="menu-item {{ request()->routeIs(['admin.admins-roles.*']) ? 'active' : '' }}">
                   <a href="{{ route('admin.admins-roles.index') }}" class="menu-link">
                     <div data-i18n="Admins Roles">Administrates Roles</div>
                   </a>
                 </li>
-
+                @endif
+                @if(admin()->can('manager-role-list'))
                 <li class="menu-item  {{ request()->routeIs(['admin.managers-roles.*']) ? 'active' : '' }}">
                   <a href="{{ route('admin.managers-roles.index') }}" class="menu-link">
                     <div data-i18n="Managers Roles">Restaurant Managers Roles</div>
                   </a>
                 </li>
-
+                @endif
+                @if(admin()->can('supervisor-role-list'))
                 <li class="menu-item  {{ request()->routeIs(['admin.supervisors-roles.*']) ? 'active' : '' }}">
                   <a href="{{ route('admin.supervisors-roles.index') }}" class="menu-link">
                     <div data-i18n="Supervisors Roles">Kitchen Supervisors Roles</div>
                   </a>
                 </li>
-
+                @endif
+                @if(admin()->can('keeper-role-list'))
                 <li class="menu-item  {{ request()->routeIs(['admin.keepers-roles.*']) ? 'active' : '' }}">
                   <a href="{{ route('admin.keepers-roles.index') }}" class="menu-link">
                     <div data-i18n="Keepers Roles">Warehouse Keepers Roles</div>
                   </a>
                 </li>
-
+                @endif
 
                 
               </ul>
@@ -126,7 +132,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Kitchens & Warehouses</span>
             </li>
-
+            @if(admin()->can('restaurant-list'))
             <!-- Restaurants -->
             <li class="menu-item {{ request()->routeIs('admin.restaurants.index') ? 'active' : '' }}">
               <a href="{{ route('admin.restaurants.index') }}" class="menu-link">
@@ -134,7 +140,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Restaurants</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('kitchen-list'))
             <!-- Kitchens -->
             <li class="menu-item {{ request()->routeIs('admin.kitchens.index') ? 'active' : '' }}">
               <a href="{{ route('admin.kitchens.index') }}" class="menu-link">
@@ -142,7 +149,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Kitchens</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('warehouse-list'))
             <!-- Suppliers -->
             <li class="menu-item {{ request()->routeIs('admin.warehouses.index') ? 'active' : '' }}">
               <a href="{{ route('admin.warehouses.index') }}" class="menu-link">
@@ -150,7 +158,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Warehouses</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('menu-list'))
             <!-- Menus -->
             <li class="menu-item {{ request()->routeIs('admin.menus.index') ? 'active' : '' }}">
               <a href="{{ route('admin.menus.index') }}" class="menu-link">
@@ -158,11 +167,11 @@
                 <div data-i18n="Analytics" class="fw-bolder">Menus</div>
               </a>
             </li>
-
+            @endif
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Suppliers & Products</span>
             </li>
-
+            @if(admin()->can('supplier-list'))
             <!-- Suppliers -->
             <li class="menu-item {{ request()->routeIs('admin.suppliers.index') ? 'active' : '' }}">
               <a href="{{ route('admin.suppliers.index') }}" class="menu-link">
@@ -170,7 +179,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Suppliers</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('client-list'))
             <!-- Clients -->
             <li class="menu-item {{ request()->routeIs('admin.clients.index') ? 'active' : '' }}">
               <a href="{{ route('admin.clients.index') }}" class="menu-link">
@@ -178,7 +188,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Clients</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('category-list'))
             <!-- Categories -->
             <li class="menu-item {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
               <a href="{{ route('admin.categories.index') }}" class="menu-link">
@@ -186,7 +197,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Categories</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('product-list'))
             <!-- Products -->
             <li class="menu-item {{ request()->routeIs('admin.products.index') ? 'active' : '' }}">
               <a href="{{ route('admin.products.index') }}" class="menu-link">
@@ -194,7 +206,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Products</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('purchasing-list'))
             <!-- Purchases -->
             <li class="menu-item {{ request()->routeIs('admin.purchases.index') ? 'active' : '' }}">
               <a href="{{ route('admin.purchases.index') }}" class="menu-link">
@@ -202,7 +215,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Purchases</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('transfer-list'))
             <!-- Transfers -->
             <li class="menu-item {{ request()->routeIs('admin.orders.index') ? 'active' : '' }}">
               <a href="{{ route('admin.orders.index') }}" class="menu-link">
@@ -210,7 +224,8 @@
                 <div data-i18n="Analytics" class="fw-bolder">Transfers</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('sale-list'))
             <!-- Sales -->
             <li class="menu-item {{ request()->routeIs('admin.sales.index') ? 'active' : '' }}">
               <a href="{{ route('admin.sales.index') }}" class="menu-link">
@@ -218,11 +233,13 @@
                 <div data-i18n="Analytics" class="fw-bolder">Sales</div>
               </a>
             </li>
-
+            @endif
+            @if(admin()->can('setting-list'))
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Settings</span>
             </li>
-
+            @endif
+            @if(admin()->can('setting-list'))
             <!-- Settings -->
             <li class="menu-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
               <a href="{{ route('admin.settings') }}" class="menu-link">
@@ -230,7 +247,7 @@
                 <div data-i18n="Analytics" class="fw-bolder">Settings</div>
               </a>
             </li>
-
+            @endif
           </ul>
         </aside>
         <!-- / Menu -->
