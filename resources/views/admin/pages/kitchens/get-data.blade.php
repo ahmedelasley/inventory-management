@@ -101,7 +101,6 @@
                                         Actions <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            @endif
 
                                             @if(admin()->can('kitchen-read'))
                                                 <a class="dropdown-item" href="javascript:void(0);"
