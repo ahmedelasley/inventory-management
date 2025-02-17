@@ -113,7 +113,7 @@ class Create extends Component
         $data = Role::where('guard_name', 'manager')->orderBy('id','DESC')->paginate(50);
         $groups = Permission::where('guard_name', 'manager')->get();
 
-        return view('admin.pages.roles.Managers.partials.create', [
+        return view('admin.pages.roles.managers.partials.create', [
             'data' => $data,
             'groups' => $groups,
         ]);
