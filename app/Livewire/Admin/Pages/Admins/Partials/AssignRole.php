@@ -36,7 +36,7 @@ class AssignRole extends Component
     
         // Set the properties
         $this->name                      = $this->admin->name;
-        $this->role                      = $this->admin->getRoleNames()[0];
+        $this->role                      = $this->admin?->getRoleNames()[0];
         
     
         // Reset validation and errors
