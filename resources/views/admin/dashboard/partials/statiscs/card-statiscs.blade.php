@@ -32,11 +32,11 @@
                 <div class="card-body">
                     <div class="card-title d-flex  justify-content-between">
                     <div class="avatar flex-shrink-0">
-                        <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/list.png" alt="chart success" class="rounded  h-75 w-75"/>
+                        <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/client.png" alt="chart success" class="rounded  h-75 w-75"/>
                     </div>
-                    <h6 class="fw-semibold d-block mb-1 text-start">Categories</h6>
+                    <h6 class="fw-semibold d-block mb-1 text-start">Clients</h6>
                     </div>
-                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Category::count() > 0 ? \App\Models\Category::count() : 0  }}</h3>
+                    <h3 class="card-title mb-2 pt-2 text-center">{{ \App\Models\Client::count() > 0 ? \App\Models\Client::count() : 0  }}</h3>
                 </div>
                 </div>
             </div>
