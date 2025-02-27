@@ -13,19 +13,22 @@
                     <label for="kitchen_id" class="form-label">Kitchens</label><span class='text-danger'>*</span>
                     <select wire:model.live="kitchen_id" class="form-control" id="kitchen_id">
                         <option value="">Select a Kitchen...</option>
-                        @forelse ($restaurants as $record)
-                            <optgroup label="{{ $record->name }} Restaurant">
-                                @forelse ($record->kitchens as $kitchen)
-                                    <option value="{{ $kitchen->id }}" wire:key="kitchen-{{ $kitchen->id }}">
-                                        {{ $kitchen->name }}
-                                    </option>
-                                @empty
-                                    <option disabled>No Kitchens</option>
-                                @endforelse
-                            </optgroup>
-                        @empty
-                        @endforelse
+                    
+                        @if(!empty($restaurants))
+                            @foreach ($restaurants as $record)
+                                @if(!empty($record->kitchens))
+                                    <optgroup label="{{ $record->name }} Restaurant">
+                                        @foreach ($record->kitchens as $kitchen)
+                                            <option value="{{ $kitchen->id }}">{{ $kitchen->name }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endif
+                            @endforeach
+                        @else
+                            <option disabled>No Restaurants Available</option>
+                        @endif
                     </select>
+                    
                     <x-input-error class="mt-2" :messages="$errors->get('kitchen_id')" />
                 </div>
                 <div class="mb-3">

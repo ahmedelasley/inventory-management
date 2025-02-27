@@ -7,8 +7,56 @@
             <button type="button" class="btn-close" wire:click="closeForm" ></button>
         </div>
         <form method="post" wire:submit.prevent="submit">
-            <div class="modal-body">   
+            <div class="modal-body">  
+                
+                
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="kitchen_id" class="form-label">Kitchens</label><span class='text-danger'>*</span>
+                        <select wire:model.live="kitchen_id" class="form-control" id="kitchen_id">
+                            <option value="">Select a Kitchen...</option>
+                        
+                            @if(!empty($restaurants))
+                                @foreach ($restaurants as $record)
+                                    @if(!empty($record->kitchens))
+                                        <optgroup label="{{ $record->name }} Restaurant">
+                                            @foreach ($record->kitchens as $kitchen)
+                                                <option value="{{ $kitchen->id }}">{{ $kitchen->name }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endif
+                                @endforeach
+                            @else
+                                <option disabled>No Restaurants Available</option>
+                            @endif
+                        </select>
+                        
+                        <x-input-error class="mt-2" :messages="$errors->get('kitchen_id')" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="warehouse_id" class="form-label">Warehouses</label><span class='text-danger'>*</span>
+                        <select wire:model.live="warehouse_id" class="form-control" id="warehouse_id">
+                            <option value="">Select a Warehouse...</option>
+                            @if(!empty($warehouses))
+                                @foreach ($warehouses as $warehouse)
+                                    <option value="{{ $warehouse['id'] }}">{{ $warehouse['name'] }}</option>
+                                @endforeach
+                            @else
+                                <option disabled>No Warehouses Available</option>
+                            @endif
+                        </select>
+                        
+                        <x-input-error class="mt-2" :messages="$errors->get('warehouse_id')" />
+                    </div>
+                </div>
+                
+                
 
+
+{{-- 
                 <div class="row">
                     <div class="col mb-3">
                         <label for="kitchen_id" class="form-label">Kitchens</label><span class='text-danger'>*</span>
@@ -51,6 +99,7 @@
                     <x-input-error class="mt-2" :messages="$errors->get('warehouse_id')" />
                     </div>
                 </div>
+--}}
 
                 <div class="row">
                     <div class="col mb-3">

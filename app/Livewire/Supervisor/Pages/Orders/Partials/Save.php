@@ -112,21 +112,21 @@ class Save extends Component
             // Handle return logic
             foreach ($this->order->products as $product) {
 
-                $warehouseStock = WarehouseStock::where('id', $product->warehouse_stock_id)->where('warehouse_id', $this->order->warehouse_id)->first();
-                if ($warehouseStock) {
-                    $warehouseStock->quantity -= $product->quantity_available;
-                    $warehouseStock->save();
-                }
+                // $warehouseStock = WarehouseStock::where('id', $product->warehouse_stock_id)->where('warehouse_id', $this->order->warehouse_id)->first();
+                // if ($warehouseStock) {
+                //     $warehouseStock->quantity -= $product->quantity_available;
+                //     $warehouseStock->save();
+                // }
 
-                // Save warehouse stock movements
-                $warehouseStockMovement = new WarehouseStockMovement();
-                $warehouseStockMovement->warehouse_stock_id = $warehouseStock->id;
-                $warehouseStockMovement->type = 'Reduce';
-                $warehouseStockMovement->date = now();
-                $warehouseStockMovement->quantity = $product->quantity_available;
-                $warehouseStockMovement->notes = 'Reduce';
-                $warehouseStockMovement->createable()->associate($service);
-                $warehouseStockMovement->save();
+                // // Save warehouse stock movements
+                // $warehouseStockMovement = new WarehouseStockMovement();
+                // $warehouseStockMovement->warehouse_stock_id = $warehouseStock->id;
+                // $warehouseStockMovement->type = 'Reduce';
+                // $warehouseStockMovement->date = now();
+                // $warehouseStockMovement->quantity = $product->quantity_available;
+                // $warehouseStockMovement->notes = 'Reduce';
+                // $warehouseStockMovement->createable()->associate($service);
+                // $warehouseStockMovement->save();
 
 
 

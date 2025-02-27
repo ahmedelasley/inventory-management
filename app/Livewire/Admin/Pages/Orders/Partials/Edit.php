@@ -23,8 +23,6 @@ class Edit extends Component
     public $order;
     public $order_id;
     public $code;
-    public $warehouse_id;
-    public $kitchen_id;
     public $request_date;
     // public float $tax;
     // public float $additional_cost;
@@ -33,6 +31,11 @@ class Edit extends Component
     // public $business_date;
     public $notes;
 
+    public $restaurants;
+    public $kitchen_id;
+    public $warehouse_id;
+    public $warehouses = []; // قائمة المستودعات التي ستتغير ديناميكيًا
+
 
     public $rules = [];
 
@@ -40,47 +43,81 @@ class Edit extends Component
     {
         $this->order = $order;
         $this->order_id = $order->id;
+        $this->restaurants = Restaurant::with(['kitchens', 'warehouses'])->get() ?? collect();
+        
+        // تعيين المطبخ والمستودع من الطلب الحالي
+        $this->kitchen_id = $order->kitchen_id;
+        $this->warehouse_id = $order->warehouse_id;
+    
+        // جلب المستودعات الخاصة بالمطبخ المحدد مسبقًا
+        $this->warehouses = $this->getWarehousesForKitchen($this->kitchen_id);
     }
+    
+    // جلب المستودعات بناءً على المطبخ المحدد
+    private function getWarehousesForKitchen($kitchenId)
+    {
+        $kitchen = Kitchen::find($kitchenId);
+        return $kitchen && $kitchen->restaurant ? $kitchen->restaurant->warehouses->toArray() : [];
+    }
+    
+
+    public function updatedKitchenId($value)
+    {
+        $this->warehouse_id = null; // إعادة تعيين المستودع عند تغيير المطبخ
+        $this->warehouses = []; // إعادة تعيين المستودعات إلى مصفوفة فارغة
+    
+        if ($value) {
+            // جلب المطبخ المختار
+            $kitchen = Kitchen::find($value);
+    
+            if ($kitchen && $kitchen->restaurant) {
+                // جلب المستودعات المرتبطة بالمطعم
+                $this->warehouses = $kitchen->restaurant->warehouses->toArray() ?? collect(); // تأكد من تحويلها إلى مصفوفة
+            }
+        }
+    }
+    
+    
 
     protected $listeners = ['orderUpdate'];
-
     public function orderUpdate($id)
     {
         $this->order = Order::find($id);
-    
+        
         if (!$this->order) {
-            // Alert 
             showAlert($this, 'error', 'order not found');
+            return;
         }
     
-
-        // Set the properties
-        $this->code             = $this->order->code;
-        $this->warehouse_id     = $this->order->warehouse_id;
-        $this->kitchen_id      = $this->order->kitchen_id;
-        $this->request_date   = $this->order->request_date;
-
-        // $this->tax              = $this->order->tax;
-        // $this->additional_cost  = $this->order->additional_cost;
-        // $this->discount         = $this->order->discount;
-        // $this->request_date     = $this->order->request_date;
-        // $this->business_date    = $this->order->business_date;
-        $this->notes            = $this->order->notes;
+        $this->restaurants = Restaurant::with(['kitchens', 'warehouses'])->get() ?? collect();
     
-        // dd($this->supplier_id);
-        // Reset validation and errors
+        // تحديث القيم بناءً على الطلب المحدد
+        $this->code          = $this->order->code;
+        $this->kitchen_id    = $this->order->kitchen_id;
+        $this->warehouse_id  = $this->order->warehouse_id;
+        $this->request_date  = $this->order->request_date;
+        $this->notes         = $this->order->notes;
+    
+        // تحديث قائمة المستودعات بناءً على المطبخ
+        $this->warehouses = $this->getWarehousesForKitchen($this->kitchen_id);
+    
+        // إعادة تعيين التحقق من الأخطاء
         $this->resetValidation();
         $this->resetErrorBag();
     
-        // Open modal
+        // فتح المودال
         $this->dispatch('editOrderModalToggle');
     }
+    
 
     public function closeForm()
     {
         // Reset form fields
         $this->reset();
-    
+        $this->restaurants = Restaurant::with(['kitchens', 'warehouses'])->get() ?? collect();
+
+        // تأكد من أن $warehouses ليس null بل مصفوفة فارغة
+        $this->warehouses = [];
         // Reset validation errors
         $this->resetValidation();
         $this->resetErrorBag();
@@ -137,6 +174,7 @@ class Edit extends Component
 
             // Hide modal
             $this->dispatch('editOrderModalToggle');
+            $this->dispatch('productRefreshComponent');
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(Index::class);
@@ -159,12 +197,12 @@ class Edit extends Component
 
     public function render()
     {
-        $restaurants = Restaurant::with(['creator', 'editor', 'manager', 'kitchens', 'warehouses'])->get();
+        // $restaurants = Restaurant::with(['creator', 'editor', 'manager', 'kitchens', 'warehouses'])->get();
 
         // $kitchens = Kitchen::select('id', 'name')->get();
         // $warehouses = Warehouse::select('id', 'name')->get();
         return view('admin.pages.orders.partials.edit', [
-            'restaurants' => $restaurants,
+            // 'restaurants' => $restaurants,
 
             // 'kitchens' => $kitchens,
             // 'warehouses' => $warehouses,

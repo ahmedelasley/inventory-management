@@ -115,7 +115,7 @@
                                         </a> --}}
                                         @if(admin()->can('transfer-show-transactions'))
                                             <a class="btn btn-primary btn-sm" href="{{ route('admin.orders.show.transaction', ['order' => $value]) }}">
-                                                <i class="bx bx-show me-1"></i> Show Transactions
+                                                <i class="bx bx-transfer-alt me-1"></i> Show Transactions
                                             </a>
                                         @endif
                                     </td>

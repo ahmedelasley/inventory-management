@@ -44,7 +44,7 @@
                     >
                         <i class="bx bx-trash me-1"></i>
                     </a>
-                    {{-- @livewire('supervisor.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time())) --}}
+                    @livewire('supervisor.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time()))
 
                 @endif
 

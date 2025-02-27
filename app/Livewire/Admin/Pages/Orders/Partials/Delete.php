@@ -5,7 +5,7 @@ namespace App\Livewire\Admin\Pages\Orders\Partials;
 use Livewire\Component;
 use App\Models\Supplier;
 use App\Models\Warehouse;
-use App\Models\Purchase;
+use App\Models\Order;
 use App\Models\Admin;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -19,27 +19,27 @@ class Delete extends Component
 {
     use LivewireAlert;
 
-    public $purchase;
+    public $order;
     public $code;
 
-    public function mount($purchase)
+    public function mount($order)
     {
-        $this->purchase = $purchase;
+        $this->order = $order;
     }
 
-    protected $listeners = ['purchaseDelete'];
+    protected $listeners = ['orderDelete'];
 
-    public function purchaseDelete($id)
+    public function orderDelete($id)
     {
-        $this->purchase = Purchase::find($id);
+        $this->order = Order::find($id);
     
-        if (!$this->purchase) {
+        if (!$this->order) {
             // Alert 
             showAlert($this, 'error', 'Purchase not found');
         }
     
         // Set the properties
-        $this->code = $this->purchase->code;
+        $this->code = $this->order->code;
     
         // Open modal
         $this->dispatch('deleteModalToggle');
@@ -60,10 +60,10 @@ class Delete extends Component
         try {
    
             // Delete the selected rows
-            foreach ($this->purchase->products as $product) {
+            foreach ($this->order->products as $product) {
                 $product->delete();
             }
-            $this->purchase->delete();
+            $this->order->delete();
 
             DB::commit(); // All database operations are successful, commit the transaction            
 

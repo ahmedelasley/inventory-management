@@ -191,7 +191,16 @@ class GetData extends Component
     public function render()
     {
         // $data = Kitchen::with(['supervisor', 'creator', 'updater'])->where($this->field, 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
-        $data = KitchenStock::with(['createable', 'product', 'kitchen', 'movements'])->where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->paginate(20);
+        // $data = KitchenStock::with(['createable', 'product', 'kitchen', 'movements'])->where('kitchen_id', Auth::guard('supervisor')->user()->kitchen->id)->paginate(20);
+        $data = KitchenStock::with(['product', 'kitchen'])->ofKitchen(Auth::guard('supervisor')->user()->kitchen->id);
+        if ($this->field == 'name') {
+            $data = $data->whereHas('product', function ($query) { $query->where('name', 'like', '%' . $this->search . '%'); });
+        } else if ($this->field == 'code') {
+            $data = $data->whereHas('product', function ($query) { $query->where('sku', 'like', '%' . $this->search . '%'); });
+        } else {
+            $data = $data->where($this->field, 'like', '%' . $this->search . '%');
+         }        
+         $data = $data->latest()->paginate($this->paginate);
 
         return view('supervisor.pages.kitchens.get-data', [
             'data' => $data,

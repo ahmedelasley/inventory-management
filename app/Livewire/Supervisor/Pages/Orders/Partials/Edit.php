@@ -136,6 +136,7 @@ class Edit extends Component
 
             // Hide modal
             $this->dispatch('editOrderModalToggle');
+            $this->dispatch('productRefreshComponent');
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(Index::class);

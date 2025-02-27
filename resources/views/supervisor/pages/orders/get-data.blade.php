@@ -87,7 +87,7 @@
 
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><a href="{{ route('supervisor.orders.create.order', ['order' => $value]) }}"><strong>{{ $value->code }}</strong></a></td>
+                                    <td><a href="{{ route('supervisor.orders.create.order', ['order' => $value]) }}"><i class='bx bx-receipt'></i><strong><strong>{{ $value->code }}</strong></a></td>
                                     <td>{{ $value->kitchen?->name }}</td>
                                     <td>{{ $value->warehouse?->name }}</td>
 

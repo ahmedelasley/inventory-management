@@ -24,6 +24,10 @@ class Products extends Component
     public $paginate;
     public $order;
 
+    protected $listeners = [
+        'productRefreshComponent' =>'$refresh',
+    ];
+
     protected function queryString()
     {
         return [
@@ -114,7 +118,13 @@ class Products extends Component
 
 
 
-    
+    //How to make refresh component after edit order
+    // public function refreshComponent()
+    // {
+    //     $this->emit('refreshComponent');
+    // }
+
+
     public function render()
     {
 

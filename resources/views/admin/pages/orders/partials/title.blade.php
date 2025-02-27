@@ -36,7 +36,6 @@
                     @endif
 
                     @if(admin()->can('transfer-send'))
-                        {{-- @livewire('admin.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time())) --}}
                         <a class="btn btn-sm btn-outline-primary" href="javascript:void(0);"
                             wire:click.prevent="$dispatch('orderSend', { id: {{ $order->id }} })"
                         >
@@ -96,6 +95,8 @@
                     >
                         <i class="bx bx-trash me-1"></i>
                     </a>
+                    @livewire('admin.pages.orders.partials.delete', ['order' => $order], key('order-delete-'.time()))
+
                 @endif
             @endif
         </div>

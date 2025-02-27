@@ -24,6 +24,10 @@ class Products extends Component
     public $paginate;
     public $order;
 
+    protected $listeners = [
+        'productRefreshComponent' =>'$refresh',
+    ];
+
     // public float $quantity;
     // public float $cost;
     // public $production_date;
@@ -128,15 +132,27 @@ class Products extends Component
     public function render()
     {
         $products = Product::with(['category', 'creator', 'updater', 'warehouseStocks'])
-                            ->whereHas('warehouseStocks');
-
-
+        ->whereHas('warehouseStocks', function ($query) {
+            $query->where('warehouse_id', $this->order->warehouse_id);
+            });
         if ($this->field == 'category') {
-            $products = $products->whereHas('category', function ($query) { $query->where('name', 'like', '%' . $this->search . '%'); });
-         } else {
+            $products = $products->whereHas('category', function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+            });
+            } else {
             $products = $products->where($this->field, 'like', '%' . $this->search . '%');
-         }        
-         $products = $products->latest()->paginate($this->paginate);
+            }
+
+
+        // $products = WarehouseStock::with(['product', 'createable', 'warehouse'])
+        // ->whereHas('warehouse', function ($query) { $query->where('warehouse_id', $this->order->warehouse_id); });
+        // if (in_array($this->field, ['name', 'sku'])) {
+        //     $products = $products->whereHas('product', function ($query) { $query->where($this->field, 'like', '%' . $this->search . '%'); });
+        // } else {
+        //     $products = $products->where($this->field, 'like', '%' . $this->search . '%');
+        //  }   
+        $products = $products->latest()->paginate($this->paginate);
+
 
         return view('supervisor.pages.orders.partials.products', [
             'products' => $products,
