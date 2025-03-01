@@ -32,7 +32,7 @@
 
                     <div class="col mb-3">
                         <x-input-label for="invoice_number" class="form-label" :value="__('Invoice Number')" /><span class='text-danger'>*</span>
-                        <x-text-input id="invoice_number" wire:model.live.debounce.250ms="invoice_number" type="text" class="form-control"/>
+                        <x-text-input id="invoice_number" wire:model.blur="invoice_number" type="text" class="form-control"/>
                         <x-input-error class="mt-2" :messages="$errors->get('invoice_number')" />
                     </div>
                 </div>
@@ -40,17 +40,17 @@
                 <div class="row g-3">
                     <div class="col mb-3">
                         <x-input-label for="additional_cost" class="form-label" :value="__('Additional Cost')" /><span class='text-danger'>*</span>
-                        <x-text-input id="additional_cost" wire:model.live.debounce.250ms="additional_cost" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                        <x-text-input id="additional_cost" wire:model.blur="additional_cost" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
                         <x-input-error class="mt-2" :messages="$errors->get('additional_cost')" />
                     </div>
                     <div class="col mb-3">
                         <x-input-label for="tax" class="form-label" :value="__('Paid Tax')" /><span class='text-danger'>*</span>
-                        <x-text-input id="tax" wire:model.live.debounce.250ms="tax" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                        <x-text-input id="tax" wire:model.blur="tax" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
                         <x-input-error class="mt-2" :messages="$errors->get('tax')" />
                     </div>
                     <div class="col mb-3">
                         <x-input-label for="discount" class="form-label" :value="__('Discount')" /><span class='text-danger'>*</span>
-                        <x-text-input id="discount" wire:model.live.debounce.250ms="discount" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                        <x-text-input id="discount" wire:model.blur="discount" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
                         <x-input-error class="mt-2" :messages="$errors->get('discount')" />
                     </div>
 
@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col mb-3">
                         <x-input-label for="notes" class="form-label" :value="__('Notes')" /><span class='text-danger'>*</span>
-                        <x-text-input id="notes" wire:model.live.debounce.250ms="notes" type="text" class="form-control"/>
+                        <x-text-input id="notes" wire:model.blur="notes" type="text" class="form-control"/>
                         <x-input-error class="mt-2" :messages="$errors->get('notes')" />
                     </div>
                 </div>

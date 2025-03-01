@@ -173,7 +173,7 @@ class Save extends Component
 
             // Hide modal
             $this->dispatch('savePurchaseModalToggle');
-            $this->dispatch('refreshTitle'); 
+            $this->dispatch('refreshTitleSave'); 
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(GetData::class);

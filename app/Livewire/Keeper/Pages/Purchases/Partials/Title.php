@@ -19,6 +19,7 @@ class Title extends Component
     public $purchase;
     protected $listeners = [
         'refreshTitle' => '$refresh',
+        'refreshTitleSave' => '$refresh',
         // 'editModalToggle' =>'$refresh',
         // 'deleteModalToggle' =>'$refresh',
         // 'editPurchaseModalToggle' =>'$refresh',

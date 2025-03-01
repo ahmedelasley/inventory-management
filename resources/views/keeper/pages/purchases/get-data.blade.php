@@ -87,7 +87,12 @@
 
                                 <tr>
                                     <td>{{$loop->iteration }}</td>
-                                    <td><strong>{{ $value->code }}</strong></td>
+                                    <td>
+                                        <a href="{{ route('keeper.purchases.create.purchase', ['purchase' => $value]) }}">
+                                            <strong><i class='bx bx-cart'></i> {{ $value->code }}</strong>
+                                        </a>
+
+                                    </td>
                                     <td>{{ $value->supplier?->name }}</td>
                                     <td>{{ $value->warehouse?->name }}</td>
 
