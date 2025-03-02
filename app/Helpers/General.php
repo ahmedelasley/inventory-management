@@ -35,5 +35,11 @@
             return auth()->guard('admin')->user();
         }
     }
+    if (!function_exists('keeper')) {
+        function keeper()
+        {
+            return auth()->guard('keeper')->user();
+        }
+    }
     
 

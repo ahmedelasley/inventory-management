@@ -19,6 +19,7 @@
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="javascript:void(0);" wire:click="searchField('name')">Name</a></li>
                           <li><a class="dropdown-item" href="javascript:void(0);" wire:click="searchField('code')">Code</a></li>
+                          <li><a class="dropdown-item" href="javascript:void(0);" wire:click="searchField('phone')">Phone</a></li>
                         </ul>
                     </div>
                     <div class="btn-group">
@@ -38,6 +39,12 @@
                             <li><a class="dropdown-item" href="javascript:void(0);" wire:click="exportExcel">Export Excel to Mail</a></li>
                         </ul>
                     </div>
+                    {{-- <button type="button" class="btn btn-sm btn-outline-primary ms-2" wire:click="exportPDF"><i class='bx bxs-file-pdf'></i> PDF</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-outline-danger ms-2" data-bs-toggle="modal" data-bs-target="#importModal"><i class='bx bx-spreadsheet' ></i> Import</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-outline-success ms-2" wire:click="exportExcel"><i class='bx bx-spreadsheet' ></i> Export</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteSelectedModal" @if(empty($selectedRows)) disabled @endif><i class="bx bx-trash me-1"></i> Delete</button> --}}
+                    @include('admin.pages.suppliers.partials.import')
+                    @include('admin.pages.suppliers.partials.delete-selected')
 
                 </div>
                 <select wire:model.live="paginate" class="form-control w-10 mt-3 me-3" style="width:75px" id="paginate">
@@ -54,15 +61,26 @@
             </div>
 
             <div class="card-body">
+                
                 <div class="table-responsive text-wrap"  style="height : calc(100vh - 420px)">
                     <table class="table table-striped table-hover table-sm text-center">
                         <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                         <tr>
+                            {{-- <th class="fw-bolder fs-6">
+                                <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                wire:model="selectAllStatus"
+                                wire:click="selectAll"
+                                aria-label="Checkbox for following text input"
+                              />
+                            </th> --}}
                             <th class="fw-bolder fs-6">#</th>
-                            <th class="fw-bolder fs-6">Name</th>
                             <th class="fw-bolder fs-6">Code</th>
-                            <th class="fw-bolder fs-6">Location</th>
-                            <th class="fw-bolder fs-6">Manager</th>
+                            <th class="fw-bolder fs-6">Name</th>
+                            <th class="fw-bolder fs-6">Phone</th>
+                            <th class="fw-bolder fs-6">Email</th>
+                            <th class="fw-bolder fs-6">Address</th>
                             <th class="fw-bolder fs-6">Created At</th>
                             <th class="fw-bolder fs-6">Updated At</th>
                             <th class="fw-bolder fs-6">Actions</th>
@@ -72,62 +90,39 @@
                             @forelse ($data as $value)
 
                         <tr>
-                            <td>{{$loop->iteration }}</td>
-                            <td>
-                                @if(admin()->can('restaurant-read'))
-                                <a href="{{ route('admin.restaurants.show', $value) }}"><strong><i class='bx bxs-store'></i> {{ $value->name }}</strong></a>
-                            @else
-                                <strong><i class='bx bxs-store'></i> {{ $value->name }}</strong>
-                            @endif
-                            </td>
-                            <td>{{ $value->code }}</td>
-                            <td>{{ $value->location }}</td>
-                            <td><span class="badge bg-label-primary">{{ $value->manager?->name }}</span></td>
-                            <td>{{ $value->creator?->name }}<br>{{ $value->created_at }}</td>
-                            <td>{{ $value->editor == NULL ? "" : $value->editor?->name }}<br>{{ $value->editor == NULL ? "" : $value->updated_at  }}</td>
-                            <td>
+                            {{-- <td>
                                 @if (!$value->is_default)
-                                    <div class="dropdown">
-                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        Actions <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
+                                    <input
+                                    class="form-check-input mt-0"
+                                    type="checkbox"
+                                    wire:model.live="selectedRows" value="{{ $value->id }}"
+                                    aria-label="Checkbox for following text input"
+                                />
+                              @endif
+                            </td> --}}
+                            <td>{{$loop->iteration }}</td>
+                            <td><strong>{{ $value->code }}</strong></td>
+                            <td><strong>{{ $value->name }}</strong></td>
+                            <td>{{ $value->phone }}</td>
+                            <td>{{ $value->email }}</td>
+                            <td>{{ $value->address }}</td>
 
-                                            @if(admin()->can('restaurant-read'))
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('restaurantShow', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-show me-1"></i> Show
-                                            </a>
-                                            @endif
-
-                                            @if(admin()->can('restaurant-edit'))
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('restaurantUpdate', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-edit-alt me-1"></i> Edit
-                                            </a>
-                                            @endif
-
-                                            @if(admin()->can('restaurant-delete'))
-                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                wire:click.prevent="$dispatch('restaurantDelete', { id: {{ $value->id }} })"
-                                            >
-                                                <i class="bx bx-trash me-1"></i> Delete
-                                            </a>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                @else
-                                    <span class="badge bg-label-primary">Default</span>
-                                @endif
-
+                            <td>{{ $value->creator?->name }}<br>{{ $value->created_at }}</td>
+                            {{-- <td>{{ $value->updater?->name }}<br>{{ $value->updated_at }}</td> --}}
+                            <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td>
+                            <td>
+                                {{-- @if(keeper()->can('supplier-read')) --}}
+                                    <a class="btn btn-primary" href="javascript:void(0);"
+                                        wire:click="$dispatch('supplierShow', { id: {{ $value->id }} })"
+                                    >
+                                        <i class="bx bx-show me-1"></i> Show
+                                    </a>
+                                {{-- @endif --}}
                             </td>
                         </tr>
                         @empty
                             <tr>
-                                <td colspan="8">No data to display! - Add new data</td>
+                                <td colspan="9">No data to display! - Add new data</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -141,7 +136,6 @@
                         </ul>
                     </nav>
                 </div>
-  
             </div>
         </div>
     </div>

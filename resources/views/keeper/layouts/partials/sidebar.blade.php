@@ -38,7 +38,33 @@
                 <div data-i18n="Analytics" class="fw-bolder">Dashboard</div>
               </a>
             </li>
-
+            {{-- @if(keeper()->can('supplier-list')) --}}
+            <!-- Suppliers -->
+            <li class="menu-item {{ request()->routeIs('keeper.suppliers.index') ? 'active' : '' }}">
+              <a href="{{ route('keeper.suppliers.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/supplier.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Suppliers</div>
+              </a>
+            </li>
+            {{-- @endif --}}
+            {{-- @if(keeper()->can('category-list')) --}}
+            <!-- Categories -->
+            <li class="menu-item {{ request()->routeIs('keeper.categories.index') ? 'active' : '' }}">
+              <a href="{{ route('keeper.categories.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/list.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Categories</div>
+              </a>
+            </li>
+            {{-- @endif --}}
+            {{-- @if(keeper()->can('product-list')) --}}
+            <!-- Products -->
+            <li class="menu-item {{ request()->routeIs('keeper.products.index') ? 'active' : '' }}">
+              <a href="{{ route('keeper.products.index') }}" class="menu-link">
+                <img src="{{ URL::asset('assets/admin') }}/img/icons/unicons/products.png" alt="User" class="menu-icon tf-icons" />
+                <div data-i18n="Analytics" class="fw-bolder">Products</div>
+              </a>
+            </li>
+            {{-- @endif --}}
             <!-- Inventory -->
             <li class="menu-item {{ request()->routeIs('keeper.warehouses.index') ? 'active' : '' }}">
               <a href="{{ route('keeper.warehouses.index') }}" class="menu-link">

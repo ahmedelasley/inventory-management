@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Keeper\DashboardController;
 use App\Http\Controllers\Keeper\ProfileController;
+use App\Http\Controllers\Keeper\SupplierController;
+use App\Http\Controllers\Keeper\CategoryController;
+use App\Http\Controllers\Keeper\ProductController;
 use App\Http\Controllers\Keeper\WarehouseController;
 use App\Http\Controllers\Keeper\PurchaseController;
 use App\Http\Controllers\Keeper\OrderController;
@@ -38,6 +41,9 @@ Route::prefix('keeper')->name('keeper.')->group(function () {
 
 
         Route::resources([
+            '/suppliers' => SupplierController::class,
+            '/categories' => CategoryController::class,
+            '/products' => ProductController::class,
             '/warehouses' => WarehouseController::class,
             '/purchases' => PurchaseController::class,
             '/orders' => OrderController::class,
