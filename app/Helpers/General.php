@@ -35,11 +35,26 @@
             return auth()->guard('admin')->user();
         }
     }
+    if (!function_exists('manager')) {
+        function manager()
+        {
+            return auth()->guard('manager')->user();
+        }
+    }
+
     if (!function_exists('keeper')) {
         function keeper()
         {
             return auth()->guard('keeper')->user();
         }
     }
+
+    if (!function_exists('supervisor')) {
+        function supervisor()
+        {
+            return auth()->guard('supervisor')->user();
+        }
+    }
+
     
 

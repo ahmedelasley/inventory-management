@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('keeper')->name('keeper.')->group(function () {
 
-    Route::middleware('auth.keeper')->group(function () {
+    Route::middleware(['auth.keeper', 'verified.keeper'])->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

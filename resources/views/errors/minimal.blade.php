@@ -49,7 +49,7 @@
                         @elseif(Auth::guard('supervisor')->check())
                             <a href="{{ route('supervisor.dashboard') }}" class="btn btn-primary">Home</a>
                         @elseif(Auth::guard('keeper')->check())
-                            <a href="{{ route('adkeepermin.dashboard') }}" class="btn btn-primary">Home</a>
+                            <a href="{{ route('keeper.dashboard') }}" class="btn btn-primary">Home</a>
                         @else
                         <a href="{{ url('/') }}" class="btn btn-primary">Home</a>
                         @endif

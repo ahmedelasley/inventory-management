@@ -65,14 +65,17 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // 'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verified.admin' => \App\Http\Middleware\EnsureEmailIsVerifiedAdmin::class,
+        'verified.manager' => \App\Http\Middleware\EnsureEmailIsVerifiedManager::class,
+        'verified.keeper' => \App\Http\Middleware\EnsureEmailIsVerifiedKeeper::class,
+        'verified.supervisor' => \App\Http\Middleware\EnsureEmailIsVerifiedSupervisor::class,
 
         /**** OTHER Authenticate MIDDLEWARE ****/
 
         /**** Authenticate MIDDLEWARE ****/
         'auth.admin' => \App\Http\Middleware\AuthenticateAdmin::class,
         'auth.manager' => \App\Http\Middleware\AuthenticateManager::class,
-        'auth.supervisor' => \App\Http\Middleware\AuthenticateSupervisor::class,
         'auth.keeper' => \App\Http\Middleware\AuthenticateKeeper::class,
+        'auth.supervisor' => \App\Http\Middleware\AuthenticateSupervisor::class,
 
         /**** Role & Permission MIDDLEWARE ****/
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,

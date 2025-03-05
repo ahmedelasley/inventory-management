@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('supervisor')->name('supervisor.')->group(function () {
 
-    Route::middleware('auth.supervisor')->group(function () {
+    Route::middleware(['auth.supervisor', 'verified.supervisor'])->group(function () {
 
         // Route::get('/', function () {
         //     return view('supervisor.dashboard');
