@@ -17,7 +17,12 @@
             </div>
             <div class="flex-grow-1">
               <span class="fw-semibold d-block text-wrap">{{ Auth::guard('admin')->user()->name }}</span>
-              <small class="fw-semibold d-block text-wrap">{{ Auth::guard('admin')->user()->email }}</small>
+              <!--<small class="fw-semibold d-block text-wrap " style="width: 100%;">{{ Auth::guard('admin')->user()->email }}</small>-->
+              @php
+              $email = Auth::guard('admin')->user()->email;
+              @endphp
+            <small class="fw-semibold d-block text-wrap " style="width: 100%;">{!! nl2br(strlen($email) > 20 && str_contains($email, '@') ? str_replace('@', "\n@", $email) : $email) !!}</small>
+
               <small class="text-primary">Administrate</small>
             </div>
           </div>

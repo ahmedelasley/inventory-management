@@ -160,7 +160,7 @@ class Edit extends Component
     {
         $suppliers = Supplier::select('id', 'name')->get();
         $warehouses = Warehouse::select('id', 'name')->get();
-        return view('admin.pages.Purchases.partials.edit', [
+        return view('admin.pages.purchases.partials.edit', [
             'suppliers' => $suppliers,
             'warehouses' => $warehouses,
         ]);

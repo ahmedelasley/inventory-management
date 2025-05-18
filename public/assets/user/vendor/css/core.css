@@ -14957,7 +14957,7 @@ body {
 
 .menu-inner-shadow {
   display: none;
-  position: absolute;
+  /*position: absolute;*/
   top: 4.225rem;
   height: 3rem;
   width: 100%;

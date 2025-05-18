@@ -195,6 +195,6 @@ class Save extends Component
 
     public function render()
     {
-        return view('admin.pages.Purchases.partials.save');
+        return view('admin.pages.purchases.partials.save');
     }
 }

@@ -23,7 +23,7 @@
                 <div class="mb-3">
                     <label for="client_id" class="form-label">Clients</label><span class='text-danger'>*</span>
                     <select wire:model.live="client_id" class="form-control" id="client_id">
-                        <option value="">Select a Warehouse...</option>
+                        <option value="">Select a Client...</option>
                         @forelse ($clients as $record)
                             <option value="{{ $record->id }}" wire:key="client-{{ $record->id }}" >{{ $record->name }}</option>
                         @empty

@@ -56,7 +56,7 @@
                 <!-- Table -->
                 <div class="table-responsive text-wrap" style="height: calc(100vh - 420px)">
                     <table class="table table-striped table-hover table-sm text-center">
-                        <thead class="bg-white border-0 sticky-top">
+                        <thead class="bg-white border-0 sticky-top"  style="z-index: 3;">
                             <tr>
                                 <th class="fw-bolder">#</th>
                                 <th class="fw-bolder">Code</th>
