@@ -19,6 +19,7 @@
         </li>
       </ul>
       <div class="tab-content">
+        @if(admin()->can('setting-list'))
         <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
           @livewire('admin.settings.partials.edit')
         </div>
@@ -28,6 +29,23 @@
         <div class="tab-pane fade" id="navs-pills-justified-backup" role="tabpanel">
           @livewire('admin.settings.partials.backup')
         </div>
+        @else
+        <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
+          <div class="alert alert-danger" role="alert">
+            You do not have permission to view this page.
+          </div>
+        </div>
+        <div class="tab-pane fade" id="navs-pills-justified-logo" role="tabpanel">
+          <div class="alert alert-danger" role="alert">
+            You do not have permission to view this page.
+          </div>
+        </div>  
+        <div class="tab-pane fade" id="navs-pills-justified-backup" role="tabpanel">
+          <div class="alert alert-danger" role="alert">
+            You do not have permission to view this page.
+          </div>
+        </div>
+        @endif
       </div>
     </div>
   </div>

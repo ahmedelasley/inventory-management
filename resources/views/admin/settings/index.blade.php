@@ -32,8 +32,13 @@
             <h5 class="fw-bolder fs-5">Settings</h5>
       </div>
 
+    @if(admin()->can('setting-list'))
       @livewire('admin.settings.get-data')
-
+    @else
+      <div class="alert alert-danger" role="alert">
+      You do not have permission to view this page.
+      </div>
+    @endif
 
 </div>
 <!-- / Content -->
