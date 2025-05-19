@@ -50,7 +50,7 @@ class Create extends Component
             $validatedData       = $this->validate();
             // Add creator
             $validatedData['sku'] = 'sku-' . (Product::count() == 0 ? '0001' : (int) str_replace('sku-', '', Product::latest()->first()->sku) + 1 );
-            $validatedData['created_id'] = Auth::guard('admin')->user()->id;
+            // $validatedData['created_id'] = Auth::guard('admin')->user()->id;
 
             // Query Create
             Product::create($validatedData);

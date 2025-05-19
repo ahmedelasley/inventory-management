@@ -3,52 +3,60 @@
 namespace App\Exports;
 
 use App\Models\Product;
-// use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-
-class ProductsExport implements FromQuery, WithHeadings, ShouldQueue
+class ProductsExport implements FromQuery, WithHeadings, WithMapping, ShouldQueue
 {
     use Exportable;
 
+    protected $id = 1;
+
     public function query()
     {
-        return Product::query();
+        return Product::with(['category', 'creator', 'updater']);
     }
-    // /**
-    // * @return \Illuminate\Support\Collection
-    // */
-    // public function collection()
-    // {
-    //     return Product::all();
-    // }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
+    public function headings(): array
+    {
+        return [
+            '#',
+            'Name',
+            'Name Localized',
+            'SKU',
+            'Description',
+            'Storge Unit',
+            'Intgredtiant Unit',
+            'Storage To Intgredient',
+            'Costing Method',
+            'Category',
+            'Creator',
+            'Editor',
+            'Created at',
+            'Updated At',
+        ];
+    }
 
-     public function headings(): array
-     {
-         return [
-            'id',
-            'name',
-            'name_localized',
-            'sku',
-            'description',
-            'storge_unit',
-            'intgredtiant_unit',
-            'storage_to_intgredient',
-            'costing_method',
-            'category_id',
-            'created_id',
-            'updated_id',
-            'created_at',
-            'updated_at',
-         ];
-     }
+    public function map($product): array
+    {
+        return [
+            $this->id++,
+            $product->name,
+            $product->name_localized,
+            $product->sku,
+            $product->description,
+            $product->storge_unit,
+            $product->intgredtiant_unit,
+            $product->storage_to_intgredient,
+            $product->costing_method,
+            $product->category?->name,
+            $product->creator?->name,
+            $product->updater?->name,
+            $product->created_at,
+            $product->updated_at,
+        ];
+    }
 }

@@ -125,7 +125,7 @@ class GetData extends Component
         // Alert 
         showAlert($this, 'success', __('Downloading Data Successfully'));
 
-        return Excel::download(new ProductsExport, 'Products.xlsx');
+        return Excel::download(new ProductsExport, "Products-" . Now() . ".xlsx", \Maatwebsite\Excel\Excel::XLSX);
         
     }
     public function exportPDF()

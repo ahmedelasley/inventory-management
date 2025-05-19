@@ -32,7 +32,7 @@ Route::prefix('supervisor')->name('supervisor.')->group(function () {
         // Route::get('/dashboard', function () {
         //     return view('supervisor.dashboard');
         // })->name('dashboard');
-        // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index']);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::controller(ProfileController::class)->name('profile.')->group(function () {
