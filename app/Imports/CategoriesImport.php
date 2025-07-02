@@ -25,9 +25,11 @@ class CategoriesImport implements ToModel, WithHeadingRow, WithSkipDuplicates
         return new Category([
             'name'                      => $row['name'],
             'description'               => $row['description'],
-            'parent_id'               => $row['parent_id'],
-            'is_default'               => $row['is_default'],
+            'parent_id'               => $row['parent'],
+            'type'                      => ($row['type'] == 'stock' ? 0 : 1), // Assuming type is either 'stock' or 'menu'
             'created_id'                => Auth::guard('admin')->user()->id, // Ensure this is not null
+            'created_at'                => now(), // Ensure this is not null
+            'updated_at'                => now(), // Ensure this is not null
         ]);
     }
 

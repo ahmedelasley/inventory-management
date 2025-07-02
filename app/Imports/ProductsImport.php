@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\Models\Product;
+use App\Models\Category;
+
 // use Illuminate\Support\Collection;
 
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -32,7 +34,7 @@ class ProductsImport implements ToModel, WithHeadingRow, WithSkipDuplicates
             'intgredtiant_unit'         => $row['intgredtiant_unit'],
             'storage_to_intgredient'    => $row['storage_to_intgredient'],
             'costing_method'            => $row['costing_method'],
-            'category_id'               => $row['category_id'],
+            'category_id'               => Category::where('name', $row['category'])->where('type', 0)->first()?->id, // Ensure this is not null
             'created_id'                => Auth::guard('admin')->user()->id, // Ensure this is not null
         ]);
     }
