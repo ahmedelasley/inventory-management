@@ -51,7 +51,7 @@ Route::prefix('manager')->name('manager.')->group(function () {
         // Route::get('/dashboard', function () {
         //     return view('manager.dashboard');
         // })->name('dashboard');
-        // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index']);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

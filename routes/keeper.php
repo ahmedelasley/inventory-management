@@ -29,7 +29,7 @@ Route::prefix('keeper')->name('keeper.')->group(function () {
 
     Route::middleware(['auth.keeper', 'verified.keeper'])->group(function () {
 
-        // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index']);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::controller(ProfileController::class)->name('profile.')->group(function () {
