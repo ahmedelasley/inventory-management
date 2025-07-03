@@ -14,7 +14,7 @@
                     <div class="row g-3">
                         <div class="col mb-3">
                             <x-input-label for="quantity" class="form-label" :value="__('Quantity')" /><span class='text-danger'>*</span>
-                            <x-text-input id="quantity" wire:model.blur="quantity" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                            <x-text-input id="quantity" wire:model.blur="quantity" type="text" class="form-control" step="1" min="0" pattern="^\d+(?:\.\d{12,4})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"/>
                             <x-input-error class="mt-2" :messages="$errors->get('quantity')" />
                         </div>
                         <div class="col mb-3">

@@ -95,9 +95,9 @@ class Edit extends Component
             'supplier_id'       => 'required|exists:suppliers,id',
             'invoice_date'      => 'required|date',
             'invoice_number'    => 'required|string',
-            'tax'               => 'required|numeric|decimal:0,4|gte:0',
-            'additional_cost'   => 'required|numeric|decimal:0,4|gte:0',
-            'discount'          => 'required|numeric|decimal:0,4|gte:0',
+            'tax'               => 'nullable|numeric|decimal:0,4|gte:0',
+            'additional_cost'   => 'nullable|numeric|decimal:0,4|gte:0',
+            'discount'          => 'nullable|numeric|decimal:0,4|gte:0',
             'notes'             => 'nullable|string|max:255',
 
 

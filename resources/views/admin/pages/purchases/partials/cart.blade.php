@@ -43,7 +43,7 @@
     </div>
     <div class="card-body">
         @if(admin()->can('purchasing-all-items'))
-            <div class="table-responsive text-wrap table-wrapper-scroll-y my-custom-scrollbar" style="height : calc(100vh - 700px)" >
+            <div class="table-responsive text-wrap table-wrapper-scroll-y my-custom-scrollbar" style="height : calc(100vh - 300px)" >
                 <table class="table table-striped table-hover table-sm text-center">
                     <thead class="bg-white border-0 sticky-top" style="z-index: 3;">
                     <tr>
