@@ -17,6 +17,7 @@ class Cart extends Component
     protected $listeners = [
         'addItem' => '$refresh',
         'editModalToggle' =>'$refresh',
+        'deleteItemModalToggle' =>'$refresh',
         'deleteModalToggle' =>'$refresh',
         'editOrderModalToggle' =>'$refresh',
         'sendOrderModalToggle' =>'$refresh',

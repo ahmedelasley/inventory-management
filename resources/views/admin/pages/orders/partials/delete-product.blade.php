@@ -1,6 +1,6 @@
 <div >
     <!-- Modal -->
-    <div  wire:ignore.self  class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div  wire:ignore.self  class="modal fade" id="deleteItemModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">

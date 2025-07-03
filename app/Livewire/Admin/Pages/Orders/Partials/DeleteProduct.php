@@ -46,7 +46,7 @@ class DeleteProduct extends Component
     
         if (!$this->item) {
             // Alert 
-            showAlert($this, 'error', 'Warehouse not found');
+            showAlert($this, 'error', 'Order Item not found');
         }
     
         // Set the properties
@@ -65,7 +65,7 @@ class DeleteProduct extends Component
         $this->resetErrorBag();
     
         // Open modal
-        $this->dispatch('deleteModalToggle');
+        $this->dispatch('deleteItemModalToggle');
     }
 
     public function closeForm()
@@ -78,7 +78,7 @@ class DeleteProduct extends Component
         $this->resetErrorBag();
     
         // Close modal
-        $this->dispatch('deleteModalToggle');
+        $this->dispatch('deleteItemModalToggle');
     }
     
     // public function rules()
@@ -128,7 +128,7 @@ class DeleteProduct extends Component
             $this->order->update([
                 'items' => $this->order->items - 1,
                 'quantities' => $this->order->quantities - $this->item->quantity_request ,
-                // 'subtotal' => $this->order->subtotal - ($this->item->quantity * $this->item->cost ) ,
+                'subtotal' => $this->order->subtotal - ($this->item->quantity_request * $this->item->cost ) ,
             ]);
 
             // Query delete
@@ -142,7 +142,7 @@ class DeleteProduct extends Component
             $this->reset();
 
             // Hide modal
-            $this->dispatch('deleteModalToggle');
+            $this->dispatch('deleteItemModalToggle');
 
             // Refresh skills data component
             // $this->dispatch(['refreshData'])->to(Index::class);

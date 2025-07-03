@@ -110,7 +110,7 @@ class EditProduct extends Component
 
             $this->order->update([
                 'quantities' => $this->order->quantities - $this->item->quantity_request + $validatedData['quantity_request'],
-                // 'subtotal' => $this->purchase->subtotal - ($this->item->quantity * $this->item->cost ) + ($validatedData['quantity'] * $validatedData['cost'] ) ,
+                'subtotal' => $this->order->subtotal - ($this->item->quantity_request * $this->item->cost ) + ($validatedData['quantity_request'] * $this->item->cost ) ,
             ]);
 
             // Update the item

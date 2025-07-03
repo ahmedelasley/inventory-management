@@ -16,7 +16,7 @@
                                 <div class="row g-1">
                                     <div class="col mb-3">
                                         <x-input-label for="quantity_request" class="form-label" :value="__('Quantity Request')" /><span class='text-danger'>*</span>
-                                        <x-text-input id="quantity_request" wire:model="quantity_request" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                                        <x-text-input id="quantity_request" wire:model="quantity_request" type="text" class="form-control" step="1" min="0" pattern="^\d+(?:\.\d{12,4})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"/>
                                         <x-input-error class="mt-2" :messages="$errors->get('quantity_request')" />
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                 <div class="row g-1">
                                     <div class="col mb-3">
                                         <x-input-label for="quantity_available" class="form-label" :value="__('Quantity Available')" /><span class='text-danger'>*</span>
-                                        <x-text-input id="quantity_available" wire:model="quantity_available" type="number" class="form-control" pattern="^\d*(\.\d{0,4})?$"/>
+                                        <x-text-input id="quantity_available" wire:model="quantity_available" type="text" class="form-control" step="1" min="0" pattern="^\d+(?:\.\d{12,4})?$" onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"/>
                                         <x-input-error class="mt-2" :messages="$errors->get('quantity_available')" />
                                     </div>
                                 </div>
