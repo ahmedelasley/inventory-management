@@ -69,6 +69,8 @@
                                     <th class="fw-bolder fs-6">Name</th>
                                     <th class="fw-bolder fs-6">SKU</th>
                                     <th class="fw-bolder fs-6">Live Qty Stock</th>
+                                    <th class="fw-bolder fs-6">Cost</th>
+                                    <th class="fw-bolder fs-6">Total</th>
                                     <th class="fw-bolder fs-6">Production Date</th>
                                     <th class="fw-bolder fs-6">Expiration Date</th>
                                     <th class="fw-bolder fs-6">Created At</th>
@@ -87,7 +89,9 @@
                                         @endif
                                     </td>
                                     <td>{{ $value->product->sku }}</td>
-                                    <td>{{ $value->quantity }}</td>
+                                    <td>{{ $value->quantity . ' ' . $value->product->storge_unit }} ( {{ ( $value->quantity * $value->product->storage_to_intgredient ). ' ' . $value->product->intgredtiant_unit }} )</td>
+                                    <td>{{ $value->cost }}</td>
+                                    <td>{{ $value->quantity * $value->cost  }}</td>
                                     <td>{{ $value->production_date }}</td>
                                     <td>{{ $value->expiration_date }}</td>
                                     <td>{{ $value->createable?->name }}<br>{{ $value->created_at }}</td>

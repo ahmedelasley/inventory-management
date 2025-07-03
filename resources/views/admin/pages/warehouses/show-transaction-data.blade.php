@@ -63,6 +63,8 @@
                                         <th class="fw-bolder fs-6">Name</th>
                                         <th class="fw-bolder fs-6">SKU</th>
                                         <th class="fw-bolder fs-6">Qty Stock</th>
+                                        <th class="fw-bolder fs-6">Cost</th>
+                                        <th class="fw-bolder fs-6">Total</th>
                                         <th class="fw-bolder fs-6">Status</th>
                                         <th class="fw-bolder fs-6">Date</th>
                                         <th class="fw-bolder fs-6">Created At</th>
@@ -75,7 +77,10 @@
                                     <td>{{$loop->iteration }}</td>
                                     <td>{{ $value->warehouseStock->product->name }}</td>
                                     <td>{{ $value->warehouseStock->product->sku }}</td>
-                                    <td>{{ $value->quantity }}</td>
+                                    <td>{{ $value->quantity . ' ' . $value->warehouseStock->product->storge_unit }} ( {{ ( $value->quantity * $value->warehouseStock->product->storage_to_intgredient ). ' ' . $value->warehouseStock->product->intgredtiant_unit }} )</td>
+                                    <td>{{ $value->warehouseStock->cost }}</td>
+                                    <td>{{ $value->quantity * $value->warehouseStock->cost  }}</td>
+                                    <!--<td>{{ $value->quantity }}</td>-->
                                     <td>{{ $value->type }}</td>
                                     <td>{{ $value->date }}</td>
                                     <td>{{ $value->createable?->name }}<br>{{ $value->created_at }}</td>

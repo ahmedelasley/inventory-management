@@ -4,17 +4,21 @@ namespace App\Livewire\Admin\Pages\Warehouses;
 
 use Livewire\Component;
 use App\Models\Supervisor;
+use App\Models\Warehouse;
 use App\Models\WarehouseStock;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Exports\WarehousesExport;
+use App\Exports\InventoryWarehouseExport;
+
 use App\Imports\WarehousesImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithFileUploads;
 // use Maatwebsite\Excel\Excel as ExcelType;
 use Mpdf\Mpdf;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 class ShowData extends Component
 {
     use LivewireAlert, WithPagination, WithFileUploads;
@@ -67,17 +71,41 @@ class ShowData extends Component
         // Alert 
         showAlert($this, 'success', __('Downloading Data Successfully'));
 
-        return Excel::download(new WarehousesExport, 'Warehouses.xlsx');
-        
+        $warehouseName = Warehouse::find($this->id)->name;
+        $fileName = 'Inventory ( '. $warehouseName . ' ) '. Carbon::now()->format('Y-m-d H-i-s a') . '.xlsx';
+
+
+
+        return Excel::download(new InventoryWarehouseExport($this->id), $fileName);
+
+        // (new InventoryWarehouseExport($this->id))->queue($fileName);
+
+        // Excel::queue(new InventoryWarehouseExport($this->id), 'exports/' . $fileName, 'public')
+        //     ->chain([
+        //         function () use ($fileName) {
+        //             $downloadUrl = Storage::disk('public')->url('exports/' . $fileName);
+
+        //             // إطلاق حدث للواجهة
+        //             // $this->dispatch('download-file', ['url' => $downloadUrl]);
+        //             $this->dispatch('download-file', url: $downloadUrl);
+
+        //         }
+        // ]);
+
+
     }
     public function exportPDF()
     {
         // Alert 
         showAlert($this, 'success', __('Downloading Data Successfully'));
+        $warehouseName = Warehouse::find($this->id)->name;
 
-        return Excel::download(new WarehousesExport, 'Warehouses.pdf', \Maatwebsite\Excel\Excel::MPDF);
+        $fileName = 'Inventory ( '. $warehouseName . ' ) '. Carbon::now()->format('Y-m-d H-i-s a') . '.pdf';
+
+        return Excel::download(new InventoryWarehouseExport($this->id), $fileName, \Maatwebsite\Excel\Excel::MPDF);
         
     }
+
 
 
 
