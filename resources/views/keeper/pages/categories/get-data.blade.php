@@ -63,6 +63,7 @@
                             <th class="fw-bolder fs-6">Name</th>
                             <th class="fw-bolder fs-6">Description</th>
                             <th class="fw-bolder fs-6">Parent</th>
+                            <th class="fw-bolder fs-6">Type</th>
                             <th class="fw-bolder fs-6">Created At</th>
                             <th class="fw-bolder fs-6">Updated At</th>
                             <th class="fw-bolder fs-6">Actions</th>
@@ -76,6 +77,7 @@
                             <td><strong>{{ $value->name }}</strong></td>
                             <td>{{ $value->description }}</td>
                             <td><span class="badge bg-label-primary me-1">{{ $value->parent?->name }}</span></td>
+                            <td><span class="badge bg-label-success me-1">{{ $value->type == 0 ? 'Stock' : 'Menu'}}</span></td>
                             <td>{{ $value->creator?->name }}<br>{{ $value->created_at }}</td>
                             {{-- <td>{{ $value->updater?->name }}<br>{{ $value->updated_at }}</td> --}}
                             <td>{{ $value->updater == NULL ? "" : $value->updater?->name }}<br>{{ $value->updater == NULL ? "" : $value->updated_at  }}</td>

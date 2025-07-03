@@ -24,8 +24,12 @@ class Category extends Model
         'name',
         'description',
         'parent_id',
+        'type',
+        'is_default',
         'created_id',
         'updated_id',
+        'created_at',
+        'updated_at',
     ];
     public $timestamps = true;
     
