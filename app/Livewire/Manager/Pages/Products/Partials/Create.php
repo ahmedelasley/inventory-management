@@ -97,7 +97,7 @@ class Create extends Component
     }
     public function render()
     {
-        $data = Category::with(['parent', 'children'])->paginate(20);
+        $data = Category::with(['parent', 'children'])->where('type', 0)->paginate(20);
         return view('manager.pages.products.partials.create', [
             'data' => $data,
         ]);

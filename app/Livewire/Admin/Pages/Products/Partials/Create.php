@@ -50,7 +50,7 @@ class Create extends Component
             $validatedData       = $this->validate();
             // Add creator
             $validatedData['sku'] = 'sku-' . (Product::count() == 0 ? '0001' : (int) str_replace('sku-', '', Product::latest()->first()->sku) + 1 );
-            $validatedData['created_id'] = Auth::guard('admin')->user()->id;
+            // $validatedData['created_id'] = Auth::guard('admin')->user()->id;
 
             // Query Create
             Product::create($validatedData);
@@ -97,7 +97,7 @@ class Create extends Component
     }
     public function render()
     {
-        $data = Category::with(['parent', 'children'])->paginate(20);
+        $data = Category::with(['parent', 'children'])->where('type', 0)->paginate(20);
         return view('admin.pages.products.partials.create', [
             'data' => $data,
         ]);

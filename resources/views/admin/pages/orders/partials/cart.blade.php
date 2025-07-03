@@ -47,6 +47,18 @@
                 <x-text-show  class='text-center' :labelValue="__('Submitter')" :value='$order->updateable?->name'/>
             </div>
         </div>
+        <div class="row g-3">
+            <div class="col mb-1 text-start">
+                
+            </div>
+            <div class="col mb-1 text-center">
+                <x-text-show :labelValue="__('SubTotal')" :value='$order->subtotal'/>
+            </div>
+            <div class="col mb-1 text-start">
+                
+            </div>
+        </div>
+
 
     </div>
     <div class="card-body">

@@ -37,7 +37,7 @@ class Create extends Component
 
     public function mount()
     {
-        $this->categories = Category::with(['parent', 'children'])->get() ?? collect(); // تجنب null
+        $this->categories = Category::with(['parent', 'children'])->where('type', 1)->get() ?? collect(); // تجنب null
         $this->restaurants = Restaurant::all() ?? collect(); // تجنب null
         $this->kitchens = collect(); // دائماً قائمة فارغة في البداية
     }

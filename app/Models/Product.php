@@ -4,7 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\ProductObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Models\Scopes\StockTypeScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 
+#[ObservedBy([ProductObserver::class])]
+#[ScopedBy([StockTypeScope::class])]
 class Product extends Model
 {
     use HasFactory;
