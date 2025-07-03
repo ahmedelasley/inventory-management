@@ -4,17 +4,21 @@ namespace App\Livewire\Admin\Pages\Kitchens;
 
 use Livewire\Component;
 use App\Models\Supervisor;
+use App\Models\Kitchen;
 use App\Models\KitchenStock;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+
 use App\Exports\KitchensExport;
+use App\Exports\InventoryKitchenExport;
 use App\Imports\KitchensImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithFileUploads;
 // use Maatwebsite\Excel\Excel as ExcelType;
 use Mpdf\Mpdf;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 class ShowData extends Component
 {
     use LivewireAlert, WithPagination, WithFileUploads;
@@ -67,18 +71,42 @@ class ShowData extends Component
         // Alert 
         showAlert($this, 'success', __('Downloading Data Successfully'));
 
-        return Excel::download(new KitchensExport, 'Kitchens.xlsx');
-        
+
+        $kitchenName = Kitchen::find($this->id)->name;
+
+        $fileName = 'Inventory ( '. $kitchenName . ' ) '. Carbon::now()->format('Y-m-d H-i-s a') . '.xlsx';
+
+
+        return Excel::download(new InventoryKitchenExport($this->id), $fileName);
+
+        // (new InventoryKitchenExport($this->id))->queue($fileName);
+
+        // Excel::queue(new InventoryKitchenExport($this->id), 'exports/' . $fileName, 'public')
+        //     ->chain([
+        //         function () use ($fileName) {
+        //             $downloadUrl = Storage::disk('public')->url('exports/' . $fileName);
+
+        //             // إطلاق حدث للواجهة
+        //             // $this->dispatch('download-file', ['url' => $downloadUrl]);
+        //             $this->dispatch('download-file', url: $downloadUrl);
+
+        //         }
+        // ]);
+
+
     }
     public function exportPDF()
     {
         // Alert 
         showAlert($this, 'success', __('Downloading Data Successfully'));
 
-        return Excel::download(new KitchensExport, 'Kitchens.pdf', \Maatwebsite\Excel\Excel::MPDF);
+        $kitchenName = Kitchen::find($this->id)->name;
+
+        $fileName = 'Inventory ( '. $kitchenName . ' ) '. Carbon::now()->format('Y-m-d H-i-s a') . '.pdf';
+
+        return Excel::download(new InventoryKitchenExport($this->id), $fileName, \Maatwebsite\Excel\Excel::MPDF);
         
     }
-
 
 
 
